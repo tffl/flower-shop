@@ -1,0 +1,7 @@
+1.	Task: 
+2.	Screenshot:
+3.	Done: 02.05.25
+4.	Score: 10
+5.	Description: 
+6.	Rationale: task requirement
+   
