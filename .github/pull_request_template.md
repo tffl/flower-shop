@@ -1,4 +1,4 @@
-1.	Task: 
+1.	Task: RSS-ECOMM
 2.	Screenshot:
 3.	Done: 02.05.25
 4.	Score: 10
