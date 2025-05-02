@@ -20,14 +20,14 @@ This project is developed as a [Rolling Scopes School](https://rs.school/) final
 
 Follow the steps:
 
-1. Clone the Repository
-Clone the repository using Git and navigate into the project folder:
+1. Clone the Repository<br>
+Clone the repositor using Git and navigate into the project folder:
 
 ```bash
 git clone https://github.com/tffl/flower-shop
 ```
 
-2. Install Dependencies
+2. Install Dependencies<br>
 You must have Node.js (v18+) installed. After that, run the following command to install all dependencies:
 
 ```bash
