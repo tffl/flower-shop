@@ -43,11 +43,11 @@ Scripts for Vite:
 -  "preview": "vite preview",  
 
 Scripts for ESLint and Pretter:  
-  "lint": "eslint .",  
-  "format": "prettier --write .",  
+-  "lint": "eslint .",  
+-  "format": "prettier --write .",  
 
 Scripts for Vitest:  
-    "test": "vitest",  
-    "test:watch": "vitest watch",  
-    "test:coverage": "vitest run --coverage",  
-    "test:ui": "vitest --ui"  
+-    "test": "vitest",  
+-    "test:watch": "vitest watch",  
+-    "test:coverage": "vitest run --coverage",  
+-    "test:ui": "vitest --ui"  
