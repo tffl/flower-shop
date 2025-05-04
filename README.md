@@ -34,7 +34,6 @@ You must have Node.js (v18+) installed. After that, run the following command to
 npm install
 ```
 
-
 Available scripts:  
 --
 Scripts for Vite:  
@@ -51,3 +50,4 @@ Scripts for Vitest:
 -    "test:watch": "vitest watch",  
 -    "test:coverage": "vitest run --coverage",  
 -    "test:ui": "vitest --ui"  
+
