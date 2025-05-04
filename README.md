@@ -38,13 +38,11 @@ npm install
 Available scripts:  
 --
 Scripts for Vite:  
-
-  "dev": "vite",  
-  "build": "tsc -b && vite build",  
-  "preview": "vite preview",  
+-  "dev": "vite",  
+-  "build": "tsc -b && vite build",  
+-  "preview": "vite preview",  
 
 Scripts for ESLint and Pretter:  
-
   "lint": "eslint .",  
   "format": "prettier --write .",  
 
