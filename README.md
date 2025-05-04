@@ -33,3 +33,23 @@ You must have Node.js (v18+) installed. After that, run the following command to
 ```bash
 npm install
 ```
+
+
+Available scripts:  
+--
+Scripts for Vite:  
+
+  "dev": "vite",  
+  "build": "tsc -b && vite build",  
+  "preview": "vite preview",  
+
+Scripts for ESLint and Pretter:  
+
+  "lint": "eslint .",  
+  "format": "prettier --write .",  
+
+Scripts for Vitest:  
+    "test": "vitest",  
+    "test:watch": "vitest watch",  
+    "test:coverage": "vitest run --coverage",  
+    "test:ui": "vitest --ui"  

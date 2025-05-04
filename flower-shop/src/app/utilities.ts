@@ -1,4 +1,3 @@
-
 export function addElement(
   pParent: HTMLElement,
   eType: string,
@@ -12,14 +11,13 @@ export function addElement(
   return pElement;
 }
 
-
 export function addImgElement(
   pParent: HTMLElement,
   eClass: string,
   eSrc: string,
-  eAlt: string
+  eAlt: string,
 ): HTMLImageElement {
-  const pElement = document.createElement('img');
+  const pElement = document.createElement("img");
   pParent.appendChild(pElement);
   if (eClass) pElement.classList.add(eClass);
   if (eSrc) pElement.src = eSrc;
@@ -28,10 +26,10 @@ export function addImgElement(
   return pElement;
 }
 
-export function test(){
-  const pContainer = addElement(document.body, 'div', 'container','')
-  addElement(pContainer, 'h1', '', 'Flower Shop')
-  console.log ('FlowerShop - h1')
-  addImgElement(pContainer, 'icon', 'svg/ok.svg', 'icon')
-  addImgElement(pContainer, '', 'img/flowers.jpg', 'picture')
+export function test() {
+  const pContainer = addElement(document.body, "div", "container", "");
+  addElement(pContainer, "h1", "", "Flower Shop");
+  console.log("FlowerShop - h1");
+  addImgElement(pContainer, "icon", "svg/ok.svg", "icon");
+  addImgElement(pContainer, "", "img/flowers.jpg", "picture");
 }
