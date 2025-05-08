@@ -1,0 +1,13 @@
+.menu{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 37px;
+}
+.menu__item {
+  text-transform: capitalize;
+
+}
+.menu__item a{
+  color:var(--color-txt);
+}

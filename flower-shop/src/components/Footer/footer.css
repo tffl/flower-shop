@@ -1,0 +1,11 @@
+.footer{
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* font-size: 18px;
+    padding: 29px 120px; */
+}
+.footer__logo{
+  width: 100px;
+}
