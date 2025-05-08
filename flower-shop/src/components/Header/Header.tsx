@@ -1,8 +1,18 @@
+import { Link } from 'react-router-dom';
+import { Submenu } from '../UI/Submenu/Submenu';
+import { Menu } from '../UI/Menu/Menu';
+import './header.css';
+
 export const Header = () => {
   return (
     <header className='header'>
-      <h1 className='header__title'>Lorem, ipsum dolor.</h1>
-      <nav className='header__nav'></nav>
+      <div className='header__wrapper container'>
+          <Link className='header__logo' to='/'>
+        Blossom Bay
+        </Link>
+        <Menu />
+        <Submenu/>
+      </div>
     </header>
   );
 };
