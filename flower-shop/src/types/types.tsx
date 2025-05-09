@@ -5,6 +5,9 @@ export type ButtonProps = {
   className?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export type ImputProps = {
-  children: ReactNode;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+export type InputProps = {
+  className?: string;
+  error?: boolean;
+  label?: string;
+  errorMessage?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;

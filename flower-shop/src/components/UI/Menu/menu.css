@@ -1,13 +1,22 @@
-.menu{
+.menu {
   display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   gap: 37px;
 }
 .menu__item {
   text-transform: capitalize;
-
 }
-.menu__item a{
-  color:var(--color-txt);
+.menu__item a {
+  color: var(--color-txt);
+  opacity: 50%;
+  transition: opacity ease-in-out 0.3s;
+}
+.menu__item a:hover,
+.menu__item a:active {
+  opacity: 100%;
+}
+
+.active a {
+  opacity: 100%;
 }
