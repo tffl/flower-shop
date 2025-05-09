@@ -15,7 +15,7 @@ export const Main = () => {
         label='Password'
         errorMessage='Должно быть не менее 5 символов'
       ></Input>
-      <Button>Create account</Button>
+      <Button className='register__button'>Create account</Button>
     </main>
   );
 };
