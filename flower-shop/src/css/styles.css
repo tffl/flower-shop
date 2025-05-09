@@ -1,6 +1,8 @@
 :root {
   --color-back: #d1edcc;
   --color-txt: #ffffff;
+  --color-btn: #4a4e37;
+  --color-btnHover: #767c58;
   --color-title: #c66590;
 }
 * {
@@ -20,7 +22,6 @@ img {
   margin: 0 auto;
 }
 body {
-  
   height: 100vh;
   font-family: Arial;
   font-style: normal;
@@ -37,9 +38,9 @@ body {
   display: flex;
 }
 
-a{
+a {
   text-decoration: none;
 }
-li{
+li {
   list-style-type: none;
 }
