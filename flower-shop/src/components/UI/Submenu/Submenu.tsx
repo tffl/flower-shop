@@ -15,7 +15,7 @@ export const Submenu = () => {
         </Link>
       </li>
       <li className='submenu__item'>
-        <Link to='/auth'>
+        <Link to='/register'>
           Register
         </Link>
       </li>

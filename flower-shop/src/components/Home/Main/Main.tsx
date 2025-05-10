@@ -1,13 +1,13 @@
 import { HeroSection } from '../HeroSection/HeroSection';
-import { Button } from '../UI/Button/Button';
-import { Input } from '../UI/Input/Input';
+// import { Button } from '../UI/Button/Button';
+// import { Input } from '../UI/Input/Input';
 import './main.css';
 
 export const Main = () => {
   return (
     <main className='main'>
       <HeroSection />
-      <Input
+      {/* <Input
         className='password'
         type='password'
         placeholder='Password'
@@ -15,7 +15,7 @@ export const Main = () => {
         label='Password'
         errorMessage='Должно быть не менее 5 символов'
       ></Input>
-      <Button className='register__button'>Create account</Button>
+      <Button className='register__button'>Create account</Button> */}
     </main>
   );
 };
