@@ -1,7 +1,3 @@
 export const Button = () => {
-  return (
-    <div className='button'>
-      
-    </div>
-  );
+  return <div className="button"></div>;
 };

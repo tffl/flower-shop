@@ -1,12 +1,12 @@
-.submenu{
+.submenu {
   display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   gap: 10px;
 }
 .submenu__item {
   text-transform: capitalize;
 }
-.submenu__item a{
-  color:var(--color-txt)
+.submenu__item a {
+  color: var(--color-txt);
 }
