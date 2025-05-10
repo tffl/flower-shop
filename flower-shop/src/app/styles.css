@@ -1,10 +1,8 @@
 :root {
-  --color-back: #d1edcc;
+  --color-back: #f2f2f2;
   --color-txt: #ffffff;
-  --color-txtForm: #838383;
-  --color-btn: #4a4e37;
-  --color-btnHover: #767c58;
   --color-title: #c66590;
+  --color-footer-back: #4a4e37;
 }
 * {
   box-sizing: border-box;
@@ -44,4 +42,17 @@ a {
 }
 li {
   list-style-type: none;
+}
+
+.dummy {
+  width: 600px;
+  margin: 100px auto;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  font-size: 2rem;
+  line-height: 150%;
+  text-align: center;
+  color: #1d5f23;
 }

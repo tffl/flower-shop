@@ -1,3 +1,13 @@
+// import { Header } from "../components/Header/Header";
+import { Main } from "../components/About/main";
+// import { Footer } from "../components/Footer/Footer";
+
 export const PageAbout = () => {
-  return <h2> About is working</h2>;
+  return (
+    <>
+      {/* <Header /> */}
+      <Main />
+      {/* <Footer /> */}
+    </>
+  );
 };
