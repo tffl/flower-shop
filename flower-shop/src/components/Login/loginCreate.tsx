@@ -1,7 +1,7 @@
-import { IField, IRegisterSection } from "./types";
+import { IField, ILoginSection } from "./types";
 
 interface IPropsSection {
-  section: IRegisterSection;
+  section: ILoginSection;
 }
 
 interface IPropsInput {
