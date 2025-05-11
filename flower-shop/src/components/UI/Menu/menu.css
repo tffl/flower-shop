@@ -9,16 +9,16 @@
 }
 .menu__item a {
   color: var(--color-txt);
-  opacity: 50%;
+  opacity: 0.5;
   transition: opacity ease-in-out 0.3s;
 }
 .menu__item a:hover,
 .menu__item a:active {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .active a {
-  opacity: 100%;
+  opacity: 1;
 }
 .menu__link {
   opacity: 0.5;

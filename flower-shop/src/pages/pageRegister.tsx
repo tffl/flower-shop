@@ -5,7 +5,7 @@ import { Footer } from "../components/Footer/Footer";
 export const PageRegister = () => {
   return (
     <>
-      <Header textColor="var(--color-footer-back)" position="static"/>
+      <Header textColor="var(--color-footer-back)" position="static" iconColor ="var(--color-footer-back)"/>
       <Main />
       <Footer />
     </>

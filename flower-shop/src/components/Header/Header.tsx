@@ -4,7 +4,7 @@ import { Menu } from '../UI/Menu/Menu';
 import './header.css';
 import { HeaderProps } from '../../types/types';
 
-export const Header = ({textColor="var(--color-txt)", position="fixed",backColor="#ffffff" }:HeaderProps) => {
+export const Header = ({textColor="var(--color-txt)", position="fixed",backColor="#ffffff",iconColor = "var(--color-txt)" }:HeaderProps) => {
   return (
     <header className='header' style={{position:position,backgroundColor:backColor}}>
       <div className='header__wrapper container'>
@@ -12,7 +12,7 @@ export const Header = ({textColor="var(--color-txt)", position="fixed",backColor
         Blossom Bay
         </Link>
         <Menu textColor={textColor}/>
-        <Submenu textColor={textColor}/>
+        <Submenu textColor={textColor} iconColor={iconColor}/>
       </div>
     </header>
   );

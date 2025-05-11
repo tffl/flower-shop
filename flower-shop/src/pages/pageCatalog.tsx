@@ -5,7 +5,7 @@ import { Main } from "../components/Catalog/main";
 export const PageCatalog = () => {
   return (
     <>
-      <Header textColor="var(--color-footer-back)" position="static"/> 
+      <Header textColor="var(--color-footer-back)" position="static" iconColor ="var(--color-footer-back)"/> 
       <Main />
       {/* <Footer /> */}
     </>
