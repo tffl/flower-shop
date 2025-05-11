@@ -10,3 +10,7 @@
 .submenu__item a{
   color:var(--color-txt)
 }
+.submenu__item a:hover,
+.submenu__item a:active {
+  opacity: 1;
+}

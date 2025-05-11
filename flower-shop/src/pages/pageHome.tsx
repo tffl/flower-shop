@@ -5,7 +5,7 @@ import { Footer } from "../components/Footer/Footer";
 export const PageHome = () => {
   return (
     <>
-      <Header />
+      <Header textColor="var(--color-txt)}" position="absolute" backColor="transparent"/>
       <Main />
       <Footer />
     </>

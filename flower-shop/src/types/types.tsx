@@ -12,3 +12,19 @@ export type InputProps = {
   label?: string;
   errorMessage?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
+
+export type HeaderProps = {
+  textColor?: `var(--${string})` | string;
+  position?:"fixed" | "absolute" | "relative" | "static" | "sticky";
+  backColor?: string;
+  iconColor?: `var(--${string})` | string;
+  // className?: string; 
+};
+export type MenuProps = {
+  textColor?: string;
+};
+
+export type SubMenuProps = {
+  textColor?: string;
+  iconColor?:string;
+};
