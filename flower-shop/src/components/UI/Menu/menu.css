@@ -20,3 +20,11 @@
 .active a {
   opacity: 100%;
 }
+.menu__link {
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.menu__link.active {
+  opacity: 1;
+}

@@ -1,6 +1,6 @@
 export const Main = () => {
   return (
-    <div>
+    <div className="catalog">
       <h2> Catalog </h2>
       <div className="dummy" style={{ backgroundImage: "url('img/back.png')" }}>
         <p>Page is not available yet.</p>

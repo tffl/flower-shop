@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
-import './submenu.css'
+import { Link, NavLink } from 'react-router-dom';
+import { MenuProps } from '../../../types/types';
+import './submenu.css';
 
-export const Submenu = () => {
+export const Submenu = ({textColor}: MenuProps) => {
   return (
     <ul className='submenu'>
       <li className='submenu__item'>
@@ -10,14 +11,18 @@ export const Submenu = () => {
           </Link>
       </li>
       <li className='submenu__item'>
-        <Link to='/login'>
-          Login
-        </Link>
+        <NavLink to='/login' style={{color: textColor}} className={({ isActive }) => 
+            isActive ? 'menu__link active' : 'menu__link'
+          }>
+          Login|
+        </NavLink>
       </li>
       <li className='submenu__item'>
-        <Link to='/register'>
+        <NavLink to='/register' style={{color: textColor}} className={({ isActive }) => 
+            isActive ? 'menu__link active' : 'menu__link'
+          }>
           Register
-        </Link>
+        </NavLink>
       </li>
     </ul>
   );
