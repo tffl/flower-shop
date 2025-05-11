@@ -1,3 +1,13 @@
+import { Header } from "../components/Header/Header";
+import { Main } from "../components/Login/Main";
+import { Footer } from "../components/Footer/Footer";
+
 export const PageLogin = () => {
-  return <h2> Login is working</h2>;
+  return (
+    <>
+      <Header />
+      <Main />
+      <Footer />
+    </>
+  );
 };
