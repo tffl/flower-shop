@@ -36,13 +36,13 @@ h3 {
   color: var(--color-r-txt);
 }
 
-.section {
+.register__section {
   max-width: 80%;
   margin: 10px auto;
   padding: 10px 0;
 }
 
-.section input {
+.register__input input {
   width: 100%;
   margin: 5px 0;
   padding: 5px;
@@ -50,12 +50,27 @@ h3 {
   line-height: 150%;
   color: var(--color-r-txt);
   border: 1px solid var(--color-r-border);
-}
-
-.input {
-  color: var(--color-r-txt);
   text-align: left;
 }
+.register__check {
+  margin: 8px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  font-size: 1rem;
+  line-height: 150%;
+  text-align: left;
+}
+
+.register__check input{
+  width: 20px;
+}
+.register__check-label{
+  font-size: 1.3rem;
+  line-height: 150%;
+  text-align: left;
+}
+
 .switch-top {
   margin: 10px auto;
   /* padding: 10px 0; */
@@ -66,7 +81,7 @@ h3 {
   letter-spacing: 0.18rem; */
   color: var(--color-r-prime);
 }
-.switch-bottom {
+.switch {
   margin: 20px auto;
   font-size: 2rem;
   line-height: 150%;
@@ -75,8 +90,7 @@ h3 {
 .green {
   color: var(--color-r-title);
 }
-
-.button {
+.register_btn {
   width: 80%;
   font-size: 1.5rem;
   margin: 20px 10px;
@@ -84,3 +98,4 @@ h3 {
   color: #ffffff;
   background-color: var(--color-btn-back);
 }
+

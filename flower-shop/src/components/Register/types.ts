@@ -2,7 +2,7 @@ export interface IRegisterSection {
   id: number;
   title: string;
   aFields: IField[];
-  aChecks: ICheckbox[];
+  aChecks: ICheck[];
 }
 
 export interface IField {
@@ -12,7 +12,7 @@ export interface IField {
   placeholder: string;
 }
 
-export interface ICheckbox{
+export interface ICheck {
   id: number;
   label: string;
 }

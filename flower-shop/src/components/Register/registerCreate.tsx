@@ -1,4 +1,4 @@
-import { IField, IRegisterSection } from "./types";
+import { IField, ICheck, IRegisterSection } from "./types";
 
 interface IPropsSection {
   section: IRegisterSection;
@@ -8,28 +8,55 @@ interface IPropsInput {
   aFields: IField[];
 }
 
+interface IPropsCheck {
+  aChecks: ICheck[];
+}
+
 export function CreateSection({ section }: IPropsSection) {
   return (
-    <div className="section">
+    <div className="register__section">
       <h3>{section.title}</h3>
-      <RegInput aFields={section.aFields} />
+      <RegInputs aFields={section.aFields} />
+      <RegChecks aChecks={section.aChecks} />
     </div>
   );
 }
 
-function RegInput({ aFields }: IPropsInput) {
+function RegInputs({ aFields }: IPropsInput) {
   // console.log("RegInput<<<", props);
   // console.log ('****', props.aFields[0].type, props.aFields[0].placeholder)
   return (
-    <div className="input">
-      {aFields.map((iField) => (
-        <input
-          type={iField.type}
-          placeholder={iField.label + ": " + iField.placeholder}
-          key={iField.id}
-        ></input>
-      ))}
-      {/* <h4>Name*</h4> */}
+    <div>
+      {aFields.map((iField,i) => (
+        <div className="register__input" key = {i+3}>
+          {/* <h4>{iField.label}*</h4> */}
+          <input
+            type={iField.type}
+            placeholder={iField.label + ": " + iField.placeholder}
+            key={iField.id}
+          ></input>
+        </div>
+      ))
+    }
     </div>
+  );
+}
+
+function RegChecks({ aChecks }: IPropsCheck) {
+  // console.log("RegInput<<<", props);
+  // console.log ('****', props.aFields[0].type, props.aFields[0].placeholder)
+  return (
+    <>
+      {aChecks.map((iCheck, i) => (
+        <div className="register__check" key = {i}>
+          <input
+            type='checkbox'
+            key={iCheck.id}
+          ></input>
+          <p className="register__check-label">{iCheck.label}</p>
+        </div>
+      ))
+    }
+    </>
   );
 }

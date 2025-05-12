@@ -29,31 +29,36 @@ export const Main = () => {
           placeholder: "Qwer1234",
         },
       ],
-       aChecks: [],
+      aChecks: [],
     },
 
     {
       id: 2,
       title: "Shipping address",
       aFields: [
-        { id: 1, label: "Country", type: "text", placeholder: "UK" },
-        { id: 2, label: "City", type: "text", placeholder: "Mycity" },
-        { id: 3, label: "Street", type: "text", placeholder: "Street1" },
-        { id: 4, label: "Postal code", type: "text", placeholder: "654321" },
+        { id: 21, label: "Country", type: "text", placeholder: "UK" },
+        { id: 22, label: "City", type: "text", placeholder: "Mycity" },
+        { id: 23, label: "Street", type: "text", placeholder: "Street1" },
+        { id: 24, label: "Postal code", type: "text", placeholder: "654321" },
       ],
-        aChecks: [],
+      aChecks: [
+        { id: 25, label: 'Set Shipping address as default'},
+        { id: 26, label: 'Set Shipping Address as Billing Address'},
+      ],
     },
 
     {
       id: 3,
       title: "Billing address",
       aFields: [
-        { id: 1, label: "Country", type: "text", placeholder: "USA" },
-        { id: 2, label: "City", type: "text", placeholder: "Newcity" },
-        { id: 3, label: "Street", type: "text", placeholder: "Street2" },
-        { id: 4, label: "Postal code", type: "text", placeholder: "111111" },
+        { id: 31, label: "Country", type: "text", placeholder: "USA" },
+        { id: 32, label: "City", type: "text", placeholder: "Newcity" },
+        { id: 33, label: "Street", type: "text", placeholder: "Street2" },
+        { id: 34, label: "Postal code", type: "text", placeholder: "111111" },
       ],
-        aChecks: [],
+      aChecks: [
+         { id: 35, label: 'Set Billing Address as default'},
+      ],
     },
   ];
 
@@ -69,9 +74,9 @@ export const Main = () => {
             <CreateSection section={iSection} key={iSection.id} />
           ))}
           {/* <input type='submit'>Create account</input> */}
-          <button className="button">Create account</button>
+          <button className="register_btn">Create account</button>
 
-          <p className="switch-bottom">
+          <p className="switch">
             Already have an account? <span className="green">Login</span>!
           </p>
         </form>
