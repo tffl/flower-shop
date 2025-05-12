@@ -1,29 +1,47 @@
-import { NavLink } from 'react-router-dom';
-import { MenuProps } from '../../../types/types';
-import './menu.css';
+import { NavLink } from "react-router-dom";
+import { MenuProps } from "../../../types/types";
+import "./menu.css";
 
-export const Menu = ({textColor}: MenuProps) => {
+export const Menu = ({ textColor }: MenuProps) => {
   return (
-    <ul className='menu'>
-      <li className='menu__item'>
-        <NavLink to='/' style={{color: textColor}} className={({ isActive }) => 
-            isActive ? 'menu__link active' : 'menu__link'
-          }>home</NavLink>
-      </li>
-      <li className='menu__item'>
-        <NavLink to='/catalog' style={{color: textColor}} className={({ isActive }) => 
-            isActive ? 'menu__link active' : 'menu__link'
+    <ul className="menu">
+      <li className="menu__item">
+        <NavLink
+          to="/"
+          style={{ color: textColor }}
+          className={({ isActive }) =>
+            isActive ? "menu__link active" : "menu__link"
           }
->catalog</NavLink>
+        >
+          home
+        </NavLink>
       </li>
-      <li className='menu__item'>
-        <NavLink to='/about' style={{color: textColor}} className={({ isActive }) => 
-            isActive ? 'menu__link active' : 'menu__link'
+      <li className="menu__item">
+        <NavLink
+          to="/catalog"
+          style={{ color: textColor }}
+          className={({ isActive }) =>
+            isActive ? "menu__link active" : "menu__link"
           }
->about us</NavLink>
+        >
+          catalog
+        </NavLink>
       </li>
-      <li className='menu__item'>
-        <a href='#footer' style={{color: textColor}} >Contacts</a>
+      <li className="menu__item">
+        <NavLink
+          to="/about"
+          style={{ color: textColor }}
+          className={({ isActive }) =>
+            isActive ? "menu__link active" : "menu__link"
+          }
+        >
+          about us
+        </NavLink>
+      </li>
+      <li className="menu__item">
+        <a href="#footer" style={{ color: textColor }}>
+          Contacts
+        </a>
       </li>
     </ul>
   );

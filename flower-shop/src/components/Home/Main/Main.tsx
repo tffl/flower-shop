@@ -1,11 +1,11 @@
-import { HeroSection } from '../HeroSection/HeroSection';
+import { HeroSection } from "../HeroSection/HeroSection";
 // import { Button } from '../UI/Button/Button';
 // import { Input } from '../UI/Input/Input';
-import './main.css';
+import "./main.css";
 
 export const Main = () => {
   return (
-    <main className='main'>
+    <main className="main">
       <HeroSection />
       {/* <Input
         className='password'
