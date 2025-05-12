@@ -1,5 +1,5 @@
 import { Header } from "../components/Header/Header";
-import { Main } from "../components/Register/Main";
+import { Main } from "../components/Register/Register";
 import { Footer } from "../components/Footer/Footer";
 
 export const PageRegister = () => {

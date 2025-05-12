@@ -25,7 +25,7 @@ function RegInput({ aFields }: IPropsInput) {
       {aFields.map((iField) => (
         <input
           type={iField.type}
-          placeholder={iField.placeholder}
+          placeholder={iField.label + ": " + iField.placeholder}
           key={iField.id}
         ></input>
       ))}
