@@ -1,8 +1,8 @@
-import { ButtonProps } from '../../../types/types';
-import './button.css';
+import { ButtonProps } from "../../../types/types";
+import "./button.css";
 
 export const Button = ({
-  type = 'button',
+  type = "button",
   children,
   className,
   ...props
@@ -11,7 +11,7 @@ export const Button = ({
     <button
       {...props}
       type={type}
-      className={`button ${className || ''}`.trim() || undefined}
+      className={`button ${className || ""}`.trim() || undefined}
     >
       {children}
     </button>

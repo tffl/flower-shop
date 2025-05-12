@@ -5,7 +5,11 @@ import { Main } from "../components/About/main";
 export const PageAbout = () => {
   return (
     <>
-      <Header textColor="var(--color-footer-back)" position="static" iconColor ="var(--color-footer-back)"/>
+      <Header
+        textColor="var(--color-footer-back)"
+        position="static"
+        iconColor="var(--color-footer-back)"
+      />
       <Main />
       {/* <Footer /> */}
     </>
