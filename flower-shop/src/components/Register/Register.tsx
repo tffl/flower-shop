@@ -42,8 +42,8 @@ export const Main = () => {
         { id: 24, label: "Postal code", type: "text", placeholder: "654321" },
       ],
       aChecks: [
-        { id: 25, label: 'Set Shipping address as default'},
-        { id: 26, label: 'Set Shipping Address as Billing Address'},
+        { id: 25, label: "Set Shipping address as default" },
+        { id: 26, label: "Set Shipping Address as Billing Address" },
       ],
     },
 
@@ -56,9 +56,7 @@ export const Main = () => {
         { id: 33, label: "Street", type: "text", placeholder: "Street2" },
         { id: 34, label: "Postal code", type: "text", placeholder: "111111" },
       ],
-      aChecks: [
-         { id: 35, label: 'Set Billing Address as default'},
-      ],
+      aChecks: [{ id: 35, label: "Set Billing Address as default" }],
     },
   ];
 

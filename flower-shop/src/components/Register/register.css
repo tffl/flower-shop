@@ -62,10 +62,15 @@ h3 {
   text-align: left;
 }
 
-.register__check input{
+.register__check input {
   width: 20px;
 }
-.register__check-label{
+
+.register__check input[type="checkbox"]:checked {
+  background-color: var(--color-btn-back);
+}
+
+.register__check-label {
   font-size: 1.3rem;
   line-height: 150%;
   text-align: left;
@@ -98,4 +103,3 @@ h3 {
   color: #ffffff;
   background-color: var(--color-btn-back);
 }
-

@@ -27,8 +27,8 @@ function RegInputs({ aFields }: IPropsInput) {
   // console.log ('****', props.aFields[0].type, props.aFields[0].placeholder)
   return (
     <div>
-      {aFields.map((iField,i) => (
-        <div className="register__input" key = {i+3}>
+      {aFields.map((iField, i) => (
+        <div className="register__input" key={i + 3}>
           {/* <h4>{iField.label}*</h4> */}
           <input
             type={iField.type}
@@ -36,8 +36,7 @@ function RegInputs({ aFields }: IPropsInput) {
             key={iField.id}
           ></input>
         </div>
-      ))
-    }
+      ))}
     </div>
   );
 }
@@ -48,15 +47,11 @@ function RegChecks({ aChecks }: IPropsCheck) {
   return (
     <>
       {aChecks.map((iCheck, i) => (
-        <div className="register__check" key = {i}>
-          <input
-            type='checkbox'
-            key={iCheck.id}
-          ></input>
+        <div className="register__check" key={i}>
+          <input type="checkbox" key={iCheck.id}></input>
           <p className="register__check-label">{iCheck.label}</p>
         </div>
-      ))
-    }
+      ))}
     </>
   );
 }
