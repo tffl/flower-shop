@@ -15,18 +15,16 @@ export const Main = () => {
   ];
 
   return (
-      <div
-        className="login"
-        style={{ backgroundImage: "url('img/back.png')" }}>
-        <form>
-          {aSections.map((iSection) => (
-            <CreateSection section={iSection} key={iSection.id} />
-          ))}
-          <button className="button">Login</button>
-          <p className="switch-bottom">
-            Don't have an account? <span className="green">Register</span>
-          </p>
-        </form>
-      </div>
+    <div className="login" style={{ backgroundImage: "url('img/back.png')" }}>
+      <form>
+        {aSections.map((iSection) => (
+          <CreateSection section={iSection} key={iSection.id} />
+        ))}
+        <button className="button">Login</button>
+        <p className="switch-bottom">
+          Don't have an account? <span className="green">Register</span>
+        </p>
+      </form>
+    </div>
   );
 };
