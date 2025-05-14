@@ -1,7 +1,6 @@
 :root {
   --color-back: #f2f2f2;
   --color-txt: #ffffff;
-  --color-title: #c66590;
   --color-footer-back: #4a4e37;
 }
 * {
@@ -25,7 +24,7 @@ body {
   font-family: Arial;
   font-style: normal;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 150%;
   text-align: center;
   background: var(--color-back);
@@ -36,14 +35,12 @@ body {
   margin: 0 auto;
   display: flex;
 }
-
 a {
   text-decoration: none;
 }
 li {
   list-style-type: none;
 }
-
 .dummy {
   width: 600px;
   margin: 100px auto;

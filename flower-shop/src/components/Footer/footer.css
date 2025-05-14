@@ -1,13 +1,31 @@
 .footer {
-  max-width: 1440px;
-  margin: 0 auto;
+  /* max-width: 1440px; */
+  width: 100%;
+  /* margin: 0 auto; */
   display: flex;
   flex-direction: column;
   /* font-size: 18px;
     padding: 29px 120px; */
   background-color: var(--color-footer-back);
-  padding: 30px;
+
+  font-size: 2rem;
 }
+
+.footer__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 29px 120px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer__txt{
+  width: 1400px;
+  text-align: left;
+}
+
 .footer__logo {
   width: 100px;
 }
