@@ -4,6 +4,21 @@
   align-items: center;
   gap: 37px;
 }
+@media (max-width: 1024px) {
+  .menu {
+    gap: 25px;
+  }
+}
+@media (max-width: 950px) {
+  .menu {
+    gap: 20px;
+  }
+}
+@media (max-width: 850px) {
+  .menu {
+    gap: 15px;
+  }
+}
 .menu__item {
   text-transform: capitalize;
 }

@@ -10,7 +10,7 @@
   --color-txt-alt: #075826;
   --color-txt-err: #b95555;
   /* --color-footer-back: #343925; */
-    /* #343925 #075826; */
+  /* #343925 #075826; */
 }
 
 h2 {
@@ -46,10 +46,9 @@ h3 {
   margin: 10px auto;
   padding: 10px 0;
 }
-.register__input{
+.register__input {
   margin: 0 0 5px 0;
   text-align: left;
-
 }
 .register__input input {
   width: 100%;
@@ -62,7 +61,7 @@ h3 {
   text-align: left;
 }
 
-.register__input input:active{
+.register__input input:active {
   border-color: var(--color-txt-alt);
 }
 .register__check {
@@ -75,9 +74,9 @@ h3 {
   text-align: left;
 }
 
-.register__check:hover{
+.register__check:hover {
   border-color: var(--color-txt-alt);
-  color: var(--color-txt-alt)
+  color: var(--color-txt-alt);
 }
 
 .register__check input {
@@ -121,7 +120,7 @@ h3 {
   color: #ffffff;
   background-color: var(--color-btn-back);
 }
-.register__input-error{
+.register__input-error {
   min-height: 20px;
   color: var(--color-txt-err);
   font-size: 1rem;

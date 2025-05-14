@@ -17,7 +17,7 @@ export interface ICheck {
   label: string;
 }
 
-export interface IError{
+export interface IError {
   id: number;
   message: string;
 }
