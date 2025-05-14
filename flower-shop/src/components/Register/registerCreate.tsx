@@ -1,4 +1,4 @@
-import { IField, ICheck, IRegisterSection } from "./types";
+import { IField, ICheck, IRegisterSection} from "./types";
 
 interface IPropsSection {
   section: IRegisterSection;
@@ -12,6 +12,22 @@ interface IPropsCheck {
   aChecks: ICheck[];
 }
 
+// const aInputErrors: IError [] =[
+//   { id:1, message: 'Field is required'},
+//   { id:2, message: 'Field must contain only latin letters'},
+//   { id:3, message: 'Field must contain only numbers and latin letters'},
+//   { id:4, message: 'Field must contain at least 8 characters'},
+//   { id:5, message: 'Field must contain at least 1 number'},
+//   { id:6, message: 'Field must contain at least 1 letter in upper case'},
+//   { id:7, message: 'Field must contain at least 1 letter in lower case'},
+//   { id:8, message: 'Invalid email'},
+//   { id:9, message: 'The user must be over 14 years old'},
+// ]
+
+// const aCountries =[
+//   'USA','UK','Canada'
+// ]
+
 export function CreateSection({ section }: IPropsSection) {
   return (
     <div className="register__section">
@@ -23,18 +39,18 @@ export function CreateSection({ section }: IPropsSection) {
 }
 
 function RegInputs({ aFields }: IPropsInput) {
-  // console.log("RegInput<<<", props);
-  // console.log ('****', props.aFields[0].type, props.aFields[0].placeholder)
   return (
     <div>
       {aFields.map((iField, i) => (
         <div className="register__input" key={i + 3}>
-          {/* <h4>{iField.label}*</h4> */}
+          <h4>{iField.label}*</h4>
           <input
             type={iField.type}
-            placeholder={iField.label + ": " + iField.placeholder}
+            // placeholder={iField.label + ": " + iField.placeholder}
+            placeholder={iField.placeholder}
             key={iField.id}
           ></input>
+          <div className="register__input-error"></div>
         </div>
       ))}
     </div>
@@ -42,8 +58,6 @@ function RegInputs({ aFields }: IPropsInput) {
 }
 
 function RegChecks({ aChecks }: IPropsCheck) {
-  // console.log("RegInput<<<", props);
-  // console.log ('****', props.aFields[0].type, props.aFields[0].placeholder)
   return (
     <>
       {aChecks.map((iCheck, i) => (
@@ -55,3 +69,9 @@ function RegChecks({ aChecks }: IPropsCheck) {
     </>
   );
 }
+
+// function isValidForm(){
+// }
+// function outError(){
+//   console.log(aInputErrors)
+// }

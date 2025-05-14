@@ -8,8 +8,8 @@ export const Main = () => {
       id: 1,
       title: "Personal info",
       aFields: [
-        { id: 1, label: "Name", type: "text", placeholder: "V" },
-        { id: 2, label: "Surname", type: "text", placeholder: "V" },
+        { id: 1, label: "Name", type: "text", placeholder: "N" },
+        { id: 2, label: "Surname", type: "text", placeholder: "N" },
         {
           id: 3,
           label: "Date of birth",
@@ -20,7 +20,7 @@ export const Main = () => {
           id: 4,
           label: "Email",
           type: "email",
-          placeholder: "vas@email.com",
+          placeholder: "user@email.com",
         },
         {
           id: 5,
@@ -38,7 +38,7 @@ export const Main = () => {
       aFields: [
         { id: 21, label: "Country", type: "text", placeholder: "UK" },
         { id: 22, label: "City", type: "text", placeholder: "Mycity" },
-        { id: 23, label: "Street", type: "text", placeholder: "Street1" },
+        { id: 23, label: "Street", type: "text", placeholder: "Street1  272B" },
         { id: 24, label: "Postal code", type: "text", placeholder: "654321" },
       ],
       aChecks: [
@@ -53,7 +53,7 @@ export const Main = () => {
       aFields: [
         { id: 31, label: "Country", type: "text", placeholder: "USA" },
         { id: 32, label: "City", type: "text", placeholder: "Newcity" },
-        { id: 33, label: "Street", type: "text", placeholder: "Street2" },
+        { id: 33, label: "Street", type: "text", placeholder: "Street2 ap76" },
         { id: 34, label: "Postal code", type: "text", placeholder: "111111" },
       ],
       aChecks: [{ id: 35, label: "Set Billing Address as default" }],
