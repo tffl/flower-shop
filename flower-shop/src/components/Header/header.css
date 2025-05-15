@@ -11,10 +11,6 @@
   font-size: 18px;
   padding: 29px 120px;
 }
-.header__logo {
-  font-size: 30px;
-  color: var(--color-txt);
-}
 @media (max-width: 1024px) {
   .header__wrapper {
     padding: 29px 100px;
@@ -31,5 +27,14 @@
 @media (max-width: 850px) {
   .header__wrapper {
     padding: 29px 50px;
+  }
+}
+.header__logo {
+  font-size: 30px;
+  color: var(--color-txt);
+}
+@media (max-width: 768px) {
+  .header__logo {
+    z-index: 5;
   }
 }
