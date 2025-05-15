@@ -58,6 +58,7 @@ function RegInputs({ aFields }: IPropsInput) {
               // onBlur={(e) => blurHandler(e)}
               onBlur={(e) => inputHandler(e)}
               key={iField.id}
+              defaultValue={iField.type === "date" ? "2000-01-01" : ""} //min="2023-01-01" max="2023-12-31"
             ></input>
           )}
           <div className="register__input-error"></div>

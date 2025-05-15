@@ -13,12 +13,9 @@ const aInputErrors: string[] = [
 // export function blurHandler(e: any) {
 export function inputHandler(e: any) {
   //  <div className="register__input-error">{sError}</div>
-  console.log('change<<<<',e.target.value);
+  console.log("change<<<<", e.target.value);
   let sError: string | null = "";
   let value = e.target.value.trim();
-  
-
-
   const reName = /[a-z]+/i; // /^[A-Za-z]+$/
   const reEmail = /\w+@\w+\.[a-z]{2,3}/i;
 
@@ -36,12 +33,13 @@ export function inputHandler(e: any) {
         break;
 
       case "date":
-        break
+        if (age(value) < 13)
+            sError = "The user must be over 13 years old"
+        break;
 
       case "email":
-         if (!reEmail.test(value))
-          sError = "Invalid email"
-        break
+        if (!reEmail.test(value)) sError = "Invalid email";
+        break;
       case "password":
         break;
       case "city":
@@ -76,4 +74,20 @@ export function isValidForm() {
 
   console.log(aInputErrors);
   return flValid;
+}
+
+function age(bday: Date): number {
+  const today = new Date();
+  const birthday = new Date(bday)
+  console.log (today,birthday)
+  let age: number = today.getFullYear() - birthday.getFullYear();
+  console.log(today.getFullYear(), '-', birthday.getFullYear(), '=', age)
+
+  if (
+    today.getMonth() < birthday.getMonth() ||
+    (today.getMonth() === birthday.getMonth() &&
+      today.getDay() < birthday.getDay())
+  )
+    age -= 1;
+  return age;
 }
