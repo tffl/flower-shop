@@ -2,6 +2,7 @@ import "./register.css";
 import { CreateSection } from "./registerCreate.tsx";
 import { IRegisterSection } from "./registerTypes";
 import { registerSubmit } from "./registerSubmit";
+import { Link} from "react-router-dom";
 
 export const Main = () => {
   const aSections: IRegisterSection[] = [
@@ -117,13 +118,16 @@ export const Main = () => {
       aChecks: [{ id: 35, label: "Set Billing Address as default" }],
     },
   ];
-
+  const altColor='#075826'
   return (
     <div>
       <div
         className="register"
         style={{ backgroundImage: "url('img/bgroses23.png')" }}
       >
+         <p className="switch">
+          Already have an account? <span className="green"><Link to="/login" style={{ color: altColor }}>Login</Link></span>!
+        </p>
         {/* <p className="switch-top">Login | <span className="green">Register</span></p> */}
         {/* <form> */}
         {aSections.map((iSection) => (
@@ -134,9 +138,9 @@ export const Main = () => {
           Create account
         </button>
 
-        <p className="switch">
-          Already have an account? <span className="green">Login</span>!
-        </p>
+        {/* <p className="switch">
+          Already have an account? <span className="green"><Link to="/login" style={{ color: altColor }}>Login</Link></span>!
+        </p> */}
         {/* </form> */}
       </div>
     </div>

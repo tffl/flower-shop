@@ -2,6 +2,7 @@
 import { IField, ICheck, IRegisterSection } from "./registerTypes";
 import { inputHandler } from "./registerValid";
 
+
 interface IPropsSection {
   section: IRegisterSection;
 }
