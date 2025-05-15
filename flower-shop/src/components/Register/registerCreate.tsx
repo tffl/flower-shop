@@ -1,4 +1,6 @@
-import { IField, ICheck, IRegisterSection} from "./types";
+// import { useState } from "react";
+import { IField, ICheck, IRegisterSection } from "./registerTypes";
+import { inputHandler } from "./registerValid";
 
 interface IPropsSection {
   section: IRegisterSection;
@@ -24,9 +26,10 @@ interface IPropsCheck {
 //   { id:9, message: 'The user must be over 14 years old'},
 // ]
 
-// const aCountries =[
-//   'USA','UK','Canada'
-// ]
+// const [sName, setName] = useState(initialState: '')
+// const [sNameError, setError] = useState(initialState:'')
+
+const aCountries = ["USA", "UK", "Canada"];
 
 export function CreateSection({ section }: IPropsSection) {
   return (
@@ -44,12 +47,19 @@ function RegInputs({ aFields }: IPropsInput) {
       {aFields.map((iField, i) => (
         <div className="register__input" key={i + 3}>
           <h4>{iField.label}*</h4>
-          <input
-            type={iField.type}
-            // placeholder={iField.label + ": " + iField.placeholder}
-            placeholder={iField.placeholder}
-            key={iField.id}
-          ></input>
+          {iField.label === "Country" ? (
+            <RegSelect />
+          ) : (
+            <input
+              type={iField.type}
+              name={iField.name}
+              // placeholder={iField.label + ": " + iField.placeholder}
+              placeholder={iField.placeholder}
+              // onBlur={(e) => blurHandler(e)}
+              onBlur={(e) => inputHandler(e)}
+              key={iField.id}
+            ></input>
+          )}
           <div className="register__input-error"></div>
         </div>
       ))}
@@ -70,6 +80,17 @@ function RegChecks({ aChecks }: IPropsCheck) {
   );
 }
 
+function RegSelect() {
+  return (
+    <select className="register__select">
+      {aCountries.map((iCountry, i) => (
+        <option className="register__select-option" key={i}>
+          {iCountry}
+        </option>
+      ))}
+    </select>
+  );
+}
 // function isValidForm(){
 // }
 // function outError(){

@@ -10,7 +10,7 @@
   --color-txt-alt: #075826;
   --color-txt-err: #b95555;
   /* --color-footer-back: #343925; */
-    /* #343925 #075826; */
+  /* #343925 #075826; */
 }
 
 h2 {
@@ -33,25 +33,27 @@ h3 {
 
 .register {
   font-family: Montserrat;
-  max-width: 600px;
+  max-width: 800px;
   margin: 20px auto;
   padding: 10px;
   background: var(--color-r-back);
-  background-image: url(img/back.png);
+  /* background-image: url(img/back.png); */
+  background-position: center;
+  background-size: cover;
   color: var(--color-r-txt);
 }
 
 .register__section {
-  max-width: 80%;
+  max-width: 70%;
   margin: 10px auto;
   padding: 10px 0;
 }
-.register__input{
+.register__input {
   margin: 0 0 5px 0;
   text-align: left;
-
 }
-.register__input input {
+.register__input input,
+.register__input select {
   width: 100%;
   /* margin: 5px 0; */
   padding: 5px;
@@ -62,7 +64,11 @@ h3 {
   text-align: left;
 }
 
-.register__input input:active{
+.register__input select {
+  padding: 9px 5px;
+}
+
+.register__input input:active {
   border-color: var(--color-txt-alt);
 }
 .register__check {
@@ -75,9 +81,9 @@ h3 {
   text-align: left;
 }
 
-.register__check:hover{
+.register__check:hover {
   border-color: var(--color-txt-alt);
-  color: var(--color-txt-alt)
+  color: var(--color-txt-alt);
 }
 
 .register__check input {
@@ -114,15 +120,15 @@ h3 {
   color: var(--color-txt-alt);
 }
 .register_btn {
-  width: 80%;
+  width: 70%;
   font-size: 1.5rem;
   margin: 20px 10px;
   padding: 10px 20px;
   color: #ffffff;
   background-color: var(--color-btn-back);
 }
-.register__input-error{
-  min-height: 20px;
+.register__input-error {
+  min-height: 25px;
   color: var(--color-txt-err);
   font-size: 1rem;
 }

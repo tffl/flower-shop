@@ -7,6 +7,7 @@ export interface IRegisterSection {
 
 export interface IField {
   id: number;
+  name: string;
   label: string;
   type: string;
   placeholder: string;
@@ -17,7 +18,7 @@ export interface ICheck {
   label: string;
 }
 
-export interface IError{
+export interface IError {
   id: number;
   message: string;
 }
