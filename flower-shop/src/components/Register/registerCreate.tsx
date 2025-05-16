@@ -1,3 +1,4 @@
+
 // import { useState } from "react";
 import { IField, ICheck, IRegisterSection } from "./registerTypes";
 import { inputHandler } from "./registerValid";

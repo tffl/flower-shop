@@ -4,6 +4,11 @@
   align-items: center;
   gap: 10px;
 }
+@media (max-width: 768px) {
+  .submenu {
+    z-index: 5;
+  }
+}
 .submenu__item {
   text-transform: capitalize;
 }
