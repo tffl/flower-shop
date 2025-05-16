@@ -17,7 +17,7 @@ export type HeaderProps = {
   textColor?: `var(--${string})` | string;
   position?: 'fixed' | 'absolute' | 'relative' | 'static' | 'sticky';
   backColor?: string;
-  // iconColor?: `var(--${string})` | string;
+  iconColor?: `var(--${string})` | string;
   // className?: string;
 };
 export type MenuProps = {

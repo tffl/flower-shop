@@ -1,13 +1,9 @@
 .footer {
-  /* max-width: 1440px; */
   width: 100%;
-  /* margin: 0 auto; */
+  margin-top: auto;
   display: flex;
   flex-direction: column;
-  /* font-size: 18px;
-    padding: 29px 120px; */
   background-color: var(--color-footer-back);
-
   font-size: 2rem;
 }
 
