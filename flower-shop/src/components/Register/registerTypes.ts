@@ -7,6 +7,7 @@ export interface IRegisterSection {
 
 export interface IField {
   id: number;
+  name: string;
   label: string;
   type: string;
   placeholder: string;

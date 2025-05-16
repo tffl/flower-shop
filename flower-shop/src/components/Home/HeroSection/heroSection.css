@@ -3,6 +3,8 @@
   height: 781px;
   position: relative;
   /* background: url("img/bgmain.png"); */
+  background-position: center;
+  background-size: cover;
   padding-top: 100px;
 }
 .heroSection__title {

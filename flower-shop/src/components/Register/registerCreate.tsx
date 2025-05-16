@@ -1,4 +1,7 @@
-import { IField, ICheck, IRegisterSection } from "./types";
+
+// import { useState } from "react";
+import { IField, ICheck, IRegisterSection } from "./registerTypes";
+import { inputHandler } from "./registerValid";
 
 interface IPropsSection {
   section: IRegisterSection;
@@ -12,21 +15,7 @@ interface IPropsCheck {
   aChecks: ICheck[];
 }
 
-// const aInputErrors: IError [] =[
-//   { id:1, message: 'Field is required'},
-//   { id:2, message: 'Field must contain only latin letters'},
-//   { id:3, message: 'Field must contain only numbers and latin letters'},
-//   { id:4, message: 'Field must contain at least 8 characters'},
-//   { id:5, message: 'Field must contain at least 1 number'},
-//   { id:6, message: 'Field must contain at least 1 letter in upper case'},
-//   { id:7, message: 'Field must contain at least 1 letter in lower case'},
-//   { id:8, message: 'Invalid email'},
-//   { id:9, message: 'The user must be over 14 years old'},
-// ]
-
-// const aCountries =[
-//   'USA','UK','Canada'
-// ]
+const aCountries = ["USA", "UK", "Canada"];
 
 export function CreateSection({ section }: IPropsSection) {
   return (
@@ -44,12 +33,20 @@ function RegInputs({ aFields }: IPropsInput) {
       {aFields.map((iField, i) => (
         <div className="register__input" key={i + 3}>
           <h4>{iField.label}*</h4>
-          <input
-            type={iField.type}
-            // placeholder={iField.label + ": " + iField.placeholder}
-            placeholder={iField.placeholder}
-            key={iField.id}
-          ></input>
+          {iField.label === "Country" ? (
+            <RegSelect />
+          ) : (
+            <input
+              type={iField.type}
+              name={iField.name}
+              // placeholder={iField.label + ": " + iField.placeholder}
+              placeholder={iField.placeholder}
+              // onBlur={(e) => blurHandler(e)}
+              onChange={(e) => inputHandler(e)}
+              key={iField.id}
+              defaultValue={iField.type === "date" ? "2000-01-01" : ""} //min="2023-01-01" max="2023-12-31"
+            ></input>
+          )}
           <div className="register__input-error"></div>
         </div>
       ))}
@@ -70,8 +67,14 @@ function RegChecks({ aChecks }: IPropsCheck) {
   );
 }
 
-// function isValidForm(){
-// }
-// function outError(){
-//   console.log(aInputErrors)
-// }
+function RegSelect() {
+  return (
+    <select className="register__select">
+      {aCountries.map((iCountry, i) => (
+        <option className="register__select-option" key={i}>
+          {iCountry}
+        </option>
+      ))}
+    </select>
+  );
+}
