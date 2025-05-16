@@ -2,7 +2,7 @@ import "./register.css";
 import { CreateSection } from "./registerCreate.tsx";
 import { IRegisterSection } from "./registerTypes";
 import { registerSubmit } from "./registerSubmit";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Main = () => {
   const aSections: IRegisterSection[] = [
@@ -118,18 +118,15 @@ export const Main = () => {
       aChecks: [{ id: 35, label: "Set Billing Address as default" }],
     },
   ];
-  const altColor='#075826'
+  const greenColor = "#4a4e37";
   return (
     <div>
       <div
         className="register"
-        style={{ backgroundImage: "url('img/bgroses23.png')" }}
+        style={{ backgroundImage: "url('img/bgroses33.png')" }}
       >
-         <p className="switch">
-          Already have an account? <span className="green"><Link to="/login" style={{ color: altColor }}>Login</Link></span>!
-        </p>
         {/* <p className="switch-top">Login | <span className="green">Register</span></p> */}
-        {/* <form> */}
+        <form onSubmit = {(e) => registerSubmit(e)}>
         {aSections.map((iSection) => (
           <CreateSection section={iSection} key={iSection.id} />
         ))}
@@ -138,10 +135,16 @@ export const Main = () => {
           Create account
         </button>
 
-        {/* <p className="switch">
-          Already have an account? <span className="green"><Link to="/login" style={{ color: altColor }}>Login</Link></span>!
-        </p> */}
-        {/* </form> */}
+        <p className="register__switch-login">
+          Already have an account?{" "}
+          <span className="register__green">
+            <Link to="/login" style={{ color: greenColor }}>
+              Login
+            </Link>
+          </span>
+          !
+        </p>
+        </form>
       </div>
     </div>
   );

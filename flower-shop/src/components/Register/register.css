@@ -13,18 +13,8 @@
   /* #343925 #075826; */
 }
 
-h2 {
-  margin: 10px auto;
-  /* padding: 10px 0; */
-  font-size: 2.3rem;
-  line-height: 150%;
-  letter-spacing: 0.18rem;
-  color: var(--color-r-title);
-}
-
-h3 {
+.register h3 {
   margin: 15px auto 10px;
-  /* padding: 15px 0; */
   font-size: 2rem;
   font-weight: 400;
   line-height: 150%;
@@ -55,7 +45,6 @@ h3 {
 .register__input input,
 .register__input select {
   width: 100%;
-  /* margin: 5px 0; */
   padding: 5px;
   font-size: 1.2rem;
   line-height: 150%;
@@ -81,10 +70,10 @@ h3 {
   text-align: left;
 }
 
-.register__check:hover {
+/* .register__check:hover {
   border-color: var(--color-txt-alt);
   color: var(--color-txt-alt);
-}
+} */
 
 .register__check input {
   width: 20px;
@@ -100,24 +89,26 @@ h3 {
   text-align: left;
 }
 
-.switch-top {
+/* .switch-top {
   margin: 10px auto;
   /* padding: 10px 0; */
   /* font-size: 18px; */
-  font-size: 2rem;
-  font-weight: 400;
+  /* font-size: 2rem;
+  font-weight: 400; */
   /* line-height: 150%;
   letter-spacing: 0.18rem; */
-  color: var(--color-r-prime);
-}
-.switch {
+  /* color: var(--color-r-prime);
+} */
+
+.register__switch-login {
   margin: 20px auto;
   font-size: 2rem;
   line-height: 150%;
   color: var(--color-r-prime);
 }
-.green {
-  color: var(--color-txt-alt);
+.register__green {
+  /* color: var(--color-txt-alt); */
+  color: var(--color-footer-back);
 }
 .register_btn {
   width: 70%;

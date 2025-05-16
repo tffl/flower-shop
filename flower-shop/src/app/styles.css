@@ -41,6 +41,17 @@ a {
 li {
   list-style-type: none;
 }
+
+/* .......................................... */
+
+h2 {
+  margin: 30px auto;
+  font-size: 2.3rem;
+  line-height: 150%;
+  letter-spacing: 0.18rem;
+  color: var(--color-r-title);
+}
+
 .dummy {
   width: 600px;
   margin: 100px auto;

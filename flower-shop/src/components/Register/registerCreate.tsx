@@ -2,7 +2,6 @@
 import { IField, ICheck, IRegisterSection } from "./registerTypes";
 import { inputHandler } from "./registerValid";
 
-
 interface IPropsSection {
   section: IRegisterSection;
 }
@@ -14,21 +13,6 @@ interface IPropsInput {
 interface IPropsCheck {
   aChecks: ICheck[];
 }
-
-// const aInputErrors: IError [] =[
-//   { id:1, message: 'Field is required'},
-//   { id:2, message: 'Field must contain only latin letters'},
-//   { id:3, message: 'Field must contain only numbers and latin letters'},
-//   { id:4, message: 'Field must contain at least 8 characters'},
-//   { id:5, message: 'Field must contain at least 1 number'},
-//   { id:6, message: 'Field must contain at least 1 letter in upper case'},
-//   { id:7, message: 'Field must contain at least 1 letter in lower case'},
-//   { id:8, message: 'Invalid email'},
-//   { id:9, message: 'The user must be over 14 years old'},
-// ]
-
-// const [sName, setName] = useState(initialState: '')
-// const [sNameError, setError] = useState(initialState:'')
 
 const aCountries = ["USA", "UK", "Canada"];
 
@@ -57,7 +41,7 @@ function RegInputs({ aFields }: IPropsInput) {
               // placeholder={iField.label + ": " + iField.placeholder}
               placeholder={iField.placeholder}
               // onBlur={(e) => blurHandler(e)}
-              onBlur={(e) => inputHandler(e)}
+              onChange={(e) => inputHandler(e)}
               key={iField.id}
               defaultValue={iField.type === "date" ? "2000-01-01" : ""} //min="2023-01-01" max="2023-12-31"
             ></input>
@@ -93,8 +77,3 @@ function RegSelect() {
     </select>
   );
 }
-// function isValidForm(){
-// }
-// function outError(){
-//   console.log(aInputErrors)
-// }
