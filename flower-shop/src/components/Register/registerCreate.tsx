@@ -1,4 +1,4 @@
-import { IField, ICheck, IRegisterSection} from "./types";
+import { IField, ICheck, IRegisterSection } from "./types";
 
 interface IPropsSection {
   section: IRegisterSection;
