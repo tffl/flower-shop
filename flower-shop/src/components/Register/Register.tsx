@@ -1,7 +1,7 @@
 import "./register.css";
 import { CreateSection } from "./registerCreate.tsx";
 import { IRegisterSection } from "./registerTypes";
-import { registerSubmit } from "./registerSubmit";
+import { registerSubmit, registerSubmitButton } from "./registerSubmit";
 import { Link } from "react-router-dom";
 
 export const Main = () => {
@@ -126,24 +126,33 @@ export const Main = () => {
         style={{ backgroundImage: "url('img/bgroses33.png')" }}
       >
         {/* <p className="switch-top">Login | <span className="green">Register</span></p> */}
-        <form onSubmit = {(e) => registerSubmit(e)}>
-        {aSections.map((iSection) => (
-          <CreateSection section={iSection} key={iSection.id} />
-        ))}
-        {/* <input type='submit'>Create account</input> */}
-        <button className="register_btn" onClick={registerSubmit}>
-          Create account
-        </button>
+        <form onSubmit={(e) => registerSubmit(e)}>
+          {aSections.map((iSection) => (
+            <CreateSection section={iSection} key={iSection.id} />
+          ))}
+          {/* <input type='submit'>Create account</input> */}
+          {/* <button className="register_btn" onClick={(e) =>registerSubmitButton(e)}> */}
 
-        <p className="register__switch-login">
-          Already have an account?{" "}
-          <span className="register__green">
-            <Link to="/login" style={{ color: greenColor }}>
-              Login
-            </Link>
-          </span>
-          !
-        </p>
+          {/* <div className="register__submit-txt">The form is filled correctly</div> */}
+          <div className="register__submit-txt">
+            {/* Not all form fields are filled in correctly */}
+          </div>
+          <button
+            className="register__submit-btn inactive"
+            onClick={(e) => registerSubmitButton(e)}
+          >
+            Create account
+          </button>
+
+          <p className="register__switch-login">
+            Already have an account?{" "}
+            <span className="register__green">
+              <Link to="/login" style={{ color: greenColor }}>
+                Login
+              </Link>
+            </span>
+            !
+          </p>
         </form>
       </div>
     </div>

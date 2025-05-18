@@ -1,7 +1,7 @@
-import { ReactNode, ButtonHTMLAttributes } from 'react';
+import { ReactNode, ButtonHTMLAttributes } from "react";
 
 export type ButtonProps = {
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   children: ReactNode;
   className?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -15,7 +15,7 @@ export type InputProps = {
 
 export type HeaderProps = {
   textColor?: `var(--${string})` | string;
-  position?: 'fixed' | 'absolute' | 'relative' | 'static' | 'sticky';
+  position?: "fixed" | "absolute" | "relative" | "static" | "sticky";
   backColor?: string;
   iconColor?: `var(--${string})` | string;
   // className?: string;

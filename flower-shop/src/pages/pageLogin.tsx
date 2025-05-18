@@ -5,10 +5,7 @@ import { Footer } from "../components/Footer/Footer";
 export const PageLogin = () => {
   return (
     <>
-      <Header
-        textColor="var(--color-footer-back)"
-        position="static"
-      />
+      <Header textColor="var(--color-footer-back)" position="static" />
       <Main />
       <Footer />
     </>
