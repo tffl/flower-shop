@@ -17,3 +17,19 @@
   font-weight: normal;
   line-height: 100%;
 }
+@media (max-width: 1024px) {
+  .heroSection__title {
+    font-size: 35px;
+  }
+}
+
+@media (max-width: 850px) {
+  .heroSection__title {
+    font-size: 30px;
+  }
+}
+@media (max-width: 600px) {
+  .heroSection__title {
+    font-size: 25px;
+  }
+}
