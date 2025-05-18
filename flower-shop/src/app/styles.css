@@ -20,7 +20,7 @@ img {
   margin: 0 auto;
 }
 body {
-  height: 100vh;
+  min-height: 100vh;
   font-family: Arial;
   font-style: normal;
   font-weight: 400;
@@ -32,6 +32,11 @@ body {
 }
 .bodyNoScroll {
   overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 .container {
   max-width: 1440px;
@@ -56,7 +61,7 @@ h2 {
 }
 
 .dummy {
-  width: 600px;
+  max-width: 600px;
   margin: 100px auto;
   padding: 60px;
   display: flex;

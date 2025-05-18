@@ -1,24 +1,30 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { MenuProps } from '../../../types/types';
 import './menu.css';
 
-export const Menu = ({ textColor, className = '' }: MenuProps) => {
+export const Menu = ({ textColor, className = '', onClick }: MenuProps) => {
+  const navigate = useNavigate();
+
+  const handleLinkClick = (e: React.MouseEvent, url: string) => {
+    //  if (url.startsWith('#')) return;
+    
+    e.preventDefault();
+   
+    if (onClick) onClick(false);
+    
+      setTimeout(() => {
+      navigate(url);
+    }, 300);
+  };
+
   return (
-    <ul
-      className={className}
-      style={
-        className.includes('open')
-          ? { backgroundColor: `var(--color-txt)` }
-          : undefined
-      }
-    >
+    <ul className={className} style={className.includes('open') ? { backgroundColor: `var(--color-txt)` } : undefined}>
       <li className='menu__item'>
         <NavLink
           to='/'
           style={{ color: textColor }}
-          className={({ isActive }) =>
-            isActive ? 'menu__link active' : 'menu__link'
-          }
+          className={({ isActive }) => isActive ? 'menu__link active' : 'menu__link'}
+          onClick={(e) => handleLinkClick(e, '/')}
         >
           home
         </NavLink>
@@ -30,6 +36,7 @@ export const Menu = ({ textColor, className = '' }: MenuProps) => {
           className={({ isActive }) =>
             isActive ? 'menu__link active' : 'menu__link'
           }
+          onClick={(e) => handleLinkClick(e, '/catalog')}
         >
           catalog
         </NavLink>
@@ -41,6 +48,7 @@ export const Menu = ({ textColor, className = '' }: MenuProps) => {
           className={({ isActive }) =>
             isActive ? 'menu__link active' : 'menu__link'
           }
+          onClick={(e) => handleLinkClick(e, '/about')}
         >
           about us
         </NavLink>
@@ -50,6 +58,8 @@ export const Menu = ({ textColor, className = '' }: MenuProps) => {
           Contacts
         </a>
       </li>
+
+      {/* Остальные пункты меню... */}
     </ul>
   );
 };

@@ -27,9 +27,8 @@
     flex-direction: column;
     justify-content: center;
     gap: 40px;
-    /* color: var(--color-txt); */
     background-color: var(--color-txt);
-    /* background-image: url(./assets/bg.jpg); */
+    background-image: url(/img/bgroses2.png);
     background-position: center 0;
     background-repeat: repeat, no-repeat;
     background-size: cover;
@@ -38,6 +37,7 @@
     left: -768px;
     z-index: 3;
     transition: left 1s ease-in-out;
+    font-size: 25px;
   }
 }
 .menu__item {
@@ -67,3 +67,10 @@
 .open {
   left: 0;
 }
+.menu .open {
+  transition: transform 5s ease-in-out, opacity 2s ease-in-out;
+}
+/* .menu:not(.open) {
+  transform: translateX(-100%);
+  opacity: 0;
+} */
