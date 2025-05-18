@@ -2,6 +2,7 @@
   --color-back: #f2f2f2;
   --color-txt: #ffffff;
   --color-footer-back: #4a4e37;
+  --color-btnHover: #5b6145;
 }
 * {
   box-sizing: border-box;
