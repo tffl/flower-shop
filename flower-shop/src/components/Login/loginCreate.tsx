@@ -1,4 +1,4 @@
-import { IField, ILoginSection } from "./types";
+import { IField, ILoginSection } from "./loginTypes";
 
 interface IPropsSection {
   section: ILoginSection;
@@ -12,24 +12,27 @@ export function CreateSection({ section }: IPropsSection) {
   return (
     <div className="section">
       <h3>{section.title}</h3>
-      <RegInput aFields={section.aFields} />
+      <LogInput aFields={section.aFields} />
     </div>
   );
 }
 
-function RegInput({ aFields }: IPropsInput) {
-  // console.log("RegInput<<<", props);
-  // console.log ('****', props.aFields[0].type, props.aFields[0].placeholder)
+function LogInput({ aFields }: IPropsInput) {
   return (
     <div className="input">
       {aFields.map((iField) => (
-        <input
-          type={iField.type}
-          placeholder={iField.placeholder}
-          key={iField.id}
-        ></input>
+        <div key={iField.id} className="input-group">
+        <label htmlFor={iField.name} className="logInput-label">
+            {iField.label}
+          </label>
+          <input
+            id={iField.name}
+            name={iField.name}
+            type={iField.type}
+            placeholder={iField.placeholder}
+          />
+        </div>
       ))}
-      {/* <h4>Name*</h4> */}
     </div>
   );
 }
