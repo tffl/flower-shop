@@ -7,11 +7,11 @@ export const PageNotFound = () => {
       <h2>Page not found</h2>
       <div className="dummy" style={{ backgroundImage: "url('img/back.png')" }}>
         <Button style={{ width: "350px" }}>
-        {
-          <Link style={{ color: "var(--color-txt)" }} to="/">
-            Back to home
-          </Link>
-        }
+          {
+            <Link style={{ color: "var(--color-txt)" }} to="/">
+              Back to home
+            </Link>
+          }
         </Button>
       </div>
     </div>

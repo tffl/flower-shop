@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const Main = () => {
   const aSections: ILoginSection[] = [
- {
+    {
       id: 1,
       title: "Login",
       aFields: [
@@ -35,12 +35,12 @@ export const Main = () => {
           <CreateSection section={iSection} key={iSection.id} />
         ))}
         <button className="button">Login</button>
-      <p className="switch-bottom">
-        Don't have an account?{" "}
-        <Link to="/register" className="green">
-          Register
-        </Link>
-      </p>
+        <p className="switch-bottom">
+          Don't have an account?{" "}
+          <Link to="/register" className="green">
+            Register
+          </Link>
+        </p>
       </form>
     </div>
   );

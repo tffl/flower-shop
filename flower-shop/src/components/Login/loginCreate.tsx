@@ -22,7 +22,7 @@ function LogInput({ aFields }: IPropsInput) {
     <div className="input">
       {aFields.map((iField) => (
         <div key={iField.id} className="input-group">
-        <label htmlFor={iField.name} className="logInput-label">
+          <label htmlFor={iField.name} className="logInput-label">
             {iField.label}
           </label>
           <input

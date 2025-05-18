@@ -68,7 +68,9 @@
   left: 0;
 }
 .menu .open {
-  transition: transform 5s ease-in-out, opacity 2s ease-in-out;
+  transition:
+    transform 5s ease-in-out,
+    opacity 2s ease-in-out;
 }
 /* .menu:not(.open) {
   transform: translateX(-100%);

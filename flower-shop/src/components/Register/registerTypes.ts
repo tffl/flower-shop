@@ -22,3 +22,10 @@ export interface IError {
   id: number;
   message: string;
 }
+
+export interface ICustomer {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+}
