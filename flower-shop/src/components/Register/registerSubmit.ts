@@ -1,11 +1,12 @@
 import { isValidForm } from "./registerValid";
 import { ICustomer } from "./registerTypes";
+//import { useNavigate } from 'react-router-dom';
 
 export function registerSubmit(e: React.FormEvent<HTMLFormElement>) {
-  console.log("submit");
+  //console.log("submit");
   e.preventDefault();
-  if (isValidForm()) {
-    console.log("valid");
+  if (isValidForm(true)) {
+    //console.log("submit - valid");
     // sendRegisterCommerce();
   }
 }
@@ -13,11 +14,12 @@ export function registerSubmit(e: React.FormEvent<HTMLFormElement>) {
 export function registerSubmitButton(
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 ) {
-  console.log("submitButton", e);
+   console.log("submitButton", e);
   // e.preventDefault();
-  if (isValidForm()) {
-    console.log("*********valid");
-    newCustomer();
+  if (isValidForm(false)) {
+    //newCustomer();
+   // const navigate = useNavigate();
+   // navigate('/');
   }
 }
 
@@ -52,13 +54,13 @@ export async function newCustomer() {
   // DATA
 
   // const BEARER_TOKEN = localStorage.getItem("token");
-  // const BEARER_TOKEN = "";
+  //const BEARER_TOKEN = "OS8ZI6ah0YIlU1p-wFw0lOUsZAqMoc-x";
 
   const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // "Authorization": "Bearer ${BEARER_TOKEN}",
+      Authorization: "Bearer ${BEARER_TOKEN}",
     },
     body: JSON.stringify(oCustomer),
   });
