@@ -1,10 +1,14 @@
-export function inputHandler(e: any) {
-  console.log("input<<<", e.target.value);
+import type { ChangeEvent } from "react";
+
+export function inputHandler(e: ChangeEvent<HTMLInputElement>) {
+  const input = e.target;
+  const container = input.closest(".input-wrapper");
+  const errorElement = container?.querySelector(".error-message") as HTMLElement;
 
   let sError: string = "";
   let value = e.target.value.trim();
 
-  const reEmail = /\w+@\w+\.[a-z]{2,3}/i;
+  const reEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const rePassword = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
 
   if (!value) {
@@ -28,7 +32,9 @@ export function inputHandler(e: any) {
     }
   }
 
-  e.target.nextElementSibling.textContent = sError;
+  if (errorElement) {
+    errorElement.textContent = sError;
+  }
 }
 
 export function isValidForm() {

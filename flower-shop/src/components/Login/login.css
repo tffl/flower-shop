@@ -86,3 +86,32 @@ h3 {
   font-weight: 600;
   text-align: left;
 }
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: #bebebe;
+}
+
+.error-message {
+  min-height: 2em;
+  color: rgb(95, 34, 34);
+  font-size: 0.75rem;
+  display: block;
+}
