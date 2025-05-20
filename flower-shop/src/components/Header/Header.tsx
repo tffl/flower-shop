@@ -6,6 +6,9 @@ import { HeaderProps } from "../../types/types";
 import { useState } from "react";
 import { Burger } from "../UI/Burger/Burger";
 
+
+console.log(import.meta.env.VITE_CTP_PROJECT_KEY);
+
 export const Header = ({
   textColor = "var(--color-txt)",
   position = "fixed",
@@ -23,10 +26,10 @@ export const Header = ({
         ? `var(--color-txt)`
         : textColor;
 
-  const handleToggle = (isViible: boolean) => {
+  const handleToggle = (isVisible: boolean) => {
     const body = document.body.classList;
-    setMenuVisible(isViible);
-    isViible ? body.add("bodyNoScroll") : body.remove("bodyNoScroll");
+    setMenuVisible(isVisible);
+    isVisible ? body.add("bodyNoScroll") : body.remove("bodyNoScroll");
   };
 
   return (

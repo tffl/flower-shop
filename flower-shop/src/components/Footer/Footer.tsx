@@ -2,7 +2,7 @@ import "./footer.css";
 export const Footer = () => {
   return (
     <footer className="footer" id="footer">
-      <div className="footer__container">
+      <div className="footer__wrapper container">
         <img
           className="footer__logo"
           src="svg/logoRss.svg"
