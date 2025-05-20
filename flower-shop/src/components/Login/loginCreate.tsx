@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { IField, ILoginSection } from "./loginTypes";
+import { inputHandler } from "./loginValid";
 
 interface IPropsSection {
   section: ILoginSection;
@@ -17,7 +19,13 @@ export function CreateSection({ section }: IPropsSection) {
   );
 }
 
-function LogInput({ aFields }: IPropsInput) {
+export function LogInput({ aFields }: IPropsInput) {
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePassword = () => setShowPassword((prev) => !prev);
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    inputHandler(e);
+  };
+
   return (
     <div className="input">
       {aFields.map((iField) => (
@@ -25,12 +33,30 @@ function LogInput({ aFields }: IPropsInput) {
           <label htmlFor={iField.name} className="logInput-label">
             {iField.label}
           </label>
-          <input
-            id={iField.name}
-            name={iField.name}
-            type={iField.type}
-            placeholder={iField.placeholder}
-          />
+
+          <div className="input-wrapper">
+            <div className="input-with-icon">
+              <input
+                id={iField.name}
+                name={iField.name}
+                type={
+                  iField.name === "password" && showPassword ? "text" : iField.type}
+                placeholder={iField.placeholder}
+                onChange={handleInput}
+                required
+              />
+              {iField.name === "password" && (
+                <button
+                  type="button"
+                  onClick={togglePassword}
+                  className="toggle-password"
+                >
+                  {showPassword ? "hide" : "show"}
+                </button>
+              )}
+            </div>
+            <span className="error-message"></span> {}
+          </div>
         </div>
       ))}
     </div>
