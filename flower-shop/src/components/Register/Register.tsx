@@ -1,20 +1,22 @@
 import "./register.css";
 import { CreateSection } from "./registerCreate.tsx";
-import { registerSubmit} from "./registerSubmit";
+import { registerSubmit } from "./registerSubmit";
 import { Link } from "react-router-dom";
 import { aSections } from "./registerData.ts";
-import { useNavigate } from 'react-router-dom';
-import { isValidForm } from "./registerValid.ts";
+import { useNavigate } from "react-router-dom";
+//import { isValidForm } from "./registerValid.ts";
+import { registerSubmitButton } from "./registerSubmit";
 
 export const Main = () => {
   const greenColor = "#4a4e37";
   const navigate = useNavigate();
+  //  const rSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
   const rSubmit = async () => {
-    //registerSubmitButton
-     if (isValidForm(false)) {
-         navigate('/');
-       }
-    };
+    if (await registerSubmitButton()) {
+      //  if (isValidForm(false)) {
+      navigate("/");
+    }
+  };
   return (
     <div>
       <div
@@ -34,7 +36,7 @@ export const Main = () => {
           </div>
           <button
             className="register__submit-btn inactive"
-            onClick={rSubmit}  //(e) => registerSubmitButton(e)
+            onClick={rSubmit} //(e) => registerSubmitButton(e)
           >
             Create account
           </button>
