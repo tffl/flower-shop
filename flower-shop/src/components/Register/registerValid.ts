@@ -1,8 +1,9 @@
 import { aSections } from "./registerData.ts";
 
-const reName = /^[a-z]+$/i; // /^[A-Za-z]+$/
+const reName = /^[a-z\s-]+$/i; // /^[A-Za-z]+$/
 const reEmail = /\w+@\w+\.[a-z]{2,3}/i;
 const rePassword = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
+const reAddress = /^[\w\s-]+$/; ///[\w\s]+/;
 
 //......................................................
 export function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -12,16 +13,16 @@ export function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const value = pInput.value.trim();
   const name = pInput.name;
 
-  sError = validField(value, name)
+  sError = validField(value, name);
 
   if (pInput.nextElementSibling) pInput.nextElementSibling.textContent = sError;
 
-  isValidForm(false)
+  isValidForm(false);
 }
 
 //.....................................................
 export function isValidForm(putError: boolean) {
- //console.log("isValidForm");
+  //console.log("isValidForm");
   let flValid = true;
   let sError = "";
 
@@ -34,12 +35,12 @@ export function isValidForm(putError: boolean) {
 
       if (pInput) {
         //const value = pInput.value;
-        sError = validField(pInput.value, iInput.name)
+        sError = validField(pInput.value, iInput.name);
 
         if (sError) flValid = false;
 
         //console.log("isValidForm", putError, sError);
-        if (putError && pInput.nextElementSibling )
+        if (putError && pInput.nextElementSibling)
           pInput.nextElementSibling.textContent = sError;
       }
     });
@@ -56,7 +57,8 @@ export function isValidForm(putError: boolean) {
   } else {
     if (!pBtn.classList.contains("inactive")) pBtn.classList.add("inactive");
     if (!pTxt.classList.contains("error")) pTxt.classList.add("error");
-    if (putError) pTxt.textContent = "Not all form fields are filled in correctly.";
+    if (putError)
+      pTxt.textContent = "Not all form fields are filled in correctly.";
   }
   return flValid;
 }
@@ -80,21 +82,23 @@ function age(sBirthday: string): number {
 }
 
 //.....................................................
-function validField(value: string, name: string){
-  let sError = '';
+function validField(value: string, name: string) {
+  let sError = "";
 
   if (!value) sError = "Field is required";
   else {
     switch (name) {
       case "name":
-        console.log(value);
+        //console.log(value);
         if (!reName.test(value))
-          sError = "Name must contain only latin letters";
+          sError =
+            "Name must contain only latin letters, spaces, symbols '-' and '_'";
         break;
 
       case "surname":
         if (!reName.test(value))
-          sError = "SurName must contain only latin letters";
+          sError =
+            "SurName must contain only latin letters, spaces, symbols '-' and '_'";
         break;
 
       case "date":
@@ -115,12 +119,20 @@ function validField(value: string, name: string){
         break;
 
       case "city":
+      case "city2":
+        if (!reName.test(value))
+          sError =
+            "City must contain only latin letters, spaces, symbols '-' and '_'";
         break;
       case "street":
-        break;
       case "postcode":
+      case "street2":
+      case "postcode2":
+        if (!reAddress.test(value))
+          sError =
+            "Field must contain only latin letters, numbers, spaces, symbols '-' and '_'";
         break;
     }
   }
-  return sError
+  return sError;
 }
