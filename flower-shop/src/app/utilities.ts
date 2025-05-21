@@ -26,10 +26,10 @@ export function addImgElement(
   return pElement;
 }
 
-export function test() {
-  const pContainer = addElement(document.body, "div", "container", "");
-  addElement(pContainer, "h1", "", "Flower Shop");
-  console.log("FlowerShop - h1");
-  addImgElement(pContainer, "icon", "svg/ok.svg", "icon");
-  addImgElement(pContainer, "", "img/flowers.jpg", "picture");
-}
+// export function test() {
+//   const pContainer = addElement(document.body, "div", "container", "");
+//   addElement(pContainer, "h1", "", "Flower Shop");
+//   console.log("FlowerShop - h1");
+//   addImgElement(pContainer, "icon", "svg/ok.svg", "icon");
+//   addImgElement(pContainer, "", "img/flowers.jpg", "picture");
+// }
