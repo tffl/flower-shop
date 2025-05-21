@@ -21,7 +21,7 @@ img {
   margin: 0 auto;
 }
 body {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   font-family: Arial;
   font-style: normal;
   font-weight: 400;
