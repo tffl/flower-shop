@@ -115,10 +115,10 @@ async function newCustomer() {
   if (response.status === 201) {
     //if (true)
     const data = await response.json();
-    console.log(data);
+   // console.log(data);
     //const oCustomer1: ICustomer = await response.json();
     showResult("Your registration was successful");
-    console.log("!!!!!!!!!");
+    console.log("Your registration was successful", data);
   } else {
     console.log("newCustomer - error", response.status);
     showResult("Failed to create account");
