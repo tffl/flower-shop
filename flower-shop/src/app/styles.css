@@ -60,8 +60,9 @@ h2 {
   letter-spacing: 0.18rem;
   color: var(--color-r-title);
 }
+
 .dummy {
-  max-width: 600px;
+  width: 600px;
   margin: 100px auto;
   padding: 70px 60px 80px;
   display: flex;

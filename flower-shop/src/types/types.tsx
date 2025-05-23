@@ -35,3 +35,8 @@ export type BurgerProps = {
   className: string;
   iconColor: string;
 };
+export type TokenData ={
+  access_token: string;
+  expires_in?: number;
+  token_type?: string;
+}

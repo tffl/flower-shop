@@ -1,3 +1,5 @@
+import { APP_SCOPES, ScopeKey } from "./constants";
+
 export function addElement(
   pParent: HTMLElement,
   eType: string,
@@ -26,10 +28,20 @@ export function addImgElement(
   return pElement;
 }
 
-// export function test() {
-//   const pContainer = addElement(document.body, "div", "container", "");
-//   addElement(pContainer, "h1", "", "Flower Shop");
-//   console.log("FlowerShop - h1");
-//   addImgElement(pContainer, "icon", "svg/ok.svg", "icon");
-//   addImgElement(pContainer, "", "img/flowers.jpg", "picture");
-// }
+export function test() {
+  const pContainer = addElement(document.body, "div", "container", "");
+  addElement(pContainer, "h1", "", "Flower Shop");
+  console.log("FlowerShop - h1");
+  addImgElement(pContainer, "icon", "svg/ok.svg", "icon");
+  addImgElement(pContainer, "", "img/flowers.jpg", "picture");
+}
+
+
+
+export function buildScopeString(
+  scopeKeys: ScopeKey[], 
+): string {
+  return scopeKeys
+    .map(key => `${APP_SCOPES[key]}`)
+    .join(' ');
+}
