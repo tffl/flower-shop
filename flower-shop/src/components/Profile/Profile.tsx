@@ -1,14 +1,14 @@
 import "./profile.css";
-// import { CreateSection } from "./registerCreate.tsx";
+import { CreateSection } from "./profileCreate.tsx";
 // import { registerSubmit } from "./registerSubmit";
-import { Link } from "react-router-dom";
-// import { aSections } from "./registerData.ts";
+//import { Link } from "react-router-dom";
+import { aProfileSections } from "./profileData.ts";
 //import { useNavigate } from "react-router-dom";
 // //import { isValidForm } from "./registerValid.ts";
 // import { registerSubmitButton } from "./registerSubmit";
 
 export const Main = () => {
-  const greenColor = "#4a4e37";
+  // const greenColor = "#4a4e37";
   // const navigate = useNavigate();
   // //  const rSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
   // const rSubmit = async () => {
@@ -23,8 +23,10 @@ export const Main = () => {
         className="profile"
         style={{ backgroundImage: "url('img/bgroses33.png')" }}
       >
-        {/* <form onSubmit={(e) => registerSubmit(e)}>
-          {aSections.map((iSection) => (
+        <h2> User Profile Information</h2>
+        {/* <form onSubmit={(e) => registerSubmit(e)}> */}
+        <div className="profile__div">
+          {aProfileSections.map((iSection) => (
             <CreateSection section={iSection} key={iSection.id} />
           ))}
           {/* <input type='submit'>Create account</input> */}
@@ -32,24 +34,24 @@ export const Main = () => {
 
           {/* <div className="register__submit-txt">The form is filled correctly</div> */}
           {/* <div className="register__submit-txt"> */}
-            {/* Not all form fields are filled in correctly */}
+          {/* Not all form fields are filled in correctly */}
           {/* </div>
           <button
             className="register__submit-btn inactive"
             onClick={rSubmit} //(e) => registerSubmitButton(e)
-          >
-            Create account
-          </button> */}
+          > */}
+          <button className="profile__submit-btn">Edit</button>
 
-          <p className="register__switch-login">
+          {/* <p className="register__switch-login">
             {/* Already have an account?{" "} */}
-            <span className="register__green">
+          {/* <span className="register__green">
               <Link to="/" style={{ color: greenColor }}>
                 Home
               </Link>
             </span>
             !
-          </p>
+          </p> */}
+        </div>
         {/* </form>*/}
       </div>
     </div>

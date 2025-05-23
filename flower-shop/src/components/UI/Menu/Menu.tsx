@@ -6,7 +6,7 @@ export const Menu = ({ textColor, className = "", onClick }: MenuProps) => {
   const navigate = useNavigate();
 
   const handleLinkClick = (e: React.MouseEvent, url: string) => {
-     if (url.startsWith('#')) return;
+    if (url.startsWith("#")) return;
 
     e.preventDefault();
 
@@ -60,18 +60,6 @@ export const Menu = ({ textColor, className = "", onClick }: MenuProps) => {
           onClick={(e) => handleLinkClick(e, "/about")}
         >
           about us
-        </NavLink>
-      </li>
-      <li className="menu__item">
-        <NavLink
-          to="/profile"
-          style={{ color: textColor }}
-          className={({ isActive }) =>
-            isActive ? "menu__link active" : "menu__link"
-          }
-          onClick={(e) => handleLinkClick(e, "/profile")}
-        >
-          Profile
         </NavLink>
       </li>
       <li className="menu__item">

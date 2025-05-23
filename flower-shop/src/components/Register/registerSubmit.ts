@@ -54,9 +54,9 @@ async function takeToken() {
     method: "POST",
     headers: {
       Authorization: "Basic " + btoa(rClientId + ":" + rClientSecret),
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: "grant_type=client_credentials&scope=manage_my_quote_requests:flower-shop2025"
+    body: "grant_type=client_credentials&scope=manage_my_quote_requests:flower-shop2025",
   });
 
   console.log("newCustomer>>>await", response);
@@ -72,7 +72,7 @@ async function takeToken() {
 //.............................................................
 // export async function newCustomer(oCustomer: ICustomer) {
 async function newCustomer() {
-  let lsToken: string | null = "";
+  //let lsToken: string | null = "";
   // if ("token" in localStorage) {
   //   lsToken = localStorage.getItem("token");
   //   if (lsToken) BEARER_TOKEN = lsToken;
@@ -115,7 +115,7 @@ async function newCustomer() {
   if (response.status === 201) {
     //if (true)
     const data = await response.json();
-   // console.log(data);
+    // console.log(data);
     //const oCustomer1: ICustomer = await response.json();
     showResult("Your registration was successful");
     console.log("Your registration was successful", data);

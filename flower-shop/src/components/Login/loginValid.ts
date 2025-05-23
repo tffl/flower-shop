@@ -3,7 +3,9 @@ import type { ChangeEvent } from "react";
 export function inputHandler(e: ChangeEvent<HTMLInputElement>) {
   const input = e.target;
   const container = input.closest(".input-wrapper");
-  const errorElement = container?.querySelector(".error-message") as HTMLElement;
+  const errorElement = container?.querySelector(
+    ".error-message",
+  ) as HTMLElement;
 
   let sError: string = "";
   let value = e.target.value.trim();
