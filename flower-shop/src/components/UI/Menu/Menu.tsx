@@ -6,7 +6,7 @@ export const Menu = ({ textColor, className = "", onClick }: MenuProps) => {
   const navigate = useNavigate();
 
   const handleLinkClick = (e: React.MouseEvent, url: string) => {
-     if (url.startsWith('#')) return;
+    if (url.startsWith("#")) return;
 
     e.preventDefault();
 

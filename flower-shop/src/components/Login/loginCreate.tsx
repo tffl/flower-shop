@@ -40,7 +40,10 @@ export function LogInput({ aFields }: IPropsInput) {
                 id={iField.name}
                 name={iField.name}
                 type={
-                  iField.name === "password" && showPassword ? "text" : iField.type}
+                  iField.name === "password" && showPassword
+                    ? "text"
+                    : iField.type
+                }
                 placeholder={iField.placeholder}
                 onChange={handleInput}
                 required
