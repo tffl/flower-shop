@@ -38,9 +38,3 @@ export function inputHandler(e: ChangeEvent<HTMLInputElement>) {
     errorElement.textContent = sError;
   }
 }
-
-export function isValidForm() {
-  let flValid = true;
-  console.log("isValidForm");
-  return flValid;
-}

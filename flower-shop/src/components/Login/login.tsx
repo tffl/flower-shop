@@ -4,7 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../UI/Button/Button.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
 //import { isValidForm } from "./loginValid.ts";
-import { showResult} from "../Register/registerSubmit.ts"
+import { showResult } from "../Register/registerSubmit.ts";
+import { takeToken } from "../Register/registerSubmit.ts";
+import { ILogin } from "./loginTypes.ts";
 
 import "./login.css";
 
@@ -39,17 +41,16 @@ export const Main = () => {
   const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-     if (await newLogin()){
-       showResult("Welcome", true);
-       await login();
-       navigate("/");
-    }
-    else {
+    let nameLogin = await newLogin()
+    if (nameLogin !== null) {
+      showResult(`Welcome ${nameLogin}`, true);
+      await login();
+      navigate("/");
+    } else {
       showResult("Invalid credentials", false);
     }
 
-// }
-
+    // }
 
     // if (isValidForm()) {
     //   //console.log("valid");
@@ -58,14 +59,6 @@ export const Main = () => {
     //   navigate("/");
     // }
   };
-
-
-async function newLogin(): Promise<boolean>{
-  //await takeToken();
-  return true
-}
-
-
 
   return (
     <div className="login" style={{ backgroundImage: "url('img/back.png')" }}>
@@ -84,6 +77,66 @@ async function newLogin(): Promise<boolean>{
     </div>
   );
 };
+
+//.......................................................................
+async function newLogin(): Promise<string | null> {
+  const urlApi =
+    "https://api.europe-west1.gcp.commercetools.com/flower-shop2025/login";
+
+  //     {
+  //   "email" : "johndoe@example.com",
+  //   "password" : "secret123",
+  //   "anonymousCart" : {
+  //     "id" : "{{cart-id}}",
+  //     "typeId" : "cart"
+  //   }
+  // }
+
+  const token = await takeToken();
+  if (token === null) return null;
+  else {
+    const oLogin: ILogin = {
+      email: "",
+      password: "",
+    };
+
+    let pInput = document.querySelector(
+      `.input-wrapper input[name="email"]`,
+    ) as HTMLInputElement;
+    oLogin.email = pInput.value;
+
+    pInput = document.querySelector(
+      `.input-wrapper input[name="password"]`,
+    ) as HTMLInputElement;
+    oLogin.password = pInput.value;
+
+    console.log("newLogin>>>", oLogin);
+    const response = await fetch(urlApi, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(oLogin),
+    });
+
+    console.log("newLogin <<<< await", response);
+
+    if (response.status === 200) {
+      //if (true)
+      const data = await response.json();
+      console.log(data);
+      //const oCustomer1: ICustomer = await response.json();
+      console.log("Login successful", data);
+      console.log("Welcome", data.customer.firstName);
+      return data.customer.firstName;
+    } else {
+      console.log("newLogin - error", response.status);
+
+      return null;
+    }
+  }
+}
 
 // function isValidForm() {
 //   let flValid = true;

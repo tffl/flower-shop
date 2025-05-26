@@ -22,3 +22,8 @@ export interface IError {
   id: number;
   message: string;
 }
+
+export interface ILogin {
+  email: string;
+  password: string;
+}

@@ -33,7 +33,7 @@ export async function registerSubmitButton(): Promise<boolean> {
 // const client_id = "h1LEoc5g15JqUTUsqfw4ty74";
 
 //....................................................
-async function takeToken() {
+export async function takeToken(): Promise<string | null> {
   //console.log("takeToken");
 
   // const rClientId = "h1LEoc5g15JqUTUsqfw4ty74";
@@ -66,7 +66,8 @@ async function takeToken() {
     console.log(data);
     BEARER_TOKEN = data.access_token;
     localStorage.setItem("token", BEARER_TOKEN);
-  }
+    return BEARER_TOKEN;
+  } else return null;
 }
 
 //.............................................................
