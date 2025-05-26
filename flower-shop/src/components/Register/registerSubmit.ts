@@ -9,7 +9,8 @@ let BEARER_TOKEN = "";
 //....................................................
 export function registerSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
-  if (isValidForm(true)) { }
+  if (isValidForm(true)) {
+  }
 }
 
 //.....................................................
@@ -20,8 +21,8 @@ export async function registerSubmitButton(): Promise<boolean> {
 
   if (isValidForm(false)) {
     await takeToken();
-    if (await newCustomer()) return true
-    else return false
+    if (await newCustomer()) return true;
+    else return false;
   } else return false;
 }
 
@@ -36,8 +37,7 @@ async function takeToken() {
   console.log("takeToken");
 
   // const rClientId = "h1LEoc5g15JqUTUsqfw4ty74";
-   const rClientId = "dKXLsfhgcZ3OQCrSpp1thax1";
-
+  const rClientId = "dKXLsfhgcZ3OQCrSpp1thax1";
 
   // const rClientSecret = "6iFII4Hsy3Jiy-8VAKFxohYIi10z_FKq";
   const rClientSecret = "th8GWbXtwDcLXs4kNJ9oMV1C-9RkuCv1";
@@ -87,19 +87,27 @@ async function newCustomer(): Promise<boolean> {
     password: "",
   };
 
-  let pInput = document.querySelector(`.register input[name="name"]`) as HTMLInputElement;
-  oCustomer.firstName = pInput.value
+  let pInput = document.querySelector(
+    `.register input[name="name"]`,
+  ) as HTMLInputElement;
+  oCustomer.firstName = pInput.value;
 
-  pInput = document.querySelector(`.register input[name="surname"]`) as HTMLInputElement;
-  oCustomer.lastName = pInput.value
+  pInput = document.querySelector(
+    `.register input[name="surname"]`,
+  ) as HTMLInputElement;
+  oCustomer.lastName = pInput.value;
 
-  pInput = document.querySelector(`.register input[name="email"]`) as HTMLInputElement;
-  oCustomer.email = pInput.value
+  pInput = document.querySelector(
+    `.register input[name="email"]`,
+  ) as HTMLInputElement;
+  oCustomer.email = pInput.value;
 
-  pInput = document.querySelector(`.register input[name="password"]`) as HTMLInputElement;
-  oCustomer.password = pInput.value
+  pInput = document.querySelector(
+    `.register input[name="password"]`,
+  ) as HTMLInputElement;
+  oCustomer.password = pInput.value;
 
-  console.log(oCustomer)
+  console.log(oCustomer);
 
   // const url1 = 'https://api.europe-west1.gcp.commercetools.com/flower-shop2025/in-store/key=flower-shop2025/customers'
   // https://api.{region}.commercetools.com/{projectKey}/customers -i \
@@ -134,30 +142,34 @@ async function newCustomer(): Promise<boolean> {
 
     showResult("Your registration was successful. Welcome.", true);
     console.log("Your registration was successful", data);
-    return true
+    return true;
   } else {
     console.log("newCustomer - error", response.status);
-    showResult("Failed to create account",false);
-    return false
+    showResult("Failed to create account", false);
+    return false;
   }
 }
 //.....................................................................
-function showResult(sText: string, isSuccess:boolean) {
+function showResult(sText: string, isSuccess: boolean) {
+  const wWidth = 380;
+  const wHeight = 300;
+  const pModalWindow = addElement(
+    document.body,
+    "div",
+    "modal__window",
+    "",
+  ) as HTMLDivElement;
+  pModalWindow.style.width = `${wWidth}px`;
+  pModalWindow.style.height = `${wHeight}px`;
 
-  const wWidth = 380
-  const wHeight = 300
-  const pModalWindow = addElement(document.body, "div", "modal__window", "") as HTMLDivElement
-  pModalWindow.style.width = `${wWidth}px`
-  pModalWindow.style.height = `${wHeight}px`
+  console.log(document.body.clientHeight - wHeight, window.pageYOffset);
 
-  console.log (document.body.clientHeight-wHeight, window.pageYOffset)
+  pModalWindow.style.top = `500px`;
+  pModalWindow.style.left = `${Math.floor((document.body.clientWidth - wWidth) / 2)}px`;
 
-  pModalWindow.style.top = `500px`
-  pModalWindow.style.left = `${Math.floor((document.body.clientWidth-wWidth)/2)}px`
-
-  if(!isSuccess) {
-    pModalWindow.classList.add('error')
-    pModalWindow.style.top = `${Math.floor((document.body.clientHeight - 3 * wHeight))}px`
+  if (!isSuccess) {
+    pModalWindow.classList.add("error");
+    pModalWindow.style.top = `${Math.floor(document.body.clientHeight - 3 * wHeight)}px`;
   }
 
   addElement(pModalWindow, "p", "modal__txt", sText);

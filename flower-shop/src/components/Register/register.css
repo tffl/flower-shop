@@ -16,14 +16,6 @@
   /* #343925 #075826; */
 }
 
-.register h3 {
-  margin: 10px auto 10px;
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 150%;
-  color: var(--color-r-title);
-}
-
 .register {
   font-family: Montserrat;
   max-width: 800px;
@@ -31,9 +23,37 @@
   padding: 10px;
   background: var(--color-r-back);
   /* background-image: url(img/back.png); */
-  background-position: center;
-  background-size: cover;
+  background-position: center;  background-size: cover;
   color: var(--color-r-txt);
+}
+
+.register__section-title {
+  position: relative;
+}
+.register__section-title:before {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #5b6145 0%,
+    #ffffff 30%,
+    #ffffff 70%,
+    #5b6145 100%
+  );
+}
+.register h3 {
+  position: relative;
+  margin: 10px auto 10px;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 150%;
+  color: var(--color-r-title);
+  z-index: 5;
 }
 
 .register__section {
@@ -56,23 +76,22 @@
   text-align: left;
 }
 
-.register__input{
-position: relative;
+.register__input {
+  position: relative;
 }
 .password-view {
-position: absolute;
-top: 35px;
-right: 6px;
-display: inline-block;
-width: 20px;
-height: 20px;
-background: url(svg/view.svg) 0 0 no-repeat;
-z-index: 5;
+  position: absolute;
+  top: 35px;
+  right: 6px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(svg/view.svg) 0 0 no-repeat;
+  z-index: 5;
 }
 .password-view.view {
-background: url(svg/no-view.svg) 0 0 no-repeat;
+  background: url(svg/no-view.svg) 0 0 no-repeat;
 }
-
 
 .register__input select {
   padding: 9px 5px;
@@ -204,6 +223,6 @@ background: url(svg/no-view.svg) 0 0 no-repeat;
   z-index: 20;
 }
 
-.modal__window.error{
-   color: var(--color-txt-err);
+.modal__window.error {
+  color: var(--color-txt-err);
 }

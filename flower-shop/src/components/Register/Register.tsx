@@ -25,12 +25,8 @@ export const Main = () => {
             <CreateSection section={iSection} key={iSection.id} />
           ))}
 
-          <div className="register__submit-txt">
-          </div>
-          <button
-            className="register__submit-btn inactive"
-            onClick={rSubmit}
-          >
+          <div className="register__submit-txt"></div>
+          <button className="register__submit-btn inactive" onClick={rSubmit}>
             Create account
           </button>
 

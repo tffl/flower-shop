@@ -28,10 +28,7 @@ function ProfInfo({ aFields }: IPropsInput) {
       {aFields.map((iField, i) => (
         <div className="profile__info" key={i + 3}>
           <h4>{iField.label}: </h4>
-          <p
-            className="profile__info_txt"
-            key={iField.id}
-          >
+          <p className="profile__info_txt" key={iField.id}>
             {iField.placeholder}
           </p>
         </div>

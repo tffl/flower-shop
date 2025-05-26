@@ -19,7 +19,9 @@ const aCountries = ["USA", "UK", "Canada"];
 export function CreateSection({ section }: IPropsSection) {
   return (
     <div className="register__section">
-      <h3>{section.title}</h3>
+      <div className="register__section-title">
+        <h3>{section.title}</h3>
+      </div>
       <RegInputs aFields={section.aFields} />
       <RegChecks aChecks={section.aChecks} />
     </div>
@@ -45,7 +47,9 @@ function RegInputs({ aFields }: IPropsInput) {
             ></input>
           )}
           <div className="register__input-error"></div>
-          {(iField.name === 'password') && <a href="#" className="password-view" onClick={showView}></a>}
+          {iField.name === "password" && (
+            <a href="#" className="password-view" onClick={showView}></a>
+          )}
         </div>
       ))}
     </div>
@@ -77,18 +81,19 @@ function RegSelect() {
   );
 }
 
-function showView(){
-const pInputPass = document.querySelector(`.register input[name="password"]`) as HTMLInputElement
-let target = pInputPass.nextElementSibling as HTMLElement
-target = target.nextElementSibling as HTMLElement
+function showView() {
+  const pInputPass = document.querySelector(
+    `.register input[name="password"]`,
+  ) as HTMLInputElement;
+  let target = pInputPass.nextElementSibling as HTMLElement;
+  target = target.nextElementSibling as HTMLElement;
 
-if (pInputPass.getAttribute('type') == 'password') {
-target.classList.add('view');
-pInputPass.setAttribute('type', 'text');
-} else {
-target.classList.remove('view');
-pInputPass.setAttribute('type', 'password');
+  if (pInputPass.getAttribute("type") == "password") {
+    target.classList.add("view");
+    pInputPass.setAttribute("type", "text");
+  } else {
+    target.classList.remove("view");
+    pInputPass.setAttribute("type", "password");
+  }
+  return false;
 }
-return false;
-}
-

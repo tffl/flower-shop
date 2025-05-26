@@ -1,11 +1,10 @@
-
-.register h3 {
+/* .register h3 {
   margin: 10px auto 10px;
   font-size: 2rem;
   font-weight: 400;
   line-height: 150%;
   color: var(--color-r-title);
-}
+} */
 
 .profile {
   font-family: Montserrat;
@@ -23,7 +22,7 @@
   background-color: transparent;
 }
 
-.submenu__profile:hover{
+.submenu__profile:hover {
   outline-color: #ffffff;
 }
 
@@ -40,7 +39,6 @@
   padding: 10px 0;
 }
 
-
 .profile__submit-btn {
   width: 30%;
   font-size: 1.5rem;
@@ -54,4 +52,3 @@
   background-color: var(--color-btn-back-hover);
   cursor: pointer;
 }
-

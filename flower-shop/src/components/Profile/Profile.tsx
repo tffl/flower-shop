@@ -16,7 +16,6 @@ export const Main = () => {
           ))}
 
           <button className="profile__submit-btn">Edit</button>
-
         </div>
       </div>
     </div>

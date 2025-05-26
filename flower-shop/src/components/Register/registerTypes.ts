@@ -55,5 +55,5 @@ export interface ICustomerApi {
   firstName: string;
   lastName: string;
   password: string;
-  addresses : []
+  addresses: [];
 }
