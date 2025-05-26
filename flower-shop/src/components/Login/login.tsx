@@ -3,7 +3,9 @@ import { ILoginSection } from "./loginTypes.ts";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../UI/Button/Button.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
-import { isValidForm } from "./loginValid.ts";
+//import { isValidForm } from "./loginValid.ts";
+import { showResult} from "../Register/registerSubmit.ts"
+
 import "./login.css";
 
 export const Main = () => {
@@ -37,13 +39,33 @@ export const Main = () => {
   const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (isValidForm()) {
-      console.log("valid");
-      // переход на главную страницу и замена логаут
-      await login();
-      navigate("/");
+     if (await newLogin()){
+       showResult("Welcome", true);
+       await login();
+       navigate("/");
     }
+    else {
+      showResult("Invalid credentials", false);
+    }
+
+// }
+
+
+    // if (isValidForm()) {
+    //   //console.log("valid");
+    //   // переход на главную страницу и замена логаут
+    //   await login();
+    //   navigate("/");
+    // }
   };
+
+
+async function newLogin(): Promise<boolean>{
+  //await takeToken();
+  return true
+}
+
+
 
   return (
     <div className="login" style={{ backgroundImage: "url('img/back.png')" }}>
@@ -54,7 +76,7 @@ export const Main = () => {
         <Button type="submit">Login</Button>
         <p className="switch-bottom">
           Don't have an account?{" "}
-          <Link to="/register" className="green">
+          <Link to="/register" className="register__link">
             Register
           </Link>
         </p>
@@ -62,3 +84,9 @@ export const Main = () => {
     </div>
   );
 };
+
+// function isValidForm() {
+//   let flValid = true;
+// //  console.log("isValidForm");
+//   return flValid;
+// }

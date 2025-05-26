@@ -34,7 +34,7 @@ export async function registerSubmitButton(): Promise<boolean> {
 
 //....................................................
 async function takeToken() {
-  console.log("takeToken");
+  //console.log("takeToken");
 
   // const rClientId = "h1LEoc5g15JqUTUsqfw4ty74";
   const rClientId = "dKXLsfhgcZ3OQCrSpp1thax1";
@@ -78,7 +78,7 @@ async function newCustomer(): Promise<boolean> {
   //   if (lsToken) BEARER_TOKEN = lsToken;
   // }
 
-  console.log("newCustomer<<<", BEARER_TOKEN);
+  //console.log("newCustomer<<<", BEARER_TOKEN);
 
   const oCustomer: ICustomer = {
     email: "",
@@ -150,7 +150,7 @@ async function newCustomer(): Promise<boolean> {
   }
 }
 //.....................................................................
-function showResult(sText: string, isSuccess: boolean) {
+export function showResult(sText: string, isSuccess: boolean) {
   const wWidth = 380;
   const wHeight = 300;
   const pModalWindow = addElement(

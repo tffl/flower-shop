@@ -85,15 +85,13 @@ function showView() {
   const pInputPass = document.querySelector(
     `.register input[name="password"]`,
   ) as HTMLInputElement;
-  let target = pInputPass.nextElementSibling as HTMLElement;
-  target = target.nextElementSibling as HTMLElement;
+  let target = document.querySelector(".password-view") as HTMLElement;
 
-  if (pInputPass.getAttribute("type") == "password") {
+  if (pInputPass.getAttribute("type") === "password") {
     target.classList.add("view");
     pInputPass.setAttribute("type", "text");
   } else {
     target.classList.remove("view");
     pInputPass.setAttribute("type", "password");
   }
-  return false;
 }

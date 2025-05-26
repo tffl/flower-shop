@@ -32,7 +32,7 @@ export const Main = () => {
 
           <p className="register__switch-login">
             Already have an account?{" "}
-            <span className="register__green">
+            <span className="register__link">
               <Link to="/login" style={{ color: greenColor }}>
                 Login
               </Link>

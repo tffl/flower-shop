@@ -14,7 +14,6 @@ export function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const name = pInput.name;
 
   sError = validField(value, name);
-
   if (pInput.nextElementSibling) pInput.nextElementSibling.textContent = sError;
 
   isValidForm(false);
