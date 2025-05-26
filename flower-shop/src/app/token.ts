@@ -1,9 +1,13 @@
+
 import { buildScopeString } from "./utilities";
 
-export async function executeApiRequest() {
+
+
+export async function getToken() {
 
   try {
-    const scope=buildScopeString(['products','orders','profile']);
+    const scope=buildScopeString(['products']);
+    console.log(scope)
     const url=`${import.meta.env.VITE_CTP_AUTH_URL}/oauth/${import.meta.env.VITE_CTP_PROJECT_KEY}/anonymous/token`;
     const authString = btoa(`${import.meta.env.VITE_CTP_CLIENT_ID}:${import.meta.env.VITE_CTP_CLIENT_SECRET}`);
     
@@ -34,19 +38,3 @@ export async function executeApiRequest() {
   }
 }
 
-// export async function getCategories() {
-//   const API_URL = 'https://api.europe-west1.gcp.commercetools.com';
-//   const token = await executeApiRequest();
-  
-//   const response = await fetch(`${API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/categories`, {
-//     headers: {
-//       'Authorization': `Bearer ${token}`,
-//     },
-//   });
-
-//   if (!response.ok) {
-//     throw new Error('Failed to fetch categories');
-//   }
-
-//   return response.json();
-// }

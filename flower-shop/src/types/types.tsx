@@ -40,3 +40,12 @@ export type TokenData ={
   expires_in?: number;
   token_type?: string;
 }
+export type ApiRequestParams ={
+  endpoint: string; 
+  method?: 'GET' | 'POST' | 'DELETE'; 
+  path?: string; 
+  query?: Record<string, string>; 
+  body?: unknown; 
+  isAuthRequest?: boolean; 
+}
+

@@ -36,8 +36,6 @@ export function test() {
   addImgElement(pContainer, "", "img/flowers.jpg", "picture");
 }
 
-
-
 export function buildScopeString(
   scopeKeys: ScopeKey[], 
 ): string {
