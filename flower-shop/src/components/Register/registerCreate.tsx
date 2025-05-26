@@ -38,15 +38,14 @@ function RegInputs({ aFields }: IPropsInput) {
             <input
               type={iField.type}
               name={iField.name}
-              // placeholder={iField.label + ": " + iField.placeholder}
               placeholder={iField.placeholder}
-              // onBlur={(e) => blurHandler(e)}
               onChange={(e) => inputHandler(e)}
               key={iField.id}
               defaultValue={iField.type === "date" ? "2000-01-01" : ""} //min="2023-01-01" max="2023-12-31"
             ></input>
           )}
           <div className="register__input-error"></div>
+          {(iField.name === 'password') && <a href="#" className="password-view" onClick={showView}></a>}
         </div>
       ))}
     </div>
@@ -77,3 +76,19 @@ function RegSelect() {
     </select>
   );
 }
+
+function showView(){
+const pInputPass = document.querySelector(`.register input[name="password"]`) as HTMLInputElement
+let target = pInputPass.nextElementSibling as HTMLElement
+target = target.nextElementSibling as HTMLElement
+
+if (pInputPass.getAttribute('type') == 'password') {
+target.classList.add('view');
+pInputPass.setAttribute('type', 'text');
+} else {
+target.classList.remove('view');
+pInputPass.setAttribute('type', 'password');
+}
+return false;
+}
+

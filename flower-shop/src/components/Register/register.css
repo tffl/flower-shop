@@ -10,6 +10,7 @@
   /* --color-btn-back: #075826; */
   --color-r-border: #d9d9d9 /* --color-btn-back:#12310d; #225e18;*/;
   --color-txt-alt: #075826;
+  --color-txt-mess: #75b38d;
   --color-txt-err: #b95555;
   /* --color-footer-back: #343925; */
   /* #343925 #075826; */
@@ -54,6 +55,24 @@
   border: 1px solid var(--color-r-border);
   text-align: left;
 }
+
+.register__input{
+position: relative;
+}
+.password-view {
+position: absolute;
+top: 35px;
+right: 6px;
+display: inline-block;
+width: 20px;
+height: 20px;
+background: url(svg/view.svg) 0 0 no-repeat;
+z-index: 5;
+}
+.password-view.view {
+background: url(svg/no-view.svg) 0 0 no-repeat;
+}
+
 
 .register__input select {
   padding: 9px 5px;
@@ -157,7 +176,7 @@
   color: var(--color-txt-err);
 }
 
-.modal {
+/* .modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -169,17 +188,22 @@
   align-items: center;
   justify-content: center;
   z-index: 20;
-}
+} */
 
 .modal__window {
-  width: 400px;
-  /* height: 150px; */
+  position: absolute;
+  padding: 40px 50px 60px;
   text-align: center;
-  padding: 30px 40px 50px;
   font-size: 2rem;
   line-height: 150%;
   letter-spacing: 0.18rem;
-  color: #ffffff;
+  color: var(--color-txt-mess);
   background-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
   transition: all 0.8s;
+  z-index: 20;
+}
+
+.modal__window.error{
+   color: var(--color-txt-err);
 }

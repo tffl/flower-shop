@@ -4,16 +4,13 @@ import { registerSubmit } from "./registerSubmit";
 import { Link } from "react-router-dom";
 import { aSections } from "./registerData.ts";
 import { useNavigate } from "react-router-dom";
-//import { isValidForm } from "./registerValid.ts";
 import { registerSubmitButton } from "./registerSubmit";
 
 export const Main = () => {
   const greenColor = "#4a4e37";
   const navigate = useNavigate();
-  //  const rSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
   const rSubmit = async () => {
     if (await registerSubmitButton()) {
-      //  if (isValidForm(false)) {
       navigate("/");
     }
   };
@@ -27,16 +24,12 @@ export const Main = () => {
           {aSections.map((iSection) => (
             <CreateSection section={iSection} key={iSection.id} />
           ))}
-          {/* <input type='submit'>Create account</input> */}
-          {/* <button className="register_btn" onClick={(e) =>registerSubmitButton(e)}> */}
 
-          {/* <div className="register__submit-txt">The form is filled correctly</div> */}
           <div className="register__submit-txt">
-            {/* Not all form fields are filled in correctly */}
           </div>
           <button
             className="register__submit-btn inactive"
-            onClick={rSubmit} //(e) => registerSubmitButton(e)
+            onClick={rSubmit}
           >
             Create account
           </button>
