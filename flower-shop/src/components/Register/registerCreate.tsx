@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import { IField, ICheck, IRegisterSection } from "./registerTypes";
 import { inputHandler } from "./registerValid";
+import React, { useState } from 'react';
 
 interface IPropsSection {
   section: IRegisterSection;
@@ -16,6 +17,7 @@ interface IPropsCheck {
 
 const aCountries = ["USA", "UK", "Canada"];
 
+//..........................................................
 export function CreateSection({ section }: IPropsSection) {
   return (
     <div className="register__section">
@@ -28,7 +30,16 @@ export function CreateSection({ section }: IPropsSection) {
   );
 }
 
+//............................................................
 function RegInputs({ aFields }: IPropsInput) {
+
+  const [show, setShow] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShow((v)=> !v)
+    const pView = document.querySelector(".password-view") as HTMLElement
+    pView.classList.toggle("view")
+  }
+  
   return (
     <div>
       {aFields.map((iField, i) => (
@@ -38,7 +49,7 @@ function RegInputs({ aFields }: IPropsInput) {
             <RegSelect />
           ) : (
             <input
-              type={iField.type}
+              type={iField.name !== 'password'? iField.type : show ? 'text' : 'password'}
               name={iField.name}
               placeholder={iField.placeholder}
               onChange={(e) => inputHandler(e)}
@@ -48,7 +59,7 @@ function RegInputs({ aFields }: IPropsInput) {
           )}
           <div className="register__input-error"></div>
           {iField.name === "password" && (
-            <a href="#" className="password-view" onClick={showView}></a>
+            <a className="password-view" onClick={togglePasswordVisibility}> </a>
           )}
         </div>
       ))}
@@ -81,17 +92,4 @@ function RegSelect() {
   );
 }
 
-function showView() {
-  const pInputPass = document.querySelector(
-    `.register input[name="password"]`,
-  ) as HTMLInputElement;
-  let target = document.querySelector(".password-view") as HTMLElement;
 
-  if (pInputPass.getAttribute("type") === "password") {
-    target.classList.add("view");
-    pInputPass.setAttribute("type", "text");
-  } else {
-    target.classList.remove("view");
-    pInputPass.setAttribute("type", "password");
-  }
-}
