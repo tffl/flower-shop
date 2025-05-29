@@ -1,19 +1,19 @@
 // import { useState } from "react";
-import { IField, ICheck, IRegisterSection } from "./registerTypes";
+import { IPropsSection, IPropsInput, IPropsCheck } from "./registerTypes";
 import { inputHandler } from "./registerValid";
-import React, { useState } from 'react';
+import { useState } from "react";
 
-interface IPropsSection {
-  section: IRegisterSection;
-}
+// interface IPropsSection {
+//   section: IRegisterSection;
+// }
 
-interface IPropsInput {
-  aFields: IField[];
-}
+// interface IPropsInput {
+//   aFields: IField[];
+// }
 
-interface IPropsCheck {
-  aChecks: ICheck[];
-}
+// interface IPropsCheck {
+//   aChecks: ICheck[];
+// }
 
 const aCountries = ["USA", "UK", "Canada"];
 
@@ -21,7 +21,7 @@ const aCountries = ["USA", "UK", "Canada"];
 export function CreateSection({ section }: IPropsSection) {
   return (
     <div className="register__section">
-      <div className="register__section-title">
+      <div className={section.title ? "register__section-title" : ""}>
         <h3>{section.title}</h3>
       </div>
       <RegInputs aFields={section.aFields} />
@@ -32,14 +32,13 @@ export function CreateSection({ section }: IPropsSection) {
 
 //............................................................
 function RegInputs({ aFields }: IPropsInput) {
-
   const [show, setShow] = useState(false);
   const togglePasswordVisibility = () => {
-    setShow((v)=> !v)
-    const pView = document.querySelector(".password-view") as HTMLElement
-    pView.classList.toggle("view")
-  }
-  
+    setShow((v) => !v);
+    const pView = document.querySelector(".password-view") as HTMLElement;
+    pView.classList.toggle("view");
+  };
+
   return (
     <div>
       {aFields.map((iField, i) => (
@@ -49,7 +48,13 @@ function RegInputs({ aFields }: IPropsInput) {
             <RegSelect />
           ) : (
             <input
-              type={iField.name !== 'password'? iField.type : show ? 'text' : 'password'}
+              type={
+                iField.name !== "password"
+                  ? iField.type
+                  : show
+                    ? "text"
+                    : "password"
+              }
               name={iField.name}
               placeholder={iField.placeholder}
               onChange={(e) => inputHandler(e)}
@@ -59,7 +64,13 @@ function RegInputs({ aFields }: IPropsInput) {
           )}
           <div className="register__input-error"></div>
           {iField.name === "password" && (
-            <a className="password-view" onClick={togglePasswordVisibility}> </a>
+            <a className="password-view" onClick={togglePasswordVisibility}>
+              {show ? (
+                <img src="svg/view.svg" alt=""></img>
+              ) : (
+                <img src="svg/no-view.svg" alt=""></img>
+              )}
+            </a>
           )}
         </div>
       ))}
@@ -91,5 +102,3 @@ function RegSelect() {
     </select>
   );
 }
-
-

@@ -17,19 +17,19 @@
   /* transform: translate(-50%, -50%); */
   color: var(--color-footer-back);
   font-family: "Rosarivo";
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 400;
   line-height: 100%;
 }
 
-.decor-line{
+.decor-line {
   width: 165px;
   height: 5px;
   margin: 40px;
-  border-top: 1px solid var(--color-footer-back)
+  border-top: 1px solid var(--color-footer-back);
 }
 
-.decor-line.white{
+.decor-line.white {
   border-color: #ffffff;
 }
 

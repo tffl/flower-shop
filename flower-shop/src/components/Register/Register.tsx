@@ -30,7 +30,7 @@ export const Main = () => {
             Create account
           </button>
 
-          <p className="register__switch-login">
+          <p className="register__switch">
             Already have an account?{" "}
             <span className="register__link">
               <Link to="/login" style={{ color: greenColor }}>

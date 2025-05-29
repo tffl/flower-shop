@@ -1,5 +1,5 @@
-import { isValidForm } from "./registerValid";
-import { ICustomerApi, IAddress } from "./registerTypes";
+import { isValidForm } from "../Register/registerValid";
+import { ICustomer } from "../Register/registerTypes";
 import { addElement } from "../../app/utilities";
 
 let BEARER_TOKEN = "";
@@ -15,17 +15,17 @@ let BEARER_TOKEN = "";
 // &scope={scope}
 
 //....................................................
-export function registerSubmit(e: React.FormEvent<HTMLFormElement>) {
+export function profileSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
   if (isValidForm(true)) {
   }
 }
 
 //.....................................................
-export async function registerSubmitButton(): Promise<boolean> {
+export async function profileSubmitButton(): Promise<boolean> {
   if (isValidForm(false)) {
     await takeToken();
-    if (await newCustomer()) return true;
+    if (await rewriteCustomer()) return true;
     else return false;
   } else return false;
 }
@@ -48,7 +48,7 @@ export async function takeToken(): Promise<string | null> {
     body: "grant_type=client_credentials&scope=manage_customers:flower-shop2025",
   });
 
-  console.log("newCustomer>>>await", response);
+  //   console.log("newCustomer>>>await", response);
 
   if (response.status === 200) {
     const data = await response.json();
@@ -61,19 +61,12 @@ export async function takeToken(): Promise<string | null> {
 
 //.............................................................
 // export async function newCustomer(oCustomer: ICustomer) {
-async function newCustomer(): Promise<boolean> {
-  const oCustomer: ICustomerApi = {
+async function rewriteCustomer(): Promise<boolean> {
+  const oCustomer: ICustomer = {
     email: "",
     firstName: "",
     lastName: "",
     password: "",
-    dateOfBirth: '2000-01-01', //new Date('2000-01-01'),
-    addresses: [{
-  streetName : '',
-  postalCode : '',
-  city : '',
-  country : ''
-}]
   };
 
   let pInput = document.querySelector(
@@ -87,11 +80,6 @@ async function newCustomer(): Promise<boolean> {
   oCustomer.lastName = pInput.value;
 
   pInput = document.querySelector(
-    `.register input[name="date"]`,
-  ) as HTMLInputElement;
-  oCustomer.dateOfBirth = pInput.value
-
-  pInput = document.querySelector(
     `.register input[name="email"]`,
   ) as HTMLInputElement;
   oCustomer.email = pInput.value;
@@ -100,30 +88,6 @@ async function newCustomer(): Promise<boolean> {
     `.register input[name="password"]`,
   ) as HTMLInputElement;
   oCustomer.password = pInput.value;
-
-  // pInput = document.querySelector(
-  //   `.register input[name="country"]`,
-  // ) as HTMLInputElement;
-  // if(oCustomer.addresses[0])
-  // oCustomer.addresses[0].country = pInput.value;
-
-  pInput = document.querySelector(
-    `.register input[name="city"]`,
-  ) as HTMLInputElement;
-  if(oCustomer.addresses[0])
-  oCustomer.addresses[0].city = pInput.value;
-
-  pInput = document.querySelector(
-    `.register input[name="street"]`,
-  ) as HTMLInputElement;
-  if(oCustomer.addresses[0])
-  oCustomer.addresses[0].streetName = pInput.value;
-
-  pInput = document.querySelector(
-    `.register input[name="postcode"]`,
-  ) as HTMLInputElement;
-  if(oCustomer.addresses[0])
-  oCustomer.addresses[0].postalCode = pInput.value;
 
   console.log(oCustomer);
 

@@ -9,7 +9,7 @@
   justify-content: center;
   background-position: center;
   background-size: cover;
-  padding: 30px; 
+  padding: 30px;
 }
 .heroSection__title {
   max-width: 751px;
@@ -18,9 +18,9 @@
   left: 50%;
   transform: translate(-50%, -50%); */
   font-family: "Rosarivo";
-  font-size: 60px;
+  font-size: 45px;
   font-weight: normal;
-  line-height: 100%;
+  line-height: 110%;
 }
 @media (max-width: 1024px) {
   .heroSection__title {

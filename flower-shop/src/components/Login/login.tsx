@@ -1,5 +1,5 @@
 import { CreateSection } from "./loginCreate.tsx";
-import { ILoginSection } from "./loginTypes.ts";
+// import { ILoginSection, ILogin } from "./loginTypes.ts";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../UI/Button/Button.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
@@ -7,28 +7,32 @@ import { useAuth } from "../contexts/AuthContext.tsx";
 import { showResult } from "../Register/registerSubmit.ts";
 import { takeToken } from "../Register/registerSubmit.ts";
 import { ILogin } from "./loginTypes.ts";
+import { IRegisterSection } from "../Register/registerTypes";
+import { validField } from "../Register/registerValid";
 
 import "./login.css";
 
 export const Main = () => {
-  const aSections: ILoginSection[] = [
+  const aSections: IRegisterSection[] = [
     {
-      id: 1,
-      title: "Login",
+      id: 101,
+      title: "",
       aFields: [
         {
           id: 1,
           name: "email",
-          label: "Email*",
+          label: "Email",
           type: "email",
-          placeholder: "user@email.com",
+          placeholder: "",
+          value: "",
         },
         {
           id: 2,
           name: "password",
-          label: "Password*",
+          label: "Password",
           type: "password",
-          placeholder: "password",
+          placeholder: "",
+          value: "",
         },
       ],
       aChecks: [],
@@ -41,40 +45,56 @@ export const Main = () => {
   const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let nameLogin = await newLogin()
-    if (nameLogin !== null) {
-      showResult(`Welcome ${nameLogin}`, true);
-      await login();
-      navigate("/");
-    } else {
-      showResult("Invalid credentials", false);
+    let flValid = true;
+    let sError = "";
+
+    aSections.map((iSection) => {
+      iSection.aFields.map((iInput) => {
+        sError = "";
+        const pInput = document.querySelector(
+          `.login input[name="${iInput.name}"]`,
+        ) as HTMLInputElement;
+
+        if (pInput) {
+          sError = validField(pInput.value, iInput.name);
+          if (sError) flValid = false;
+          if (pInput.nextElementSibling)
+            pInput.nextElementSibling.textContent = sError;
+        }
+      });
+    });
+
+    if (flValid) {
+      let nameLogin = await newLogin();
+      if (nameLogin !== null) {
+        showResult(`Welcome ${nameLogin}`, true);
+        await login();
+        navigate("/");
+      } else {
+        showResult("Invalid credentials", false);
+      }
     }
-
-    // }
-
-    // if (isValidForm()) {
-    //   //console.log("valid");
-    //   // переход на главную страницу и замена логаут
-    //   await login();
-    //   navigate("/");
-    // }
   };
 
   return (
-    <div className="login" style={{ backgroundImage: "url('img/back.png')" }}>
-      <form onSubmit={loginSubmit}>
-        {aSections.map((iSection) => (
-          <CreateSection section={iSection} key={iSection.id} />
-        ))}
-        <Button type="submit">Login</Button>
-        <p className="switch-bottom">
-          Don't have an account?{" "}
-          <Link to="/register" className="register__link">
-            Register
-          </Link>
-        </p>
-      </form>
-    </div>
+    <main className="login__main">
+      <div className="login" style={{ backgroundImage: "url('img/back.png')" }}>
+        <form onSubmit={loginSubmit}>
+          {aSections.map((iSection) => (
+            <CreateSection section={iSection} key={iSection.id} />
+          ))}
+          <Button type="submit" className="register__submit-btn">
+            Login
+          </Button>
+          <p className="register__switch">
+            Don't have an account?{" "}
+            <Link to="/register" className="register__link">
+              Register
+            </Link>
+          </p>
+        </form>
+      </div>
+    </main>
   );
 };
 
@@ -101,16 +121,16 @@ async function newLogin(): Promise<string | null> {
     };
 
     let pInput = document.querySelector(
-      `.input-wrapper input[name="email"]`,
+      `.login input[name="email"]`,
     ) as HTMLInputElement;
     oLogin.email = pInput.value;
 
     pInput = document.querySelector(
-      `.input-wrapper input[name="password"]`,
+      `.login input[name="password"]`,
     ) as HTMLInputElement;
     oLogin.password = pInput.value;
 
-    console.log("newLogin>>>", oLogin);
+    //console.log("newLogin>>>", oLogin);
     const response = await fetch(urlApi, {
       method: "POST",
       headers: {
@@ -120,16 +140,21 @@ async function newLogin(): Promise<string | null> {
       body: JSON.stringify(oLogin),
     });
 
-    console.log("newLogin <<<< await", response);
+    //console.log("newLogin <<<< await", response);
 
     if (response.status === 200) {
       //if (true)
-      const data = await response.json();
-      console.log(data);
-      //const oCustomer1: ICustomer = await response.json();
-      console.log("Login successful", data);
-      console.log("Welcome", data.customer.firstName);
-      return data.customer.firstName;
+      const dataCustomer = await response.json();
+
+      console.log("Login successful", dataCustomer);
+      console.log("Welcome", dataCustomer.customer.firstName);
+
+      const sCustomer = JSON.stringify(dataCustomer.customer);
+
+      console.log(sCustomer);
+      localStorage.setItem("customer", sCustomer);
+
+      return dataCustomer.customer.firstName;
     } else {
       console.log("newLogin - error", response.status);
 

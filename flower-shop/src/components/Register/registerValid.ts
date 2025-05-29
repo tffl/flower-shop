@@ -81,7 +81,7 @@ function age(sBirthday: string): number {
 }
 
 //.....................................................
-function validField(value: string, name: string) {
+export function validField(value: string, name: string) {
   let sError = "";
 
   if (!value) sError = "Field is required";

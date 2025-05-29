@@ -1,19 +1,26 @@
 // import { useState } from "react";
-import { IField, IRegisterSection } from "../Register/registerTypes";
+import { IPropsSection, IPropsInput } from "../Register/registerTypes";
 // import { inputHandler } from "./registerValid";
 
-interface IPropsSection {
-  section: IRegisterSection;
-}
+// interface IPropsSection {
+//   section: IRegisterSection;
+// }
 
-interface IPropsSection {
-  section: IRegisterSection;
-}
+// interface IPropsSection {
+//   section: IRegisterSection;
+// }
 
-interface IPropsInput {
-  aFields: IField[];
-}
+// interface IPropsInput {
+//   aFields: IField[];
+// }
 export function CreateSection({ section }: IPropsSection) {
+  // const sCustomer = localStorage.getItem("customer")
+  // console.log('CreateSection - localstorage', sCustomer)
+  // if (sCustomer){
+  // const oCustomer = JSON.parse(sCustomer)
+  // console.log('CreateSection - localstorage - object', oCustomer)
+  // }
+
   return (
     <div className="profile__section">
       <h3>{section.title}</h3>
@@ -29,7 +36,7 @@ function ProfInfo({ aFields }: IPropsInput) {
         <div className="profile__info" key={i + 3}>
           <h4>{iField.label}: </h4>
           <p className="profile__info_txt" key={iField.id}>
-            {iField.placeholder}
+            {iField.value}
           </p>
         </div>
       ))}

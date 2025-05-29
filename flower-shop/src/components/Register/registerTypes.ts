@@ -30,6 +30,18 @@ export interface ICustomer {
   password: string;
 }
 
+export interface IPropsSection {
+  section: IRegisterSection;
+}
+
+export interface IPropsInput {
+  aFields: IField[];
+}
+
+export interface IPropsCheck {
+  aChecks: ICheck[];
+}
+
 // addresses : []
 // authenticationMode : "Password"
 // billingAddressIds : []
