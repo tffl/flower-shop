@@ -59,8 +59,9 @@ h2 {
   line-height: 150%;
   letter-spacing: 0.18rem;
   color: var(--color-r-title);
+  text-transform: capitalize;
 }
-
+/* 
 .dummy {
   width: 600px;
   margin: 100px auto;
@@ -73,4 +74,4 @@ h2 {
   line-height: 150%;
   text-align: center;
   color: #1d5f23;
-}
+} */
