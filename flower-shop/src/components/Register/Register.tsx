@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { aSections } from "./registerData.ts";
 import { useNavigate } from "react-router-dom";
 import { registerSubmitButton } from "./registerSubmit";
+import { Button } from "../UI/Button/Button.tsx";
 
 export const Main = () => {
   const greenColor = "#4a4e37";
@@ -26,9 +27,9 @@ export const Main = () => {
           ))}
 
           <div className="register__submit-txt"></div>
-          <button className="register__submit-btn inactive" onClick={rSubmit}>
+          <Button className="register__submit-btn" onClick={rSubmit}>
             Create account
-          </button>
+          </Button>
 
           <p className="register__switch">
             Already have an account?{" "}

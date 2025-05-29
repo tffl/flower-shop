@@ -1,9 +1,9 @@
 import "./profile.css";
 import { CreateSection } from "./profileCreate.tsx";
-// import { aProfileSections } from "./profileData.ts";
 import { profileSubmit } from "./profileSubmit.ts";
-import { aSections } from "../Register/registerData.ts";
+import { aSections } from "./profileData.ts";
 import { IRegisterSection } from "../Register/registerTypes.ts";
+import { Button } from "../UI/Button/Button.tsx";
 
 export const Main = () => {
   const aProfileSections = aSections;
@@ -49,7 +49,7 @@ export const Main = () => {
   //           ))
 
   return (
-    <div>
+     <main className="profile__main">
       <div
         className="profile"
         style={{ backgroundImage: "url('img/bgroses33.png')" }}
@@ -60,10 +60,10 @@ export const Main = () => {
             {aProfileSections.map((iSection: IRegisterSection) => (
               <CreateSection section={iSection} key={iSection.id} />
             ))}
-            <button className="register__submit-btn">Save</button>
+            <Button className="profile__submit-btn">Save changes</Button>
           </div>
         </form>
       </div>
-    </div>
+    </main>
   );
 };

@@ -1,9 +1,7 @@
 import { CreateSection } from "./loginCreate.tsx";
-// import { ILoginSection, ILogin } from "./loginTypes.ts";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../UI/Button/Button.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
-//import { isValidForm } from "./loginValid.ts";
 import { showResult } from "../Register/registerSubmit.ts";
 import { takeToken } from "../Register/registerSubmit.ts";
 import { ILogin } from "./loginTypes.ts";
@@ -27,7 +25,7 @@ export const Main = () => {
           value: "",
         },
         {
-          id: 2,
+          id: 102,
           name: "password",
           label: "Password",
           type: "password",
@@ -71,7 +69,7 @@ export const Main = () => {
         await login();
         navigate("/");
       } else {
-        showResult("Invalid credentials", false);
+        showResult("Invalid credentials. Try again.", false);
       }
     }
   };

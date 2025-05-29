@@ -1,5 +1,6 @@
 import { isValidForm } from "./registerValid";
-import { ICustomerApi, IAddress } from "./registerTypes";
+//import { ICustomerApi, IAddress } from "./registerTypes";
+import { ICustomerApi } from "./registerTypes";
 import { addElement } from "../../app/utilities";
 
 let BEARER_TOKEN = "";
@@ -157,22 +158,63 @@ async function newCustomer(): Promise<boolean> {
     return true;
   } else {
     console.log("newCustomer - error", response.status);
-    showResult("Failed to create account. Try again.", false);
+    showResult("Failed to create account. Correct email and try again.", false);
     return false;
   }
 }
+
 //.....................................................................
 export function showResult(sText: string, isSuccess: boolean) {
-  const pModal = addElement(document.body, "div", "modal", "");
-  const pModalWindow = addElement(pModal, "div", "modal__window", "");
-
-  if (!isSuccess) {
-    pModalWindow.classList.add("error");
-  }
+  const wWidth = 380;
+  //const wHeight = 300;
+  const pModalWindow = addElement(
+    document.body,
+    "div",
+    "modal__window",
+    "",
+  ) as HTMLDivElement;
 
   addElement(pModalWindow, "p", "modal__txt", sText);
 
+
+  // pModalWindow.style.height = `${wWidth}px`;
+  // pModalWindow.style.height = `${wHeight}px`;
+
+  console.log('*******',pModalWindow.style.height, pModalWindow.style.width);
+
+  //const wWidth: number = parseInt(pModalWindow.style.width);
+  const wHeight: number = parseInt(pModalWindow.style.height);
+
+  console.log((document.body.clientHeight - wHeight)/2, window.pageYOffset);
+
+  pModalWindow.style.top = `500px`;
+  pModalWindow.style.left = `${Math.floor((document.body.clientWidth - wWidth) / 2)}px`;
+
+  if (!isSuccess) {
+    pModalWindow.classList.add("error");
+    pModalWindow.style.top = `${Math.floor(document.body.clientHeight - 800)}px`;
+  }
+
+
   setTimeout(() => {
-    pModal.remove();
-  }, 2000);
+    pModalWindow.remove();
+  }, 3000);
 }
+
+
+
+// //.....................................................................
+// export function showResult(sText: string, isSuccess: boolean) {
+//   const pModal = addElement(document.body, "div", "modal", "");
+//   const pModalWindow = addElement(pModal, "div", "modal__window", "");
+
+//   if (!isSuccess) {
+//     pModalWindow.classList.add("error");
+//   }
+
+//   addElement(pModalWindow, "p", "modal__txt", sText);
+
+//   setTimeout(() => {
+//     pModal.remove();
+//   }, 2000);
+// }

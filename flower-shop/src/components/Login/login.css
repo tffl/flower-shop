@@ -32,7 +32,7 @@ h3 {
   max-width: 800px;
   margin: 20px auto;
   padding: 10px;
-  background-image: url(img/back.png);
+  /* //background-image: url(img/back.png); */
   background-position: center;
   color: var(--color-r-txt);
 }

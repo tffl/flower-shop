@@ -78,7 +78,7 @@ function RegInputs({ aFields }: IPropsInput) {
   );
 }
 
-function RegChecks({ aChecks }: IPropsCheck) {
+export function RegChecks({ aChecks }: IPropsCheck) {
   return (
     <>
       {aChecks.map((iCheck, i) => (
@@ -91,7 +91,7 @@ function RegChecks({ aChecks }: IPropsCheck) {
   );
 }
 
-function RegSelect() {
+export function RegSelect() {
   return (
     <select className="register__select">
       {aCountries.map((iCountry, i) => (

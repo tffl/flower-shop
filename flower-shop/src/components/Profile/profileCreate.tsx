@@ -1,25 +1,10 @@
 // import { useState } from "react";
 import { IPropsSection, IPropsInput } from "../Register/registerTypes";
-// import { inputHandler } from "./registerValid";
+import {RegSelect} from "../Register/registerCreate";
+import { useState } from "react";
+import {changeHandler} from './profileChange'
 
-// interface IPropsSection {
-//   section: IRegisterSection;
-// }
-
-// interface IPropsSection {
-//   section: IRegisterSection;
-// }
-
-// interface IPropsInput {
-//   aFields: IField[];
-// }
 export function CreateSection({ section }: IPropsSection) {
-  // const sCustomer = localStorage.getItem("customer")
-  // console.log('CreateSection - localstorage', sCustomer)
-  // if (sCustomer){
-  // const oCustomer = JSON.parse(sCustomer)
-  // console.log('CreateSection - localstorage - object', oCustomer)
-  // }
 
   return (
     <div className="profile__section">
@@ -30,14 +15,49 @@ export function CreateSection({ section }: IPropsSection) {
 }
 
 function ProfInfo({ aFields }: IPropsInput) {
+   const [show, setShow] = useState(false);
+    const togglePasswordVisibility = () => {
+      setShow((v) => !v);
+      const pView = document.querySelector(".password-view") as HTMLElement;
+      pView.classList.toggle("view");
+    };
   return (
     <div>
       {aFields.map((iField, i) => (
         <div className="profile__info" key={i + 3}>
           <h4>{iField.label}: </h4>
-          <p className="profile__info_txt" key={iField.id}>
+          {/* <p className="profile__info_txt" key={iField.id}>
             {iField.value}
-          </p>
+          </p> */}
+     {iField.label === "Country" ? (
+            <RegSelect />
+          ) : (
+            <input
+              type={
+                iField.name !== "password"
+                  ? iField.type
+                  : show
+                    ? "text"
+                    : "password"
+              }
+              name={iField.name}
+              value =  {iField.value}
+              onChange={(e) => changeHandler(e)}
+              key={iField.id}
+
+            ></input>
+          )}
+          <div className="register__input-error"></div>
+          {iField.name === "password" && (
+            <a className="password-view" onClick={togglePasswordVisibility}>
+              {show ? (
+                <img src="svg/view.svg" alt=""></img>
+              ) : (
+                <img src="svg/no-view.svg" alt=""></img>
+              )}
+            </a>
+          )}
+
         </div>
       ))}
     </div>
