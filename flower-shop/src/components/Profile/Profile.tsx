@@ -4,8 +4,12 @@ import { profileSubmit } from "./profileSubmit.ts";
 import { aSections } from "./profileData.ts";
 import { IRegisterSection } from "../Register/registerTypes.ts";
 import { Button } from "../UI/Button/Button.tsx";
+import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 export const Main = () => {
+ const { isAuthenticated } = useAuth();
+
   const aProfileSections = aSections;
   const sCustomer = localStorage.getItem("customer");
 
@@ -28,7 +32,7 @@ export const Main = () => {
             iField.value = oCustomer.email;
             break;
           case "password":
-            iField.value = oCustomer.password;
+            iField.value = ''; //oCustomer.password;
             break;
           case "date":
             iField.value = oCustomer.dateOfBirth;
@@ -55,6 +59,8 @@ export const Main = () => {
         style={{ backgroundImage: "url('img/bgroses33.png')" }}
       >
         <h2> User Profile Information</h2>
+
+{isAuthenticated ? (
         <form onSubmit={(e) => profileSubmit(e)}>
           <div className="profile__div">
             {aProfileSections.map((iSection: IRegisterSection) => (
@@ -63,6 +69,24 @@ export const Main = () => {
             <Button className="profile__submit-btn">Save changes</Button>
           </div>
         </form>
+      ) : (
+<>
+<p className="profile__inactive-txt">For authorized customers only</p>
+   <p className="register__switch">
+            Don't have an account?{" "}
+            <Link to="/register" className="register__link">
+              Register
+            </Link>
+            </p>
+  <p className="register__switch">
+            Already have an account?{" "}
+               <Link to="/login" className="register__link" >
+                Login
+              </Link>
+          </p>
+</>
+
+       )}
       </div>
     </main>
   );

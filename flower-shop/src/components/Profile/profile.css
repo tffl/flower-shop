@@ -59,6 +59,23 @@
   text-align: left;
 }
 
+.password-view-profile {
+  position: absolute;
+  top: 12px;
+  right: 140px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  /* background: url(svg/view.svg) 0 0 no-repeat; */
+  z-index: 5;
+  border: 1px solid transparent;
+}
+
+/* .password-view.profile{
+  top: 12px;
+  right: 140px;
+} */
+
 .profile__submit-btn {
   width: 30%;
   font-size: 1.5rem;
@@ -72,3 +89,10 @@
   background-color: var(--color-btn-back-hover);
   cursor: pointer;
 } */
+
+
+.profile__inactive-txt{
+  margin: 80px auto;
+  font-size: 2rem;
+  color: var(--color-txt-err)
+}

@@ -92,6 +92,11 @@
   z-index: 5;
   border: 1px solid transparent;
 }
+
+/* .password-view.profile{
+  top: 12px;
+  right: 140px;
+} */
 /* .password-view.view {
   /* background: url(svg/no-view.svg) 0 0 no-repeat; 
 } */
