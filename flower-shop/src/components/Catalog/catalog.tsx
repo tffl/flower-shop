@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { executeApiRequest } from "../../app/universal";
 import './catalog.css'
+import { FormattedProduct, Product } from "../../types/types";
 
 
 export const Catalog = () => {
-  const [formattedProducts, setFormattedProducts] = useState([]);
+  const [formattedProducts, setFormattedProducts] = useState<FormattedProduct[]>([]);
   useEffect(() => {
     const fetchProducts = async () => {
     try {
@@ -17,14 +18,19 @@ export const Catalog = () => {
       console.log("Товары:", productsData.results); 
       const products = productsData.results;
 
-      const formatted = products.map(product => ({
+      const formatted: FormattedProduct[]  = products.map((product: Product)=> ({
         id: product.id,
         key: product.key,
         name: product.name,
-        price: product.masterVariant.prices?.[0]?.value.centAmount / 100 || 0, 
+        description: product.description,
+        price: product.masterVariant?.prices?.[0]?.value?.centAmount 
+            ? product.masterVariant.prices[0].value.centAmount / 100 
+            : 0,
         image: product.masterVariant.images?.[0]?.url || null,
-        attributes: product.masterVariant.attributes?.reduce((acc, attr) => {
-          acc[attr.name] = attr.value;
+        attributes: product.masterVariant.attributes?.reduce((acc: Record<string, number>, attr) => {
+          if (attr && attr.name) {
+            acc[attr.name] = attr.value;
+          }
           return acc;
         }, {}) || {}
       }));
@@ -82,8 +88,8 @@ export const Catalog = () => {
           {formattedProducts.map(good=>(
             <img 
               key={good.id} 
-              src={good.image} 
-              alt={good.name.en || 'Product image'} 
+              src={good.image||'../../../public/img/fallback.jpg'} 
+              alt={good.name || 'Product image'} 
               className="list__item"
               style={{ width: '30%' }}
             />
