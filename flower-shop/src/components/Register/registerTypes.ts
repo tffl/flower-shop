@@ -11,6 +11,7 @@ export interface IField {
   label: string;
   type: string;
   placeholder: string;
+  value: string;
 }
 
 export interface ICheck {
@@ -67,5 +68,19 @@ export interface ICustomerApi {
   firstName: string;
   lastName: string;
   password: string;
-  addresses: [];
+  dateOfBirth: string;
+  addresses: IAddress[];
+}
+
+// "streetName" : "Any Street",
+// "streetNumber" : "1337",
+// "postalCode" : "11111",
+// "city" : "Any City",
+// "country" : "US"
+
+export interface IAddress {
+  streetName: string;
+  postalCode: string;
+  city: string;
+  country: string;
 }

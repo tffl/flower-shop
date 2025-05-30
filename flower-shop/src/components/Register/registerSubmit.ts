@@ -68,13 +68,14 @@ async function newCustomer(): Promise<boolean> {
     firstName: "",
     lastName: "",
     password: "",
-    dateOfBirth: '2000-01-01', //new Date('2000-01-01'),
-    addresses: [{
-  streetName : '',
-  postalCode : '',
-  city : '',
-  country : ''
-}]
+    dateOfBirth: "2000-01-01", //new Date('2000-01-01'),
+    addresses: [],
+    //     addresses: [{
+    //   streetName : '',
+    //   postalCode : '',
+    //   city : '',
+    //   country : ''
+    // }]
   };
 
   let pInput = document.querySelector(
@@ -90,7 +91,7 @@ async function newCustomer(): Promise<boolean> {
   pInput = document.querySelector(
     `.register input[name="date"]`,
   ) as HTMLInputElement;
-  oCustomer.dateOfBirth = pInput.value
+  oCustomer.dateOfBirth = pInput.value;
 
   pInput = document.querySelector(
     `.register input[name="email"]`,
@@ -108,23 +109,23 @@ async function newCustomer(): Promise<boolean> {
   // if(oCustomer.addresses[0])
   // oCustomer.addresses[0].country = pInput.value;
 
-  pInput = document.querySelector(
-    `.register input[name="city"]`,
-  ) as HTMLInputElement;
-  if(oCustomer.addresses[0])
-  oCustomer.addresses[0].city = pInput.value;
+  // pInput = document.querySelector(
+  //   `.register input[name="city"]`,
+  // ) as HTMLInputElement;
+  // if(oCustomer.addresses[0])
+  // oCustomer.addresses[0].city = pInput.value;
 
-  pInput = document.querySelector(
-    `.register input[name="street"]`,
-  ) as HTMLInputElement;
-  if(oCustomer.addresses[0])
-  oCustomer.addresses[0].streetName = pInput.value;
+  // pInput = document.querySelector(
+  //   `.register input[name="street"]`,
+  // ) as HTMLInputElement;
+  // if(oCustomer.addresses[0])
+  // oCustomer.addresses[0].streetName = pInput.value;
 
-  pInput = document.querySelector(
-    `.register input[name="postcode"]`,
-  ) as HTMLInputElement;
-  if(oCustomer.addresses[0])
-  oCustomer.addresses[0].postalCode = pInput.value;
+  // pInput = document.querySelector(
+  //   `.register input[name="postcode"]`,
+  // ) as HTMLInputElement;
+  // if(oCustomer.addresses[0])
+  // oCustomer.addresses[0].postalCode = pInput.value;
 
   console.log(oCustomer);
 
@@ -147,18 +148,27 @@ async function newCustomer(): Promise<boolean> {
 
   console.log("newCustomer>>>await", response);
   if (response.status === 201) {
-    const data = await response.json();
-    console.log(data);
+    const dataCustomer = await response.json();
+    console.log(dataCustomer);
+
+    const sCustomer = JSON.stringify(dataCustomer.customer);
+
+    console.log(sCustomer);
+    localStorage.setItem("customer", sCustomer);
 
     showResult(
-      `Your registration was successful. Welcome ${data.customer.firstName}.`,
+      `Your registration was successful. Welcome ${dataCustomer.customer.firstName}.`,
       true,
     );
-    console.log("Your registration was successful", data);
+    console.log("Your registration was successful", dataCustomer);
     return true;
   } else {
     console.log("newCustomer - error", response.status);
-    showResult("Failed to create account. Correct email and try again.", false);
+    showResult(
+      "Failed to create account. A customer with this email already exists. Try again.",
+      false,
+    );
+    //There is already an existing customer with the provided email.
     return false;
   }
 }
@@ -176,16 +186,15 @@ export function showResult(sText: string, isSuccess: boolean) {
 
   addElement(pModalWindow, "p", "modal__txt", sText);
 
-
   // pModalWindow.style.height = `${wWidth}px`;
   // pModalWindow.style.height = `${wHeight}px`;
 
-  console.log('*******',pModalWindow.style.height, pModalWindow.style.width);
+  console.log("*******", pModalWindow.style.height, pModalWindow.style.width);
 
   //const wWidth: number = parseInt(pModalWindow.style.width);
   const wHeight: number = parseInt(pModalWindow.style.height);
 
-  console.log((document.body.clientHeight - wHeight)/2, window.pageYOffset);
+  console.log((document.body.clientHeight - wHeight) / 2, window.pageYOffset);
 
   pModalWindow.style.top = `500px`;
   pModalWindow.style.left = `${Math.floor((document.body.clientWidth - wWidth) / 2)}px`;
@@ -195,13 +204,10 @@ export function showResult(sText: string, isSuccess: boolean) {
     pModalWindow.style.top = `${Math.floor(document.body.clientHeight - 800)}px`;
   }
 
-
   setTimeout(() => {
     pModalWindow.remove();
   }, 3000);
 }
-
-
 
 // //.....................................................................
 // export function showResult(sText: string, isSuccess: boolean) {

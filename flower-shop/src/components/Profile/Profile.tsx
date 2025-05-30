@@ -12,7 +12,7 @@ export const Main = () => {
   // console.log('CreateSection - localstorage', sCustomer)
   if (sCustomer) {
     const oCustomer = JSON.parse(sCustomer);
-    console.log (' oCustomer', oCustomer)
+    console.log(" oCustomer", oCustomer);
 
     aProfileSections.map((iSection) => {
       iSection.aFields.map((iField) => {
@@ -20,25 +20,25 @@ export const Main = () => {
         switch (iField.name) {
           case "name":
             iField.value = oCustomer.firstName;
-            break
+            break;
           case "surname":
             iField.value = oCustomer.lastName;
-            break
+            break;
           case "email":
             iField.value = oCustomer.email;
-            break
+            break;
           case "password":
             iField.value = oCustomer.password;
-            break
+            break;
           case "date":
             iField.value = oCustomer.dateOfBirth;
-            break
+            break;
         }
-       // console.log('iField.value',iField.value)
+        // console.log('iField.value',iField.value)
       });
     });
 
-    console.log(aProfileSections)
+    console.log(aProfileSections);
   } else {
   }
   // console.log('CreateSection - localstorage - object', oCustomer)
@@ -49,7 +49,7 @@ export const Main = () => {
   //           ))
 
   return (
-     <main className="profile__main">
+    <main className="profile__main">
       <div
         className="profile"
         style={{ backgroundImage: "url('img/bgroses33.png')" }}

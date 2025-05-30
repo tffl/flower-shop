@@ -7,7 +7,6 @@ import { takeToken } from "../Register/registerSubmit.ts";
 import { ILogin } from "./loginTypes.ts";
 import { IRegisterSection } from "../Register/registerTypes";
 import { validField } from "../Register/registerValid";
-
 import "./login.css";
 
 export const Main = () => {
@@ -69,7 +68,10 @@ export const Main = () => {
         await login();
         navigate("/");
       } else {
-        showResult("Invalid credentials. Try again.", false);
+        showResult(
+          "Customer account with this credentials not found. Try again.",
+          false,
+        );
       }
     }
   };
@@ -144,8 +146,8 @@ async function newLogin(): Promise<string | null> {
       //if (true)
       const dataCustomer = await response.json();
 
-      console.log("Login successful", dataCustomer);
-      console.log("Welcome", dataCustomer.customer.firstName);
+      // console.log("Login successful", dataCustomer);
+      // console.log("Welcome", dataCustomer.customer.firstName);
 
       const sCustomer = JSON.stringify(dataCustomer.customer);
 
@@ -160,9 +162,3 @@ async function newLogin(): Promise<string | null> {
     }
   }
 }
-
-// function isValidForm() {
-//   let flValid = true;
-// //  console.log("isValidForm");
-//   return flValid;
-// }

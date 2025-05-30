@@ -5,12 +5,14 @@ export const aSections: IRegisterSection[] = [
     id: 222,
     title: "", //"Personal info",
     aFields: [
-      { id: 1,
+      {
+        id: 1,
         name: "name",
         label: "Name",
         type: "text",
         placeholder: "N",
-        value: "", },
+        value: "",
+      },
       {
         id: 2,
         name: "surname",

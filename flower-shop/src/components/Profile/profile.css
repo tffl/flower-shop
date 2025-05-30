@@ -8,7 +8,7 @@
   margin: 20px auto;
   padding: 10px 10px 60px;
   background: var(--color-r-back);
-  /* background-image: url(img/back.png); */
+  /* background-image: url(../../../public/img/back.png); */
   background-position: center;
   background-size: cover;
   color: var(--color-r-txt);
@@ -22,6 +22,7 @@
 }
 
 .profile__info {
+  position: relative;
   display: flex;
   align-items: center;
   /* justify-content: center; */
@@ -39,12 +40,16 @@
   padding: 10px 0;
 }
 
-.profile__info_txt{
+.profile__info_txt {
   margin: 0 10px;
 }
 
-.profile__info  input,
-.profile__info  select {
+.profile__info input[name="password"] {
+  position: relative;
+}
+
+.profile__info input,
+.profile__info select {
   /* width: 100%; */
   padding: 5px;
   font-size: 1.2rem;

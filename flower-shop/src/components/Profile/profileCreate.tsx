@@ -1,11 +1,10 @@
 // import { useState } from "react";
 import { IPropsSection, IPropsInput } from "../Register/registerTypes";
-import {RegSelect} from "../Register/registerCreate";
+import { RegSelect } from "../Register/registerCreate";
 import { useState } from "react";
-import {changeHandler} from './profileChange'
+import { changeHandler } from "./profileChange";
 
 export function CreateSection({ section }: IPropsSection) {
-
   return (
     <div className="profile__section">
       <h3>{section.title}</h3>
@@ -15,12 +14,12 @@ export function CreateSection({ section }: IPropsSection) {
 }
 
 function ProfInfo({ aFields }: IPropsInput) {
-   const [show, setShow] = useState(false);
-    const togglePasswordVisibility = () => {
-      setShow((v) => !v);
-      const pView = document.querySelector(".password-view") as HTMLElement;
-      pView.classList.toggle("view");
-    };
+  const [show, setShow] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShow((v) => !v);
+    const pView = document.querySelector(".password-view") as HTMLElement;
+    pView.classList.toggle("view");
+  };
   return (
     <div>
       {aFields.map((iField, i) => (
@@ -29,7 +28,7 @@ function ProfInfo({ aFields }: IPropsInput) {
           {/* <p className="profile__info_txt" key={iField.id}>
             {iField.value}
           </p> */}
-     {iField.label === "Country" ? (
+          {iField.label === "Country" ? (
             <RegSelect />
           ) : (
             <input
@@ -41,10 +40,9 @@ function ProfInfo({ aFields }: IPropsInput) {
                     : "password"
               }
               name={iField.name}
-              value =  {iField.value}
+              value={iField.value}
               onChange={(e) => changeHandler(e)}
               key={iField.id}
-
             ></input>
           )}
           <div className="register__input-error"></div>
@@ -57,7 +55,6 @@ function ProfInfo({ aFields }: IPropsInput) {
               )}
             </a>
           )}
-
         </div>
       ))}
     </div>

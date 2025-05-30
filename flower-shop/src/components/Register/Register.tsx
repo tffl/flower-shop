@@ -6,12 +6,17 @@ import { aSections } from "./registerData.ts";
 import { useNavigate } from "react-router-dom";
 import { registerSubmitButton } from "./registerSubmit";
 import { Button } from "../UI/Button/Button.tsx";
+import { useAuth } from "../contexts/AuthContext.tsx";
 
 export const Main = () => {
   const greenColor = "#4a4e37";
+
   const navigate = useNavigate();
+  const { login } = useAuth();
+
   const rSubmit = async () => {
     if (await registerSubmitButton()) {
+      await login();
       navigate("/");
     }
   };
