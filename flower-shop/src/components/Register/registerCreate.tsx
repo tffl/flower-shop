@@ -3,18 +3,6 @@ import { IPropsSection, IPropsInput, IPropsCheck } from "./registerTypes";
 import { inputHandler } from "./registerValid";
 import { useState } from "react";
 
-// interface IPropsSection {
-//   section: IRegisterSection;
-// }
-
-// interface IPropsInput {
-//   aFields: IField[];
-// }
-
-// interface IPropsCheck {
-//   aChecks: ICheck[];
-// }
-
 const aCountries = ["USA", "UK", "Canada"];
 
 //..........................................................

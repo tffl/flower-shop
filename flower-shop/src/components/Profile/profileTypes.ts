@@ -12,3 +12,15 @@ export interface ICustomerAPI {
   password: string;
   addresses: string[];
 }
+
+export interface IUpDate{
+
+  version : number,
+  actions : IAction[]
+
+}
+
+export interface IAction{
+  action : string;
+ dateOfBirth: string;
+}

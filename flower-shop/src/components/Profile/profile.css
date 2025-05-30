@@ -90,9 +90,8 @@
   cursor: pointer;
 } */
 
-
-.profile__inactive-txt{
+.profile__inactive-txt {
   margin: 80px auto;
   font-size: 2rem;
-  color: var(--color-txt-err)
+  color: var(--color-txt-err);
 }

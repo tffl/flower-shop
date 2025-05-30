@@ -1,8 +1,11 @@
-import { isValidForm } from "../Register/registerValid";
-import { ICustomer } from "../Register/registerTypes";
-import { addElement } from "../../app/utilities";
+//import { isValidForm } from "../Register/registerValid";
+import { ICustomerApi} from "../Register/registerTypes";
+//import { addElement } from "../../app/utilities";
+import { takeToken } from "../Register/registerSubmit.ts";
+import { showResult } from "../Register/registerSubmit.ts";
+import {IUpDate} from "./profileTypes.ts"
 
-let BEARER_TOKEN = "";
+//let BEARER_TOKEN = "";
 // const rHost = "https://auth.europe-west1.commercetools.com";
 // const baseURLAPI = "https://api.europe-west1.gcp.commercetools.com";
 // const baseURLAuth = "https://auth.europe-west1.gcp.commercetools.com";
@@ -15,101 +18,131 @@ let BEARER_TOKEN = "";
 // &scope={scope}
 
 //....................................................
-export function profileSubmit(e: React.FormEvent<HTMLFormElement>) {
+export async function profileSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
-  if (isValidForm(true)) {
-  }
-}
 
-//.....................................................
-export async function profileSubmitButton(): Promise<boolean> {
-  if (isValidForm(false)) {
-    await takeToken();
-    if (await rewriteCustomer()) return true;
+  // if (isValidProfile) {
+    if (await upDateCustomer()) return true;
     else return false;
-  } else return false;
-}
-
-//....................................................
-export async function takeToken(): Promise<string | null> {
-  // const rClientId = "h1LEoc5g15JqUTUsqfw4ty74";
-  const rClientId = "dKXLsfhgcZ3OQCrSpp1thax1";
-  // const rClientSecret = "6iFII4Hsy3Jiy-8VAKFxohYIi10z_FKq";
-  const rClientSecret = "th8GWbXtwDcLXs4kNJ9oMV1C-9RkuCv1";
-
-  const urlAuth = `https://auth.europe-west1.gcp.commercetools.com/oauth/token`;
-
-  const response = await fetch(urlAuth, {
-    method: "POST",
-    headers: {
-      Authorization: "Basic " + btoa(rClientId + ":" + rClientSecret),
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: "grant_type=client_credentials&scope=manage_customers:flower-shop2025",
-  });
-
-  //   console.log("newCustomer>>>await", response);
-
-  if (response.status === 200) {
-    const data = await response.json();
-    console.log(data);
-    BEARER_TOKEN = data.access_token;
-    localStorage.setItem("token", BEARER_TOKEN);
-    return BEARER_TOKEN;
-  } else return null;
+  // } else return false;
 }
 
 //.............................................................
-// export async function newCustomer(oCustomer: ICustomer) {
-async function rewriteCustomer(): Promise<boolean> {
-  const oCustomer: ICustomer = {
+async function upDateCustomer(): Promise<boolean> {
+  const oCustomer: ICustomerApi = {
+    id: "",
+    version: 1,
     email: "",
     firstName: "",
     lastName: "",
     password: "",
+    dateOfBirth: "",
+    addresses: [],
   };
 
+  const sLSCustomer = localStorage.getItem("customer");
+
+  if (sLSCustomer) {
+    const oLSCustomer = JSON.parse(sLSCustomer);
+    console.log(" oLSCustomer!!!!!!!!!!!", oLSCustomer);
+
+  oCustomer.id = oLSCustomer.id
+  oCustomer.version = oLSCustomer.version
+ 
+
   let pInput = document.querySelector(
-    `.register input[name="name"]`,
+    `.profile input[name="name"]`,
   ) as HTMLInputElement;
   oCustomer.firstName = pInput.value;
 
   pInput = document.querySelector(
-    `.register input[name="surname"]`,
+    `.profile input[name="surname"]`,
   ) as HTMLInputElement;
   oCustomer.lastName = pInput.value;
 
   pInput = document.querySelector(
-    `.register input[name="email"]`,
+    `.profile input[name="date"]`,
+  ) as HTMLInputElement;
+  oCustomer.dateOfBirth = pInput.value;
+
+  pInput = document.querySelector(
+    `.profile input[name="email"]`,
   ) as HTMLInputElement;
   oCustomer.email = pInput.value;
 
   pInput = document.querySelector(
-    `.register input[name="password"]`,
+    `.profile input[name="password"]`,
   ) as HTMLInputElement;
   oCustomer.password = pInput.value;
 
   console.log(oCustomer);
+  }
 
-  // const url1 = 'https://api.europe-west1.gcp.commercetools.com/flower-shop2025/in-store/key=flower-shop2025/customers'
-  // https://api.{region}.commercetools.com/{projectKey}/customers -i \
+// {
+//   "version" : 3,
+//   "actions" : [
+
+// {
+//   "action": "changeEmail",
+//   "email": "email@example.com"
+// },
+// {
+//   "action": "setFirstName",
+//   "firstName": "John"
+// }
+
+// {
+//   "action": "setLastName",
+//   "lastName": "Person"
+// }
+
+// {
+//   "action": "setDateOfBirth",
+//   "dateOfBirth": "2015-10-21"
+// }
+
+
+//{
+//     "action" : "addAddress",
+//     "address" : {
+//       "streetName" : "Any Street",
+//       "streetNumber" : "1337",
+//       "postalCode" : "11111",
+//       "city" : "Any City",
+//       "country" : "US"
+//     }
+//   } ]
+// }
+
+const oUpDate: IUpDate = {
+  version: 3,
+  actions: [
+    {
+   "action": "setDateOfBirth",
+   "dateOfBirth": "2015-10-21"
+ }
+  ]
+}
+
+ oUpDate.version = oCustomer.version
+//...................................................................
 
   const urlApi =
-    "https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers";
+    `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/${oCustomer.id}`;
+  const token = await takeToken();
 
-  // const BEARER_TOKEN = localStorage.getItem("token");
 
   const response = await fetch(urlApi, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${BEARER_TOKEN}`,
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(oCustomer),
+    body: JSON.stringify(oUpDate),
   });
 
   console.log("newCustomer>>>await", response);
-  if (response.status === 201) {
+  if (response.status === 200) {
     const data = await response.json();
     console.log(data);
 
@@ -117,26 +150,58 @@ async function rewriteCustomer(): Promise<boolean> {
       `Your registration was successful. Welcome ${data.customer.firstName}.`,
       true,
     );
-    console.log("Your registration was successful", data);
+    console.log("Your profile updated successful", data);
     return true;
   } else {
-    console.log("newCustomer - error", response.status);
-    showResult("Failed to create account. Try again.", false);
-    return false;
-  }
+    console.log("upDateCustomer - error", response.status);
+    showResult("Failed to update profile. Try again.", false);
+     return false;
+   }
 }
-//.....................................................................
-export function showResult(sText: string, isSuccess: boolean) {
-  const pModal = addElement(document.body, "div", "modal", "");
-  const pModalWindow = addElement(pModal, "div", "modal__window", "");
 
-  if (!isSuccess) {
-    pModalWindow.classList.add("error");
-  }
+//.......................................................
+// function isValidProfile(): boolean{
+//   return true
+// }
 
-  addElement(pModalWindow, "p", "modal__txt", sText);
 
-  setTimeout(() => {
-    pModal.remove();
-  }, 2000);
-}
+// {
+//   "action": "changeAddress",
+//   "addressId": "{{addressId}}",
+//   "address": {
+//     "key": "exampleKey",
+//     "title": "My Address",
+//     "salutation": "Mr.",
+//     "firstName": "Example",
+//     "lastName": "Person",
+//     "streetName": "Example Street",
+//     "streetNumber": "4711",
+//     "additionalStreetInfo": "Backhouse",
+//     "postalCode": "80933",
+//     "city": "Exemplary City",
+//     "region": "Exemplary Region",
+//     "state": "Exemplary State",
+//     "country": "DE",
+//     "company": "My Company Name",
+//     "department": "Sales",
+//     "building": "Hightower 1",
+//     "apartment": "247",
+//     "pOBox": "2471",
+//     "phone": "+49 89 12345678",
+//     "mobile": "+49 171 2345678",
+//     "email": "email@example.com",
+//     "fax": "+49 89 12345679",
+//     "additionalAddressInfo": "no additional Info",
+//     "externalId": "Information not needed"
+//   }
+// }
+
+// {
+//   "action": "removeAddress",
+//   "addressId": "{{addressId}}"
+// }
+
+// {
+//   "action": "setDefaultShippingAddress",
+//   "addressId": "{{addressId}}"
+// }

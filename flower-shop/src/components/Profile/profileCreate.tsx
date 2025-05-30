@@ -17,20 +17,25 @@ function ProfInfo({ aFields }: IPropsInput) {
   const [show, setShow] = useState(false);
   const togglePasswordVisibility = () => {
     setShow((v) => !v);
-    const pView = document.querySelector(".password-view-profile") as HTMLElement;
+    const pView = document.querySelector(
+      ".password-view",
+    ) as HTMLElement;
     pView.classList.toggle("view");
   };
   return (
     <div>
       {aFields.map((iField, i) => (
-        <div className="profile__info" key={i + 7}>
+        <div className="register__input" key={i + 7}>    {/*//className="profile__info"*/}
           <h4>{iField.label}: </h4>
           {/* <p className="profile__info_txt" key={iField.id}>
             {iField.value}
           </p> */}
 
           {iField.name === "password" && (
-            <a className="password-view-profile" onClick={togglePasswordVisibility}>
+            <a
+              className="password-view"
+              onClick={togglePasswordVisibility}
+            >
               {show ? (
                 <img src="svg/view.svg" alt=""></img>
               ) : (
@@ -51,9 +56,9 @@ function ProfInfo({ aFields }: IPropsInput) {
                     : "password"
               }
               name={iField.name}
-              value={iField.value}
+              defaultValue={iField.value}
               onChange={(e) => changeHandler(e)}
-              key={iField.id}
+              key={iField.id+300}
             ></input>
           )}
           <div className="register__input-error"></div>

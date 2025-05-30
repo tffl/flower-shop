@@ -9,7 +9,6 @@ import { Button } from "../UI/Button/Button.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
 
 export const Main = () => {
-  const greenColor = "#4a4e37";
 
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -38,12 +37,9 @@ export const Main = () => {
 
           <p className="register__switch">
             Already have an account?{" "}
-            <span className="register__link">
-              <Link to="/login" style={{ color: greenColor }}>
-                Login
-              </Link>
-            </span>
-            !
+            <Link to="/login" className="register__link">
+              Login
+            </Link>
           </p>
         </form>
       </div>
