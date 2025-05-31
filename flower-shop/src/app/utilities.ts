@@ -1,3 +1,5 @@
+import { APP_SCOPES, ScopeKey } from "./constants";
+
 export function addElement(
   pParent: HTMLElement,
   eType: string,
@@ -25,3 +27,12 @@ export function addImgElement(
 
   return pElement;
 }
+
+export function buildScopeString(
+  scopeKeys: ScopeKey[], 
+): string {
+  return scopeKeys
+    .map(key => `${APP_SCOPES[key]}`)
+    .join(' ');
+}
+

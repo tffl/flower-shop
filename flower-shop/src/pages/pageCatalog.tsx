@@ -1,5 +1,5 @@
 import { Header } from "../components/Header/Header";
-import { Main } from "../components/Catalog/main";
+import { Catalog } from "../components/Catalog/catalog";
 // import { Footer } from "../components/Footer/Footer";
 
 export const PageCatalog = () => {
@@ -10,7 +10,7 @@ export const PageCatalog = () => {
         position="static"
         iconColor="var(--color-footer-back)"
       />
-      <Main />
+      <Catalog />
       {/* <Footer /> */}
     </>
   );

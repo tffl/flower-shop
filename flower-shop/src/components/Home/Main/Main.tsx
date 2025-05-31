@@ -1,3 +1,4 @@
+
 import { HeroSection } from "../HeroSection/HeroSection";
 import { TaglineSection } from "../TaglineSection/TagLineSection";
 // import { Button } from '../UI/Button/Button';
@@ -5,6 +6,7 @@ import { TaglineSection } from "../TaglineSection/TagLineSection";
 import "./main.css";
 
 export const Main = () => {
+  
   return (
     <main className="main">
       <HeroSection />

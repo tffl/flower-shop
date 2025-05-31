@@ -6,7 +6,6 @@ import { HeaderProps } from "../../types/types";
 import { useState } from "react";
 import { Burger } from "../UI/Burger/Burger";
 
-console.log(import.meta.env.VITE_CTP_PROJECT_KEY);
 
 export const Header = ({
   textColor = "var(--color-txt)",
