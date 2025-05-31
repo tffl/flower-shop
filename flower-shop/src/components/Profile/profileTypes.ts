@@ -13,14 +13,31 @@ export interface ICustomerAPI {
   addresses: string[];
 }
 
-export interface IUpDate{
+export interface IUpDate {
+  version: number;
+  actions: [
+    {
+      action: string;
+      firstName: string;
+    },
+    {
+      action: string;
+      lastName: string;
+    },
 
-  version : number,
-  actions : IAction[]
+    {
+      action: string;
+      dateOfBirth: string;
+    },
 
+    {
+      action: string;
+      email: string;
+    },
+  ];
 }
 
-export interface IAction{
-  action : string;
- dateOfBirth: string;
-}
+// export interface IAction {
+//   action: string;
+//   dateOfBirth: string;
+// }

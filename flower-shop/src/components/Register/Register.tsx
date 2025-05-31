@@ -9,7 +9,6 @@ import { Button } from "../UI/Button/Button.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
 
 export const Main = () => {
-
   const navigate = useNavigate();
   const { login } = useAuth();
 

@@ -1,9 +1,9 @@
 //import { isValidForm } from "../Register/registerValid";
-import { ICustomerApi} from "../Register/registerTypes";
+import { ICustomerApi } from "../Register/registerTypes";
 //import { addElement } from "../../app/utilities";
 import { takeToken } from "../Register/registerSubmit.ts";
 import { showResult } from "../Register/registerSubmit.ts";
-import {IUpDate} from "./profileTypes.ts"
+import { IUpDate } from "./profileTypes.ts";
 
 //let BEARER_TOKEN = "";
 // const rHost = "https://auth.europe-west1.commercetools.com";
@@ -22,8 +22,8 @@ export async function profileSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
 
   // if (isValidProfile) {
-    if (await upDateCustomer()) return true;
-    else return false;
+  if (await upDateCustomer()) return true;
+  else return false;
   // } else return false;
 }
 
@@ -46,91 +46,105 @@ async function upDateCustomer(): Promise<boolean> {
     const oLSCustomer = JSON.parse(sLSCustomer);
     console.log(" oLSCustomer!!!!!!!!!!!", oLSCustomer);
 
-  oCustomer.id = oLSCustomer.id
-  oCustomer.version = oLSCustomer.version
- 
+    oCustomer.id = oLSCustomer.id;
+    oCustomer.version = oLSCustomer.version;
 
-  let pInput = document.querySelector(
-    `.profile input[name="name"]`,
-  ) as HTMLInputElement;
-  oCustomer.firstName = pInput.value;
+    let pInput = document.querySelector(
+      `.profile input[name="name"]`,
+    ) as HTMLInputElement;
+    oCustomer.firstName = pInput.value;
 
-  pInput = document.querySelector(
-    `.profile input[name="surname"]`,
-  ) as HTMLInputElement;
-  oCustomer.lastName = pInput.value;
+    pInput = document.querySelector(
+      `.profile input[name="surname"]`,
+    ) as HTMLInputElement;
+    oCustomer.lastName = pInput.value;
 
-  pInput = document.querySelector(
-    `.profile input[name="date"]`,
-  ) as HTMLInputElement;
-  oCustomer.dateOfBirth = pInput.value;
+    pInput = document.querySelector(
+      `.profile input[name="date"]`,
+    ) as HTMLInputElement;
+    oCustomer.dateOfBirth = pInput.value;
 
-  pInput = document.querySelector(
-    `.profile input[name="email"]`,
-  ) as HTMLInputElement;
-  oCustomer.email = pInput.value;
+    pInput = document.querySelector(
+      `.profile input[name="email"]`,
+    ) as HTMLInputElement;
+    oCustomer.email = pInput.value;
 
-  pInput = document.querySelector(
-    `.profile input[name="password"]`,
-  ) as HTMLInputElement;
-  oCustomer.password = pInput.value;
+    pInput = document.querySelector(
+      `.profile input[name="password"]`,
+    ) as HTMLInputElement;
+    oCustomer.password = pInput.value;
 
-  console.log(oCustomer);
+    console.log(oCustomer);
   }
 
-// {
-//   "version" : 3,
-//   "actions" : [
+  // {
+  //   "version" : 3,
+  //   "actions" : [
 
-// {
-//   "action": "changeEmail",
-//   "email": "email@example.com"
-// },
-// {
-//   "action": "setFirstName",
-//   "firstName": "John"
-// }
+  // {
+  //   "action": "changeEmail",
+  //   "email": "email@example.com"
+  // },
+  // {
+  //   "action": "setFirstName",
+  //   "firstName": "John"
+  // }
 
-// {
-//   "action": "setLastName",
-//   "lastName": "Person"
-// }
+  // {
+  //   "action": "setLastName",
+  //   "lastName": "Person"
+  // }
 
-// {
-//   "action": "setDateOfBirth",
-//   "dateOfBirth": "2015-10-21"
-// }
+  // {
+  //   "action": "setDateOfBirth",
+  //   "dateOfBirth": "2015-10-21"
+  // }
 
+  //{
+  //     "action" : "addAddress",
+  //     "address" : {
+  //       "streetName" : "Any Street",
+  //       "streetNumber" : "1337",
+  //       "postalCode" : "11111",
+  //       "city" : "Any City",
+  //       "country" : "US"
+  //     }
+  //   } ]
+  // }
 
-//{
-//     "action" : "addAddress",
-//     "address" : {
-//       "streetName" : "Any Street",
-//       "streetNumber" : "1337",
-//       "postalCode" : "11111",
-//       "city" : "Any City",
-//       "country" : "US"
-//     }
-//   } ]
-// }
+  const oUpDate: IUpDate = {
+    version: 1,
+    actions: [
+      {
+        action: "setFirstName",
+        firstName: "",
+      },
+      {
+        action: "setLastName",
+        lastName: "",
+      },
+      {
+        action: "setDateOfBirth",
+        dateOfBirth: "",
+      },
+      {
+        action: "changeEmail",
+        email: "",
+      },
+    ],
+  };
 
-const oUpDate: IUpDate = {
-  version: 3,
-  actions: [
-    {
-   "action": "setDateOfBirth",
-   "dateOfBirth": "2015-10-21"
- }
-  ]
-}
+  oUpDate.version = oCustomer.version;
 
- oUpDate.version = oCustomer.version
-//...................................................................
+  oUpDate.actions[0].firstName = oCustomer.firstName;
+  oUpDate.actions[1].lastName = oCustomer.lastName;
+  oUpDate.actions[2].dateOfBirth = oCustomer.dateOfBirth;
+  oUpDate.actions[3].email = oCustomer.email;
 
-  const urlApi =
-    `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/${oCustomer.id}`;
+  //...................................................................
+
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/${oCustomer.id}`;
   const token = await takeToken();
-
 
   const response = await fetch(urlApi, {
     method: "POST",
@@ -146,24 +160,28 @@ const oUpDate: IUpDate = {
     const data = await response.json();
     console.log(data);
 
-    showResult(
-      `Your registration was successful. Welcome ${data.customer.firstName}.`,
-      true,
-    );
+    showResult(`Your data has been updated successfully.`, true);
     console.log("Your profile updated successful", data);
     return true;
   } else {
     console.log("upDateCustomer - error", response.status);
     showResult("Failed to update profile. Try again.", false);
-     return false;
-   }
+    return false;
+  }
 }
+
+//.......................................................
+// {
+//   "id" : "3cdcdcc8-80c5-41bb-abb5-ac8772c9cc24",
+//   "version" : 1,
+//   "currentPassword" : "secret123",
+//   "newPassword" : "newSecret456"
+// }
 
 //.......................................................
 // function isValidProfile(): boolean{
 //   return true
 // }
-
 
 // {
 //   "action": "changeAddress",
@@ -205,3 +223,7 @@ const oUpDate: IUpDate = {
 //   "action": "setDefaultShippingAddress",
 //   "addressId": "{{addressId}}"
 // }
+
+export async function profilePassSubmit(e: React.FormEvent<HTMLFormElement>){
+ console.log (e)
+}

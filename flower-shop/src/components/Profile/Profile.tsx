@@ -1,7 +1,7 @@
 import "./profile.css";
 import { CreateSection } from "./profileCreate.tsx";
-import { profileSubmit} from "./profileSubmit.ts";
-import { aSections } from "./profileData.ts";
+import { profileSubmit, profilePassSubmit } from "./profileSubmit.ts";
+import { aSections, aProfilePassSections } from "./profileData.ts";
 import { IRegisterSection } from "../Register/registerTypes.ts";
 import { Button } from "../UI/Button/Button.tsx";
 import { useAuth } from "../contexts/AuthContext";
@@ -13,7 +13,7 @@ export const Main = () => {
   const aProfileSections = aSections;
   const sCustomer = localStorage.getItem("customer");
 
-  console.log('CreateSection - localstorage', sCustomer)
+  console.log("CreateSection - localstorage", sCustomer);
 
   if (sCustomer) {
     const oCustomer = JSON.parse(sCustomer);
@@ -41,7 +41,6 @@ export const Main = () => {
         }
       });
     });
-
   }
 
   return (
@@ -53,14 +52,32 @@ export const Main = () => {
         <h2> User Profile Information</h2>
 
         {isAuthenticated ? (
+          <>
           <form onSubmit={(e) => profileSubmit(e)}>
             <div className="profile__div">
               {aProfileSections.map((iSection: IRegisterSection) => (
                 <CreateSection section={iSection} key={iSection.id} />
               ))}
-              <Button type='submit' className="profile__submit-btn" >Save changes</Button>
+              <Button type="submit" className="profile__submit-btn">
+                Save changes
+              </Button>
             </div>
           </form>
+
+
+  <form onSubmit={(e) => profilePassSubmit(e)}>
+            <div className="profile__div">
+              {aProfilePassSections.map((iSection: IRegisterSection) => (
+                <CreateSection section={iSection} key={iSection.id} />
+              ))}
+              <Button type="submit" className="profile__submit-btn">
+                Save new password
+              </Button>
+            </div>
+          </form>
+
+</>
+
         ) : (
           <>
             <p className="profile__inactive-txt">

@@ -3,7 +3,7 @@ import { IRegisterSection } from "../Register/registerTypes";
 export const aSections: IRegisterSection[] = [
   {
     id: 222,
-    title: "", //"Personal info",
+    title: "Personal info",
     aFields: [
       {
         id: 1,
@@ -37,14 +37,14 @@ export const aSections: IRegisterSection[] = [
         placeholder: "user@email.com",
         value: "",
       },
-      {
-        id: 5,
-        name: "password",
-        label: "New password",
-        type: "password",
-        placeholder: "Qwer1234",
-        value: "",
-      },
+      // {
+      //   id: 5,
+      //   name: "password",
+      //   label: "New password",
+      //   type: "password",
+      //   placeholder: "Qwer1234",
+      //   value: "",
+      // },
     ],
     aChecks: [],
   },
@@ -124,3 +124,28 @@ export const aSections: IRegisterSection[] = [
   //   aChecks: [{ id: 35, label: "Set Billing Address as default" }],
   // },
 ];
+
+
+export const aProfilePassSections: IRegisterSection[] = [
+   {
+    id: 333,
+    title: "Password",
+    aFields: [ {
+        id: 5,
+        name: "password",
+        label: "Current password",
+        type: "password",
+        placeholder: "",
+        value: "",
+      },
+    {
+        id: 7,
+        name: "password",
+        label: "New password",
+        type: "password",
+        placeholder: "",
+        value: "",
+      },  ],
+    aChecks: [],
+ }
+]

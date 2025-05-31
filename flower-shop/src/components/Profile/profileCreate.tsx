@@ -7,7 +7,9 @@ import { changeHandler } from "./profileChange";
 export function CreateSection({ section }: IPropsSection) {
   return (
     <div className="profile__section">
-      <h3>{section.title}</h3>
+      <div className={section.title ? "profile__section-title" : ""}>
+        <h3>{section.title}</h3>
+      </div>
       <ProfInfo aFields={section.aFields} />
     </div>
   );
@@ -17,25 +19,17 @@ function ProfInfo({ aFields }: IPropsInput) {
   const [show, setShow] = useState(false);
   const togglePasswordVisibility = () => {
     setShow((v) => !v);
-    const pView = document.querySelector(
-      ".password-view",
-    ) as HTMLElement;
+    const pView = document.querySelector(".password-view") as HTMLElement;
     pView.classList.toggle("view");
   };
   return (
     <div>
       {aFields.map((iField, i) => (
-        <div className="register__input" key={i + 7}>    {/*//className="profile__info"*/}
+        <div className="register__input" key={i + 7}>
+          {" "}
           <h4>{iField.label}: </h4>
-          {/* <p className="profile__info_txt" key={iField.id}>
-            {iField.value}
-          </p> */}
-
           {iField.name === "password" && (
-            <a
-              className="password-view"
-              onClick={togglePasswordVisibility}
-            >
+            <a className="password-view" onClick={togglePasswordVisibility}>
               {show ? (
                 <img src="svg/view.svg" alt=""></img>
               ) : (
@@ -43,7 +37,6 @@ function ProfInfo({ aFields }: IPropsInput) {
               )}
             </a>
           )}
-
           {iField.label === "Country" ? (
             <RegSelect />
           ) : (
@@ -58,7 +51,7 @@ function ProfInfo({ aFields }: IPropsInput) {
               name={iField.name}
               defaultValue={iField.value}
               onChange={(e) => changeHandler(e)}
-              key={iField.id+300}
+              key={iField.id + 300}
             ></input>
           )}
           <div className="register__input-error"></div>
