@@ -5,13 +5,21 @@ export const aSections: IRegisterSection[] = [
     id: 1,
     title: "Personal info",
     aFields: [
-      { id: 1, name: "name", label: "Name", type: "text", placeholder: "N" },
+      {
+        id: 1,
+        name: "name",
+        label: "Name",
+        type: "text",
+        placeholder: "N",
+        value: "",
+      },
       {
         id: 2,
         name: "surname",
         label: "Surname",
         type: "text",
         placeholder: "N",
+        value: "",
       },
       {
         id: 3,
@@ -19,6 +27,7 @@ export const aSections: IRegisterSection[] = [
         label: "Date of birth",
         type: "date",
         placeholder: "01.01.2000",
+        value: "",
       },
       {
         id: 4,
@@ -26,6 +35,7 @@ export const aSections: IRegisterSection[] = [
         label: "Email",
         type: "email",
         placeholder: "user@email.com",
+        value: "",
       },
       {
         id: 5,
@@ -33,6 +43,7 @@ export const aSections: IRegisterSection[] = [
         label: "Password",
         type: "password",
         placeholder: "Qwer1234",
+        value: "",
       },
     ],
     aChecks: [],
@@ -48,6 +59,7 @@ export const aSections: IRegisterSection[] = [
         label: "Country",
         type: "text",
         placeholder: "UK",
+        value: "",
       },
       {
         id: 22,
@@ -55,6 +67,7 @@ export const aSections: IRegisterSection[] = [
         label: "City",
         type: "text",
         placeholder: "Mycity",
+        value: "",
       },
       {
         id: 23,
@@ -62,6 +75,7 @@ export const aSections: IRegisterSection[] = [
         label: "Street",
         type: "text",
         placeholder: "Street1  272B",
+        value: "",
       },
       {
         id: 24,
@@ -69,6 +83,7 @@ export const aSections: IRegisterSection[] = [
         label: "Postal code",
         type: "text",
         placeholder: "654321",
+        value: "",
       },
     ],
     aChecks: [
@@ -87,6 +102,7 @@ export const aSections: IRegisterSection[] = [
         label: "Country",
         type: "text",
         placeholder: "USA",
+        value: "",
       },
       {
         id: 32,
@@ -94,6 +110,7 @@ export const aSections: IRegisterSection[] = [
         label: "City",
         type: "text",
         placeholder: "Newcity",
+        value: "",
       },
       {
         id: 33,
@@ -101,6 +118,7 @@ export const aSections: IRegisterSection[] = [
         label: "Street",
         type: "text",
         placeholder: "Street2 ap76",
+        value: "",
       },
       {
         id: 34,
@@ -108,6 +126,7 @@ export const aSections: IRegisterSection[] = [
         label: "Postal code",
         type: "text",
         placeholder: "111111",
+        value: "",
       },
     ],
     aChecks: [{ id: 35, label: "Set Billing Address as default" }],

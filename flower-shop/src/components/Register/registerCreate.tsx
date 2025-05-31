@@ -1,32 +1,32 @@
 // import { useState } from "react";
-import { IField, ICheck, IRegisterSection } from "./registerTypes";
+import { IPropsSection, IPropsInput, IPropsCheck } from "./registerTypes";
 import { inputHandler } from "./registerValid";
-
-interface IPropsSection {
-  section: IRegisterSection;
-}
-
-interface IPropsInput {
-  aFields: IField[];
-}
-
-interface IPropsCheck {
-  aChecks: ICheck[];
-}
+import { useState } from "react";
 
 const aCountries = ["USA", "UK", "Canada"];
 
+//..........................................................
 export function CreateSection({ section }: IPropsSection) {
   return (
     <div className="register__section">
-      <h3>{section.title}</h3>
+      <div className={section.title ? "register__section-title" : ""}>
+        <h3>{section.title}</h3>
+      </div>
       <RegInputs aFields={section.aFields} />
       <RegChecks aChecks={section.aChecks} />
     </div>
   );
 }
 
+//............................................................
 function RegInputs({ aFields }: IPropsInput) {
+  const [show, setShow] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShow((v) => !v);
+    const pView = document.querySelector(".password-view") as HTMLElement;
+    pView.classList.toggle("view");
+  };
+
   return (
     <div>
       {aFields.map((iField, i) => (
@@ -36,24 +36,37 @@ function RegInputs({ aFields }: IPropsInput) {
             <RegSelect />
           ) : (
             <input
-              type={iField.type}
+              type={
+                iField.name !== "password"
+                  ? iField.type
+                  : show
+                    ? "text"
+                    : "password"
+              }
               name={iField.name}
-              // placeholder={iField.label + ": " + iField.placeholder}
               placeholder={iField.placeholder}
-              // onBlur={(e) => blurHandler(e)}
               onChange={(e) => inputHandler(e)}
               key={iField.id}
               defaultValue={iField.type === "date" ? "2000-01-01" : ""} //min="2023-01-01" max="2023-12-31"
             ></input>
           )}
           <div className="register__input-error"></div>
+          {iField.name === "password" && (
+            <a className="password-view" onClick={togglePasswordVisibility}>
+              {show ? (
+                <img src="svg/view.svg" alt=""></img>
+              ) : (
+                <img src="svg/no-view.svg" alt=""></img>
+              )}
+            </a>
+          )}
         </div>
       ))}
     </div>
   );
 }
 
-function RegChecks({ aChecks }: IPropsCheck) {
+export function RegChecks({ aChecks }: IPropsCheck) {
   return (
     <>
       {aChecks.map((iCheck, i) => (
@@ -66,7 +79,7 @@ function RegChecks({ aChecks }: IPropsCheck) {
   );
 }
 
-function RegSelect() {
+export function RegSelect() {
   return (
     <select className="register__select">
       {aCountries.map((iCountry, i) => (

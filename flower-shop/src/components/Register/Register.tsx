@@ -4,16 +4,17 @@ import { registerSubmit } from "./registerSubmit";
 import { Link } from "react-router-dom";
 import { aSections } from "./registerData.ts";
 import { useNavigate } from "react-router-dom";
-//import { isValidForm } from "./registerValid.ts";
 import { registerSubmitButton } from "./registerSubmit";
+import { Button } from "../UI/Button/Button.tsx";
+import { useAuth } from "../contexts/AuthContext.tsx";
 
 export const Main = () => {
-  const greenColor = "#4a4e37";
   const navigate = useNavigate();
-  //  const rSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const { login } = useAuth();
+
   const rSubmit = async () => {
     if (await registerSubmitButton()) {
-      //  if (isValidForm(false)) {
+      await login();
       navigate("/");
     }
   };
@@ -27,28 +28,17 @@ export const Main = () => {
           {aSections.map((iSection) => (
             <CreateSection section={iSection} key={iSection.id} />
           ))}
-          {/* <input type='submit'>Create account</input> */}
-          {/* <button className="register_btn" onClick={(e) =>registerSubmitButton(e)}> */}
 
-          {/* <div className="register__submit-txt">The form is filled correctly</div> */}
-          <div className="register__submit-txt">
-            {/* Not all form fields are filled in correctly */}
-          </div>
-          <button
-            className="register__submit-btn inactive"
-            onClick={rSubmit} //(e) => registerSubmitButton(e)
-          >
+          <div className="register__submit-txt"></div>
+          <Button className="register__submit-btn" onClick={rSubmit}>
             Create account
-          </button>
+          </Button>
 
-          <p className="register__switch-login">
+          <p className="register__switch">
             Already have an account?{" "}
-            <span className="register__green">
-              <Link to="/login" style={{ color: greenColor }}>
-                Login
-              </Link>
-            </span>
-            !
+            <Link to="/login" className="register__link">
+              Login
+            </Link>
           </p>
         </form>
       </div>

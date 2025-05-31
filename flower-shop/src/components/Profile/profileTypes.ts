@@ -1,31 +1,43 @@
-export interface IRegisterSection {
-  id: number;
-  title: string;
-  aFields: IField[];
-  aChecks: ICheck[];
-}
-
-export interface IField {
-  id: number;
-  name: string;
-  label: string;
-  type: string;
-  placeholder: string;
-}
-
-export interface ICheck {
-  id: number;
-  label: string;
-}
-
-export interface IError {
-  id: number;
-  message: string;
-}
-
 export interface ICustomer {
   email: string;
   firstName: string;
   lastName: string;
   password: string;
 }
+
+export interface ICustomerAPI {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  addresses: string[];
+}
+
+export interface IUpDate {
+  version: number;
+  actions: [
+    {
+      action: string;
+      firstName: string;
+    },
+    {
+      action: string;
+      lastName: string;
+    },
+
+    {
+      action: string;
+      dateOfBirth: string;
+    },
+
+    {
+      action: string;
+      email: string;
+    },
+  ];
+}
+
+// export interface IAction {
+//   action: string;
+//   dateOfBirth: string;
+// }
