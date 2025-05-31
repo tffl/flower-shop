@@ -40,3 +40,46 @@ export type TokenData ={
   expires_in?: number;
   token_type?: string;
 }
+export type ApiRequestParams ={
+  endpoint: string; 
+  method?: 'GET' | 'POST' | 'DELETE'; 
+  path?: string; 
+  query?: Record<string, string>; 
+  body?: unknown; 
+  isAuthRequest?: boolean; 
+}
+
+export type ProductAttribute = {
+  name: string;
+  value: number;
+};
+export type ProductVariant = {
+  id: number;
+  prices?: Array<{
+    value: {
+      centAmount: number;
+      currencyCode: string;
+    };
+  }>;
+  images?: Array<{
+    url: string;
+  }>;
+  attributes?: ProductAttribute[];
+};
+
+export type Product = {
+  id: string;
+  key?: string; 
+  name: string; 
+  description:string;
+  masterVariant: ProductVariant;
+};
+
+export type FormattedProduct = {
+  id: string;
+  key?: string;
+  name: string; 
+  price: number;
+  image: string | null;
+  attributes: Record<string, number>;
+};

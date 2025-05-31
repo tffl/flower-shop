@@ -1,4 +1,4 @@
-import { executeApiRequest } from "../../../app/token";
+
 import { HeroSection } from "../HeroSection/HeroSection";
 import { TaglineSection } from "../TaglineSection/TagLineSection";
 // import { Button } from '../UI/Button/Button';
@@ -6,14 +6,7 @@ import { TaglineSection } from "../TaglineSection/TagLineSection";
 import "./main.css";
 
 export const Main = () => {
-  (async () => {
-    try {
-      const token = await executeApiRequest();
-      console.log('Токен:', token.access_token);
-    } catch (error) {
-      console.error('Ошибка:', error);
-    }
-  })();
+  
   return (
     <main className="main">
       <HeroSection />
