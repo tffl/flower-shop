@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { executeApiRequest } from "../../app/universal";
 import './catalog.css'
 import { FormattedProduct, Product } from "../../types/types";
+import { Card } from "../card/Card";
 
 
 export const Catalog = () => {
@@ -85,13 +86,14 @@ export const Catalog = () => {
       <div className="catalog__productDisplay">
         <div>All</div>
         <div className="catalog__list list">
-          {formattedProducts.map(good=>(
-            <img 
-              key={good.id} 
-              src={good.image||'../../../public/img/fallback.jpg'} 
-              alt={good.name || 'Product image'} 
-              className="list__item"
-              style={{ width: '30%' }}
+        {formattedProducts.map(good => (
+            <Card
+              key={good.id}
+              id={good.id}
+              image={good.image}
+              name={good.name}
+              price={good.price}
+              description={good.description}
             />
           ))}
           </div>

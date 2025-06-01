@@ -70,16 +70,25 @@ export type ProductVariant = {
 export type Product = {
   id: string;
   key?: string; 
-  name: string; 
+  name: Record<string, string>; 
   description:string;
   masterVariant: ProductVariant;
 };
 
 export type FormattedProduct = {
   id: string;
-  key?: string;
-  name: string; 
+  key: string;
+  name: Record<string, string>;
+  description: Record<string, string>;
   price: number;
   image: string | null;
-  attributes: Record<string, number>;
+  attributes: Record<string, string | number | boolean>;
 };
+export type CardProps = {
+  id: string;
+  image: string | null;
+  name: Record<string, string>;
+  price: number;
+  description: Record<string, string>;
+};
+
