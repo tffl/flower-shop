@@ -53,7 +53,7 @@ export const Catalog = () => {
     <>
     <div className="catalog">
       <div className="catalog__options">
-        <h2 className="catalog__title"> categories </h2>
+        <h3 className="catalog__title"> categories </h3>
         <div className="catalog__categories categories">
           <section className="categories__item">
             <h3 className="categories__title">
@@ -84,7 +84,7 @@ export const Catalog = () => {
         </div>
       </div>
       <div className="catalog__productDisplay">
-        <div>All</div>
+        <h3>Our plants</h3>
         <div className="catalog__list list">
         {formattedProducts.map(good => (
             <Card

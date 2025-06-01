@@ -2,21 +2,20 @@
   display: flex;
   justify-content: space-between;
   align-items:flex-start;
-  color:black;
+  color: var(--color-r-txt);
+  font-family: Montserrat;
   padding: 30px;
-  gap: 30px;
+  gap: 20px;
 }
+
 .catalog__title{
   color:var(--color-footer-back)
 }
-h3 {
-  text-transform: capitalize;
-}
+
 .catalog__options,
 .catalog__productDisplay{
-  background-color: var(--color-txt);
   border-radius: 10px;
-  padding: 10px;
+  font-size: 16px;
 }
 .catalog__options {
   width: 20%;
@@ -30,7 +29,6 @@ h3 {
 .categories__subcategory-button{
   width: 100%;
   border: none;
-  background-color:var(--color-txt);
   font-size: inherit;
   text-transform: capitalize;
   cursor: pointer;
@@ -38,17 +36,24 @@ h3 {
 }
 .categories__subcategory{
   text-align: left;
-  padding: 10px;
 }
 .catalog__productDisplay{
   width: 70%;
-  outline: 2px solid blue;
 }
 li {
-  color:black;
+  color:rgb(48, 48, 48);
 }
 .list{
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+.catalog__list .card {
+  padding: 20px;
+}
+
+.card__description {
+  font-size: 10px;
+  line-height: 1.1;
 }
