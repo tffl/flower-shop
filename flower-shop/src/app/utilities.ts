@@ -1,4 +1,4 @@
-import { APP_SCOPES, ScopeKey } from "./constants";
+import { APP_SCOPES, ScopeKey } from "../utils/constants";
 
 export function addElement(
   pParent: HTMLElement,

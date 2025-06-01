@@ -32,7 +32,7 @@ export async function executeApiRequest(params: ApiRequestParams) {
   } else {
     
     const token = await getToken(); 
-    console.log(token.access_token);
+    // console.log(token.access_token);
     headers.Authorization = `Bearer ${token.access_token}`;
   }
 
