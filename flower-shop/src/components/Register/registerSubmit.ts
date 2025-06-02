@@ -1,6 +1,6 @@
 import { isValidForm } from "./registerValid";
-//import { ICustomerApi, IAddress } from "./registerTypes";
-import { ICustomerApi } from "./registerTypes";
+//import { ICustomerApiCreate, IAddress } from "./registerTypes";
+import { ICustomerApiCreate } from "./registerTypes";
 import { addElement } from "../../app/utilities";
 
 let BEARER_TOKEN = "";
@@ -49,11 +49,11 @@ export async function takeToken(): Promise<string | null> {
     body: "grant_type=client_credentials&scope=manage_customers:flower-shop2025",
   });
 
-  console.log("newCustomer>>>await", response);
+  //console.log("newCustomer>>>await", response);
 
   if (response.status === 200) {
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     BEARER_TOKEN = data.access_token;
     localStorage.setItem("token", BEARER_TOKEN);
     return BEARER_TOKEN;
@@ -63,7 +63,7 @@ export async function takeToken(): Promise<string | null> {
 //.............................................................
 // export async function newCustomer(oCustomer: ICustomer) {
 async function newCustomer(): Promise<boolean> {
-  const oCustomer: ICustomerApi = {
+  const oCustomer: ICustomerApiCreate = {
     email: "",
     firstName: "",
     lastName: "",
@@ -127,7 +127,7 @@ async function newCustomer(): Promise<boolean> {
   // if(oCustomer.addresses[0])
   // oCustomer.addresses[0].postalCode = pInput.value;
 
-  console.log(oCustomer);
+  //console.log(oCustomer);
 
   // const url1 = 'https://api.europe-west1.gcp.commercetools.com/flower-shop2025/in-store/key=flower-shop2025/customers'
   // https://api.{region}.commercetools.com/{projectKey}/customers -i \
@@ -146,14 +146,14 @@ async function newCustomer(): Promise<boolean> {
     body: JSON.stringify(oCustomer),
   });
 
-  console.log("newCustomer>>>await", response);
+  //console.log("newCustomer>>>await", response);
   if (response.status === 201) {
     const dataCustomer = await response.json();
     console.log(dataCustomer);
 
     const sCustomer = JSON.stringify(dataCustomer.customer);
 
-    console.log(sCustomer);
+    // console.log(sCustomer);
     localStorage.setItem("customer", sCustomer);
 
     showResult(
@@ -189,12 +189,12 @@ export function showResult(sText: string, isSuccess: boolean) {
   // pModalWindow.style.height = `${wWidth}px`;
   // pModalWindow.style.height = `${wHeight}px`;
 
-  console.log("*******", pModalWindow.style.height, pModalWindow.style.width);
+  // console.log("*******", pModalWindow.style.height, pModalWindow.style.width);
 
   //const wWidth: number = parseInt(pModalWindow.style.width);
-  const wHeight: number = parseInt(pModalWindow.style.height);
+  //const wHeight: number = parseInt(pModalWindow.style.height);
 
-  console.log((document.body.clientHeight - wHeight) / 2, window.pageYOffset);
+  // console.log((document.body.clientHeight - wHeight) / 2, window.pageYOffset);
 
   pModalWindow.style.top = `500px`;
   pModalWindow.style.left = `${Math.floor((document.body.clientWidth - wWidth) / 2)}px`;

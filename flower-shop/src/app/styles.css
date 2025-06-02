@@ -61,9 +61,9 @@ h2 {
   color: var(--color-r-title);
   text-transform: capitalize;
 }
-/* 
+
 .dummy {
-  width: 600px;
+  max-width: 600px;
   margin: 100px auto;
   padding: 70px 60px 80px;
   display: flex;
@@ -74,4 +74,4 @@ h2 {
   line-height: 150%;
   text-align: center;
   color: #1d5f23;
-} */
+}

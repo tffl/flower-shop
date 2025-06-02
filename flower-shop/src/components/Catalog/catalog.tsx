@@ -52,8 +52,7 @@ export const Catalog = () => {
       <div className="catalog__options">
         <h2 className="catalog__title">Categories</h2>
         <div className="catalog__categories categories">
-          
-            <section className="categories__item">
+                      <section className="categories__item">
               <h3 className="categories__title">
                 <button 
                   className={`categories__title-button ${
@@ -147,7 +146,7 @@ export const Catalog = () => {
           }} 
           className={`show-all-button ${!activeCategoryId ? 'active' : ''}`}
         >
-          All
+          All our plants
         </button>
         <div className="catalog__list list">
           {filteredProducts.map(product => (

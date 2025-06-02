@@ -125,27 +125,28 @@ export const aSections: IRegisterSection[] = [
   // },
 ];
 
-
 export const aProfilePassSections: IRegisterSection[] = [
-   {
+  {
     id: 333,
     title: "Password",
-    aFields: [ {
+    aFields: [
+      {
         id: 5,
-        name: "password",
+        name: "currentPassword",
         label: "Current password",
         type: "password",
         placeholder: "",
         value: "",
       },
-    {
+      {
         id: 7,
-        name: "password",
+        name: "newPassword",
         label: "New password",
         type: "password",
         placeholder: "",
         value: "",
-      },  ],
+      },
+    ],
     aChecks: [],
- }
-]
+  },
+];

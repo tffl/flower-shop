@@ -29,7 +29,7 @@ export function addImgElement(
 }
 
 export function buildScopeString(
-  scopeKeys: ScopeKey[], 
+  scopeKeys: ScopeKey[],
 ): string {
   return scopeKeys
     .map(key => `${APP_SCOPES[key]}`)
