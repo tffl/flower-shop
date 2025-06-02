@@ -50,6 +50,7 @@ export const Catalog = () => {
   return (
     <div className="catalog">
       <div className="catalog__options">
+
         <h2 className="catalog__title">Categories</h2>
         <div className="catalog__categories categories">
                       <section className="categories__item">
