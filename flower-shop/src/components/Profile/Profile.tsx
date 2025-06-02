@@ -32,7 +32,10 @@ export const Main = () => {
           case "email":
             iField.value = oCustomer.email;
             break;
-          case "password":
+          case "currentPassword":
+            iField.value = ""; //oCustomer.password;
+            break;
+          case "newPassword":
             iField.value = ""; //oCustomer.password;
             break;
           case "date":
@@ -49,35 +52,34 @@ export const Main = () => {
         className="profile"
         style={{ backgroundImage: "url('img/bgroses33.png')" }}
       >
-        <h2> User Profile Information</h2>
+        <h2 className="profile-title"> User Profile Information</h2>
 
         {isAuthenticated ? (
           <>
-          <form onSubmit={(e) => profileSubmit(e)}>
-            <div className="profile__div">
-              {aProfileSections.map((iSection: IRegisterSection) => (
-                <CreateSection section={iSection} key={iSection.id} />
-              ))}
-              <Button type="submit" className="profile__submit-btn">
-                Save changes
-              </Button>
-            </div>
-          </form>
+            <form onSubmit={(e) => profileSubmit(e)}>
+              <div className="profile__div">
+                {aProfileSections.map((iSection: IRegisterSection) => (
+                  <CreateSection section={iSection} key={iSection.id} />
+                ))}
+                <p className="profile__message"></p>
+                <Button type="submit" className="profile__submit-btn">
+                  Save changes
+                </Button>
+              </div>
+            </form>
 
-
-  <form onSubmit={(e) => profilePassSubmit(e)}>
-            <div className="profile__div">
-              {aProfilePassSections.map((iSection: IRegisterSection) => (
-                <CreateSection section={iSection} key={iSection.id} />
-              ))}
-              <Button type="submit" className="profile__submit-btn">
-                Save new password
-              </Button>
-            </div>
-          </form>
-
-</>
-
+            <form onSubmit={(e) => profilePassSubmit(e)}>
+              <div className="profile__div">
+                {aProfilePassSections.map((iSection: IRegisterSection) => (
+                  <CreateSection section={iSection} key={iSection.id} />
+                ))}
+                <p className="profile__message-password"></p>
+                <Button type="submit" className="profile__submit-btn">
+                  Save new password
+                </Button>
+              </div>
+            </form>
+          </>
         ) : (
           <>
             <p className="profile__inactive-txt">

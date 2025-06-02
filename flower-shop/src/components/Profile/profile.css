@@ -17,7 +17,6 @@
   background-color: transparent;
   padding: 30px;
   border-bottom: 1px solid var(--color-footer-back);
-
 }
 
 .profile__section-title h3 {
@@ -102,4 +101,11 @@
   margin: 80px auto;
   font-size: 2rem;
   color: var(--color-txt-err);
+}
+
+.profile__message,
+.profile__message-password {
+  min-height: 30px;
+  color: var(--color-txt-alt);
+  font-size: 1.7rem;
 }

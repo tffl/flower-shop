@@ -1,9 +1,10 @@
-//import { isValidForm } from "../Register/registerValid";
-import { ICustomerApi } from "../Register/registerTypes";
-//import { addElement } from "../../app/utilities";
+import { ICustomerApiUpDate } from "./profileTypes";
 import { takeToken } from "../Register/registerSubmit.ts";
 import { showResult } from "../Register/registerSubmit.ts";
 import { IUpDate } from "./profileTypes.ts";
+import { IRegisterSection } from "../Register/registerTypes.ts";
+import { validField } from "../Register/registerValid";
+import { aSections, aProfilePassSections } from "./profileData.ts";
 
 //let BEARER_TOKEN = "";
 // const rHost = "https://auth.europe-west1.commercetools.com";
@@ -17,25 +18,53 @@ import { IUpDate } from "./profileTypes.ts";
 // ?grant_type=client_credentials
 // &scope={scope}
 
+const sNoChange = "Yor data has not changed";
+
+//const sLSCustomer = localStorage.getItem("customer");
+let oCustomer: ICustomerApiUpDate = {
+  id: "",
+  version: 1,
+  email: "",
+  firstName: "",
+  lastName: "",
+  currentPassword: "",
+  newPassword: "",
+  dateOfBirth: "",
+  addresses: [],
+};
+
 //....................................................
 export async function profileSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
+  document.querySelector(".profile__message")!.textContent = "";
+  oCustomer = getCustomer();
+  if (isValidForm(aSections) && isCustomerChange()) await upDateCustomer();
 
-  // if (isValidProfile) {
-  if (await upDateCustomer()) return true;
-  else return false;
-  // } else return false;
+  // if (await upDateCustomer()) return true;
+  // else return false;
 }
 
-//.............................................................
-async function upDateCustomer(): Promise<boolean> {
-  const oCustomer: ICustomerApi = {
+//....................................................
+export async function profilePassSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  document.querySelector(".profile__message-password")!.textContent = "";
+  oCustomer = getCustomer();
+  if (isValidForm(aProfilePassSections) && isPasswordChange())
+    await upDatePassword();
+  // if (await upDatePassword()) return true;
+  // else return false;
+}
+
+//....................................................................
+function getCustomer() {
+  const oCustomer: ICustomerApiUpDate = {
     id: "",
     version: 1,
     email: "",
     firstName: "",
     lastName: "",
-    password: "",
+    currentPassword: "",
+    newPassword: "",
     dateOfBirth: "",
     addresses: [],
   };
@@ -44,7 +73,6 @@ async function upDateCustomer(): Promise<boolean> {
 
   if (sLSCustomer) {
     const oLSCustomer = JSON.parse(sLSCustomer);
-    console.log(" oLSCustomer!!!!!!!!!!!", oLSCustomer);
 
     oCustomer.id = oLSCustomer.id;
     oCustomer.version = oLSCustomer.version;
@@ -70,34 +98,86 @@ async function upDateCustomer(): Promise<boolean> {
     oCustomer.email = pInput.value;
 
     pInput = document.querySelector(
-      `.profile input[name="password"]`,
+      `.profile input[name="currentPassword"]`,
     ) as HTMLInputElement;
-    oCustomer.password = pInput.value;
+    oCustomer.currentPassword = pInput.value;
 
-    console.log(oCustomer);
+    pInput = document.querySelector(
+      `.profile input[name="newPassword"]`,
+    ) as HTMLInputElement;
+    oCustomer.newPassword = pInput.value;
+
+    //  console.log(oCustomer);
   }
+  return oCustomer;
+}
 
-  // {
-  //   "version" : 3,
-  //   "actions" : [
+//..........................................
+function isCustomerChange() {
+  const sLSCustomer = localStorage.getItem("customer");
+  let flChange = true;
+  if (sLSCustomer) {
+    const oLSCustomer = JSON.parse(sLSCustomer);
+    if (
+      oLSCustomer.firstName === oCustomer.firstName &&
+      oLSCustomer.lastName === oCustomer.lastName &&
+      oLSCustomer.email === oCustomer.email &&
+      oLSCustomer.dateOfBirth === oCustomer.dateOfBirth
+    ) {
+      flChange = false;
+      document.querySelector(".profile__message")!.textContent = sNoChange;
+    }
+  }
+  return flChange;
+}
+//.............................................................
+async function upDateCustomer(): Promise<boolean> {
+  // const oCustomer: ICustomerApiUpDate = {
+  //   id: "",
+  //   version: 1,
+  //   email: "",
+  //   firstName: "",
+  //   lastName: "",
+  //   password: "",
+  //   dateOfBirth: "",
+  //   addresses: [],
+  // };
 
-  // {
-  //   "action": "changeEmail",
-  //   "email": "email@example.com"
-  // },
-  // {
-  //   "action": "setFirstName",
-  //   "firstName": "John"
-  // }
+  // const sLSCustomer = localStorage.getItem("customer");
 
-  // {
-  //   "action": "setLastName",
-  //   "lastName": "Person"
-  // }
+  // if (sLSCustomer) {
+  //   const oLSCustomer = JSON.parse(sLSCustomer);
+  //   console.log(" oLSCustomer!!!!!!!!!!!", oLSCustomer);
 
-  // {
-  //   "action": "setDateOfBirth",
-  //   "dateOfBirth": "2015-10-21"
+  //   oCustomer.id = oLSCustomer.id;
+  //   oCustomer.version = oLSCustomer.version;
+
+  //   let pInput = document.querySelector(
+  //     `.profile input[name="name"]`,
+  //   ) as HTMLInputElement;
+  //   oCustomer.firstName = pInput.value;
+
+  //   pInput = document.querySelector(
+  //     `.profile input[name="surname"]`,
+  //   ) as HTMLInputElement;
+  //   oCustomer.lastName = pInput.value;
+
+  //   pInput = document.querySelector(
+  //     `.profile input[name="date"]`,
+  //   ) as HTMLInputElement;
+  //   oCustomer.dateOfBirth = pInput.value;
+
+  //   pInput = document.querySelector(
+  //     `.profile input[name="email"]`,
+  //   ) as HTMLInputElement;
+  //   oCustomer.email = pInput.value;
+
+  //   pInput = document.querySelector(
+  //     `.profile input[name="password"]`,
+  //   ) as HTMLInputElement;
+  //   oCustomer.password = pInput.value;
+
+  //   console.log(oCustomer);
   // }
 
   //{
@@ -155,13 +235,18 @@ async function upDateCustomer(): Promise<boolean> {
     body: JSON.stringify(oUpDate),
   });
 
-  console.log("newCustomer>>>await", response);
+  console.log("upDateCustomer>>await", response);
   if (response.status === 200) {
-    const data = await response.json();
-    console.log(data);
+    const dataCustomer = await response.json();
+    //console.log('update dataCustomer', dataCustomer);
+
+    const sCustomer = JSON.stringify(dataCustomer);
+
+    // console.log('upDate sCustomer',sCustomer);
+    localStorage.setItem("customer", sCustomer);
 
     showResult(`Your data has been updated successfully.`, true);
-    console.log("Your profile updated successful", data);
+    // console.log("Your profile updated successful", data);
     return true;
   } else {
     console.log("upDateCustomer - error", response.status);
@@ -170,18 +255,102 @@ async function upDateCustomer(): Promise<boolean> {
   }
 }
 
-//.......................................................
-// {
-//   "id" : "3cdcdcc8-80c5-41bb-abb5-ac8772c9cc24",
-//   "version" : 1,
-//   "currentPassword" : "secret123",
-//   "newPassword" : "newSecret456"
-// }
+//....................................................
+function isPasswordChange() {
+  const sLSCustomer = localStorage.getItem("customer");
+  let flChange = true;
+  if (sLSCustomer) {
+    const oLSCustomer = JSON.parse(sLSCustomer);
+    if (
+      oCustomer.newPassword === "" ||
+      oLSCustomer.password === oCustomer.newPassword
+    ) {
+      flChange = false;
+      document.querySelector(".profile__message-password")!.textContent =
+        sNoChange;
+    }
+  }
+  return flChange;
+}
 
 //.......................................................
-// function isValidProfile(): boolean{
-//   return true
-// }
+async function upDatePassword(): Promise<boolean> {
+  // {
+  //   "id" : "3cdcdcc8-80c5-41bb-abb5-ac8772c9cc24",
+  //   "version" : 1,
+  //   "currentPassword" : "secret123",
+  //   "newPassword" : "newSecret456"
+  // }
+  const oPassword = {
+    id: "",
+    version: 1,
+    currentPassword: "",
+    newPassword: "",
+  };
+
+  oPassword.id = oCustomer.id;
+  oPassword.version = oCustomer.version;
+  oPassword.currentPassword = oCustomer.currentPassword;
+  oPassword.newPassword = oCustomer.newPassword;
+
+  console.log("oPassword", oPassword);
+
+  //...................................................................
+
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/password`;
+  const token = await takeToken();
+
+  const response = await fetch(urlApi, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(oPassword),
+  });
+
+  //console.log("upPassword>>await", response);
+
+  if (response.status === 200) {
+    const dataCustomer = await response.json();
+    const sCustomer = JSON.stringify(dataCustomer);
+
+    console.log("upDate Password sCustomer", sCustomer);
+    localStorage.setItem("customer", sCustomer);
+
+    showResult(`Your data has been updated successfully.`, true);
+
+    return true;
+  } else {
+    console.log("upDatePassWord error", response.status);
+    showResult("Failed to update profile. Try again.", false);
+    return false;
+  }
+}
+
+//...................................
+function isValidForm(aSections: IRegisterSection[]) {
+  let flValid = true;
+  let sError = "";
+
+  aSections.map((iSection) => {
+    iSection.aFields.map((iInput) => {
+      sError = "";
+      const pInput = document.querySelector(
+        `.profile input[name="${iInput.name}"]`,
+      ) as HTMLInputElement;
+
+      if (pInput) {
+        sError = validField(pInput.value, iInput.name);
+
+        if (sError) flValid = false;
+        if (pInput.nextElementSibling)
+          pInput.nextElementSibling.textContent = sError;
+      }
+    });
+  });
+  return flValid;
+}
 
 // {
 //   "action": "changeAddress",
@@ -223,7 +392,3 @@ async function upDateCustomer(): Promise<boolean> {
 //   "action": "setDefaultShippingAddress",
 //   "addressId": "{{addressId}}"
 // }
-
-export async function profilePassSubmit(e: React.FormEvent<HTMLFormElement>){
- console.log (e)
-}
