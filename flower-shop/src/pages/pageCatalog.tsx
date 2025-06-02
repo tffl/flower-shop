@@ -1,6 +1,6 @@
 import { Header } from "../components/Header/Header";
 import { Catalog } from "../components/Catalog/catalog";
-// import { Footer } from "../components/Footer/Footer";
+import { Footer } from "../components/Footer/Footer";
 
 export const PageCatalog = () => {
   return (
@@ -11,7 +11,7 @@ export const PageCatalog = () => {
         iconColor="var(--color-footer-back)"
       />
       <Catalog />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
