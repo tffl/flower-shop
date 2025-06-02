@@ -9,6 +9,7 @@ export const TaglineSection = () => {
         Your garden starts here — discover plants, tools and ideas to make it
         magic
       </p>
+      <div className="decor-line"></div>
     </section>
   );
 };

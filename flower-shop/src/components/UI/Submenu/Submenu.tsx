@@ -58,17 +58,32 @@ export const Submenu = ({ textColor, iconColor }: SubMenuProps) => {
           </li>
         </>
       )}
-      <li className="submenu__item">
-        <NavLink
-          to="/register"
-          style={{ color: textColor }}
-          className={({ isActive }) =>
-            isActive ? "submenu__link active" : "submenu__link"
-          }
-        >
-          | Register
-        </NavLink>
-      </li>
+
+      {isAuthenticated ? (
+        <li className="submenu__item">
+          <NavLink
+            to="/profile"
+            style={{ color: textColor }}
+            className={({ isActive }) =>
+              isActive ? "submenu__link active" : "submenu__link"
+            }
+          >
+            | Profile
+          </NavLink>
+        </li>
+      ) : (
+        <li className="submenu__item">
+          <NavLink
+            to="/register"
+            style={{ color: textColor }}
+            className={({ isActive }) =>
+              isActive ? "submenu__link active" : "submenu__link"
+            }
+          >
+            | Register
+          </NavLink>
+        </li>
+      )}
     </ul>
   );
 };

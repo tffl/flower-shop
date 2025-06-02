@@ -14,7 +14,6 @@ export function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
   const name = pInput.name;
 
   sError = validField(value, name);
-
   if (pInput.nextElementSibling) pInput.nextElementSibling.textContent = sError;
 
   isValidForm(false);
@@ -82,7 +81,7 @@ function age(sBirthday: string): number {
 }
 
 //.....................................................
-function validField(value: string, name: string) {
+export function validField(value: string, name: string) {
   let sError = "";
 
   if (!value) sError = "Field is required";

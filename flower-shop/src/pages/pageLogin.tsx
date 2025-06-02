@@ -1,5 +1,5 @@
 import { Header } from "../components/Header/Header";
-import { Main } from "../components/Login/login";
+import { Main } from "../components/Login/Login";
 import { Footer } from "../components/Footer/Footer";
 
 export const PageLogin = () => {

@@ -1,6 +1,6 @@
 import { Header } from "../components/Header/Header";
-import { Main } from "../components/Catalog/main";
-// import { Footer } from "../components/Footer/Footer";
+import { Catalog } from "../components/Catalog/catalog";
+import { Footer } from "../components/Footer/Footer";
 
 export const PageCatalog = () => {
   return (
@@ -10,8 +10,8 @@ export const PageCatalog = () => {
         position="static"
         iconColor="var(--color-footer-back)"
       />
-      <Main />
-      {/* <Footer /> */}
+      <Catalog />
+      <Footer />
     </>
   );
 };
