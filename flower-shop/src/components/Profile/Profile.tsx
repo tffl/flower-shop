@@ -1,11 +1,21 @@
 import "./profile.css";
-import { CreateSection } from "./profileCreate.tsx";
-import { profileSubmit, profilePassSubmit } from "./profileSubmit.ts";
-import { aSections, aProfilePassSections } from "./profileData.ts";
+import { CreateSection, CreateSectionAddress} from "./profileCreate.tsx";
+import {
+  profileSubmit,
+  profilePassSubmit,
+  profileAddrSubmit,
+} from "./profileSubmit.ts";
+import {
+  aSections,
+  aProfilePassSections,
+  aProfileAddrSections,
+} from "./profileData.ts";
 import { IRegisterSection } from "../Register/registerTypes.ts";
 import { Button } from "../UI/Button/Button.tsx";
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { createNewAddress } from "./profileSubmit";
+import {iSectionAddress} from "./profileTypes.ts"
 
 export const Main = () => {
   const { isAuthenticated } = useAuth();
@@ -44,6 +54,31 @@ export const Main = () => {
         }
       });
     });
+
+
+    aProfileAddrSections.map((iSection) => {
+      iSection.addresses.map((iAddress) => {
+
+      iAddress.aFields.map((iField) => {
+        // console.log('iField.name',iField.name)
+        switch (iField.name) {
+          case "country":
+            iField.value = oCustomer.addresses[0].country;
+            break;
+          case "city":
+            iField.value = oCustomer.addresses[0].city;
+            break;
+              case "street":
+            iField.value = oCustomer.addresses[0].streetName;
+            break;
+          case "postcode":
+            iField.value = oCustomer.addresses[0].postalCode;
+            break;
+        }
+      })
+    })
+  })
+
   }
 
   return (
@@ -76,6 +111,25 @@ export const Main = () => {
                 <p className="profile__message-password"></p>
                 <Button type="submit" className="profile__submit-btn">
                   Save new password
+                </Button>
+              </div>
+            </form>
+
+            <form onSubmit={(e) => profileAddrSubmit(e)}>
+              <div className="profile__div">
+                {aProfileAddrSections.map((iSection: iSectionAddress) => (
+                  <CreateSectionAddress section={iSection} key={iSection.id} />
+                ))}
+                <p className="profile__message-address"></p>
+                <Button type="submit" className="profile__submit-btn">
+                  Update address data
+                </Button>
+
+                <Button
+                  className="profile__submit-btn"
+                  onClick={createNewAddress}
+                >
+                  Add new address
                 </Button>
               </div>
             </form>

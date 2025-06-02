@@ -3,7 +3,7 @@ import { IPropsSection, IPropsInput, IPropsCheck } from "./registerTypes";
 import { inputHandler } from "./registerValid";
 import { useState } from "react";
 
-const aCountries = ["USA", "UK", "Canada"];
+const aCountries = ["US", "UK", "CA"];
 
 //..........................................................
 export function CreateSection({ section }: IPropsSection) {

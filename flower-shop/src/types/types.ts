@@ -35,19 +35,19 @@ export type BurgerProps = {
   className: string;
   iconColor: string;
 };
-export type TokenData ={
+export type TokenData = {
   access_token: string;
   expires_in?: number;
   token_type?: string;
-}
-export type ApiRequestParams ={
-  endpoint: string; 
-  method?: 'GET' | 'POST' | 'DELETE'; 
-  path?: string; 
-  query?: Record<string, string>; 
-  body?: unknown; 
-  isAuthRequest?: boolean; 
-}
+};
+export type ApiRequestParams = {
+  endpoint: string;
+  method?: "GET" | "POST" | "DELETE";
+  path?: string;
+  query?: Record<string, string>;
+  body?: unknown;
+  isAuthRequest?: boolean;
+};
 
 export type ProductAttribute = {
   name: string;
@@ -69,9 +69,9 @@ export type ProductVariant = {
 
 export type Product = {
   id: string;
-  key?: string; 
-  name: Record<string, string>; 
-  description:string;
+  key?: string;
+  name: Record<string, string>;
+  description: string;
   masterVariant: ProductVariant;
 };
 
@@ -91,4 +91,3 @@ export type CardProps = {
   price: number;
   description: Record<string, string>;
 };
-
