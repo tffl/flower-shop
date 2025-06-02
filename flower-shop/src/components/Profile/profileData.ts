@@ -48,81 +48,6 @@ export const aSections: IRegisterSection[] = [
     ],
     aChecks: [],
   },
-
-  // {
-  //   id: 2,
-  //   title: "Shipping address",
-  //   aFields: [
-  //     {
-  //       id: 21,
-  //       name: "country",
-  //       label: "Country",
-  //       type: "text",
-  //       placeholder: "UK",
-  //     },
-  //     {
-  //       id: 22,
-  //       name: "city",
-  //       label: "City",
-  //       type: "text",
-  //       placeholder: "Mycity",
-  //     },
-  //     {
-  //       id: 23,
-  //       name: "street",
-  //       label: "Street",
-  //       type: "text",
-  //       placeholder: "Street1  272B",
-  //     },
-  //     {
-  //       id: 24,
-  //       name: "postcode",
-  //       label: "Postal code",
-  //       type: "text",
-  //       placeholder: "654321",
-  //     },
-  //   ],
-  //   aChecks: [
-  //     { id: 25, label: "Set Shipping address as default" },
-  //     { id: 26, label: "Set Shipping Address as Billing Address" },
-  //   ],
-  // },
-
-  // {
-  //   id: 3,
-  //   title: "Billing address",
-  //   aFields: [
-  //     {
-  //       id: 31,
-  //       name: "country2",
-  //       label: "Country",
-  //       type: "text",
-  //       placeholder: "USA",
-  //     },
-  //     {
-  //       id: 32,
-  //       name: "city2",
-  //       label: "City",
-  //       type: "text",
-  //       placeholder: "Newcity",
-  //     },
-  //     {
-  //       id: 33,
-  //       name: "street2",
-  //       label: "Street",
-  //       type: "text",
-  //       placeholder: "Street2 ap76",
-  //     },
-  //     {
-  //       id: 34,
-  //       name: "postcode2",
-  //       label: "Postal code",
-  //       type: "text",
-  //       placeholder: "111111",
-  //     },
-  //   ],
-  //   aChecks: [{ id: 35, label: "Set Billing Address as default" }],
-  // },
 ];
 
 export const aProfilePassSections: IRegisterSection[] = [
@@ -149,4 +74,95 @@ export const aProfilePassSections: IRegisterSection[] = [
     ],
     aChecks: [],
   },
+];
+
+export const aProfileAddrSections  = [
+  {
+    id: 2,
+    title: "Addresses",
+    addresses: [
+      {id : '',
+      aFields:  [
+      {
+        id: 21,
+        name: "country",
+        label: "Country",
+        type: "text",
+        placeholder: "UK",
+        value: "",
+      },
+      {
+        id: 22,
+        name: "city",
+        label: "City",
+        type: "text",
+        placeholder: "Mycity",
+        value: "",
+      },
+      {
+        id: 23,
+        name: "street",
+        label: "Street",
+        type: "text",
+        placeholder: "Street1  272B",
+        value: "",
+      },
+      {
+        id: 24,
+        name: "postcode",
+        label: "Postal code",
+        type: "text",
+        placeholder: "654321",
+        value: "",
+      },
+    ]
+  },
+
+    // aChecks: [
+    //   { id: 25, label: "Set Shipping address as default" },
+    //   { id: 26, label: "Set Shipping Address as Billing Address" },
+    // ],
+    ]
+  }
+
+
+  //   {
+  //     id: 3,
+  //     title: "Billing address",
+  //     aFields: [
+  //       {
+  //         id: 31,
+  //         name: "country2",
+  //         label: "Country",
+  //         type: "text",
+  //         placeholder: "USA",
+  //          value: "",
+  //       },
+  //       {
+  //         id: 32,
+  //         name: "city2",
+  //         label: "City",
+  //         type: "text",
+  //         placeholder: "Newcity",
+  //          value: "",
+  //       },
+  //       {
+  //         id: 33,
+  //         name: "street2",
+  //         label: "Street",
+  //         type: "text",
+  //         placeholder: "Street2 ap76",
+  //          value: "",
+  //       },
+  //       {
+  //         id: 34,
+  //         name: "postcode2",
+  //         label: "Postal code",
+  //         type: "text",
+  //         placeholder: "111111",
+  //          value: "",
+  //       },
+  //     ],
+  //     aChecks: [{ id: 35, label: "Set Billing Address as default" }],
+  //   },
 ];
