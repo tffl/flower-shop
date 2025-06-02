@@ -9,7 +9,7 @@
 }
 
 .catalog__title{
-  color:var(--color-footer-back)
+  color:var(--color-footer-back);
 }
 
 .catalog__options,
@@ -33,6 +33,7 @@
   text-transform: capitalize;
   cursor: pointer;
   text-align: left;
+  padding: 15px;
 }
 .categories__subcategory{
   text-align: left;
@@ -49,11 +50,5 @@ li {
   gap: 20px;
 }
 
-.catalog__list .card {
-  padding: 20px;
-}
-
-.card__description {
-  font-size: 10px;
-  line-height: 1.1;
-}
+.active {
+  font-weight: bold;

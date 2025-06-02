@@ -63,9 +63,7 @@ export interface IPropsCheck {
 // version :  1
 // versionModifiedAt :  "2025-05-25T06:10:08.586Z"
 
-export interface ICustomerApi {
-  id: string;
-  version: number;
+export interface ICustomerApiCreate {
   email: string;
   firstName: string;
   lastName: string;

@@ -32,7 +32,7 @@ export async function executeApiRequest(params: ApiRequestParams) {
   } else {
     
     const token = await getToken(); 
-    console.log(token.access_token);
+    // console.log(token.access_token);
     headers.Authorization = `Bearer ${token.access_token}`;
   }
 
@@ -53,19 +53,3 @@ export async function executeApiRequest(params: ApiRequestParams) {
 
 
 
-// export async function getCategories() {
-//   const API_URL = 'https://api.europe-west1.gcp.commercetools.com';
-//   const token = await executeApiRequest();
-  
-//   const response = await fetch(`${API_URL}/${import.meta.env.VITE_CTP_PROJECT_KEY}/categories`, {
-//     headers: {
-//       'Authorization': `Bearer ${token}`,
-//     },
-//   });
-
-//   if (!response.ok) {
-//     throw new Error('Failed to fetch categories');
-//   }
-
-//   return response.json();
-// }

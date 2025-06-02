@@ -1,13 +1,13 @@
 
-import { buildScopeString } from "./utilities";
+import { buildScopeString } from "../app/utilities";
 
 
 
 export async function getToken() {
 
   try {
-    const scope=buildScopeString(['products']);
-    console.log(scope)
+    const scope=buildScopeString(['products','categories']);
+    // console.log(scope)
     const url=`${import.meta.env.VITE_CTP_AUTH_URL}/oauth/${import.meta.env.VITE_CTP_PROJECT_KEY}/anonymous/token`;
     const authString = btoa(`${import.meta.env.VITE_CTP_CLIENT_ID}:${import.meta.env.VITE_CTP_CLIENT_SECRET}`);
     
@@ -29,7 +29,7 @@ export async function getToken() {
       console.error('Error details:', responseData);
       throw new Error(`Auth failed: ${response.status} - ${JSON.stringify(responseData)}`);
     }
-    console.log(responseData); 
+    // console.log(responseData); 
     return responseData;
 
   } catch (error) {

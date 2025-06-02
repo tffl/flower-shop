@@ -28,7 +28,8 @@ function ProfInfo({ aFields }: IPropsInput) {
         <div className="register__input" key={i + 7}>
           {" "}
           <h4>{iField.label}: </h4>
-          {iField.name === "password" && (
+          {(iField.name === "currentPassword" ||
+            iField.name === "newPassword") && (
             <a className="password-view" onClick={togglePasswordVisibility}>
               {show ? (
                 <img src="svg/view.svg" alt=""></img>
@@ -42,7 +43,8 @@ function ProfInfo({ aFields }: IPropsInput) {
           ) : (
             <input
               type={
-                iField.name !== "password"
+                iField.name !== "currentPassword" &&
+                iField.name !== "newPassword"
                   ? iField.type
                   : show
                     ? "text"

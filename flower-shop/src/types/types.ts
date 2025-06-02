@@ -49,30 +49,29 @@ export type ApiRequestParams ={
   isAuthRequest?: boolean; 
 }
 
-export type ProductAttribute = {
-  name: string;
-  value: number;
-};
-export type ProductVariant = {
-  id: number;
-  prices?: Array<{
-    value: {
-      centAmount: number;
-      currencyCode: string;
-    };
-  }>;
-  images?: Array<{
-    url: string;
-  }>;
-  attributes?: ProductAttribute[];
-};
-
 export type Product = {
   id: string;
-  key?: string; 
-  name: Record<string, string>; 
-  description:string;
-  masterVariant: ProductVariant;
+  key?: string;
+  name: string | Record<string, string>;
+  description?: string | Record<string, string>;
+  categories?: Array<{
+    id: string;
+    typeId: string;
+  }>;
+  masterVariant: {
+    prices?: Array<{
+      value: {
+        centAmount: number;
+      };
+    }>;
+    images?: Array<{
+      url: string;
+    }>;
+    attributes?: Array<{
+      name: string;
+      value: unknown;
+    }>;
+  };
 };
 
 export type FormattedProduct = {
@@ -82,13 +81,37 @@ export type FormattedProduct = {
   description: Record<string, string>;
   price: number;
   image: string | null;
-  attributes: Record<string, string | number | boolean>;
+  attributes: {
+    shortDescription?: string;
+    [key: string]: string | number | boolean | undefined;
+  };
+  categories: Array<{
+    id: string;
+    typeId: string; 
+  }>;
 };
 export type CardProps = {
   id: string;
   image: string | null;
   name: Record<string, string>;
   price: number;
-  description: Record<string, string>;
+  description?: Record<string, string>;
+  // shortDescription?: Record<string, string>;
+  shortDescription?: string;
+};
+export type ApiCategory = {
+  id: string;
+  parent?: {
+    id: string;
+  };
+  // name:string
+};
+export type Category = {
+  id: string;
+  name: string;
+  isMain: boolean;
+  parentId?: string;
+  slug: string;
+  description?: string;
 };
 

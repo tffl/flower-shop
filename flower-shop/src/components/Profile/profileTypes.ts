@@ -1,16 +1,27 @@
-export interface ICustomer {
+// export interface ICustomer {
+//   email: string;
+//   firstName: string;
+//   lastName: string;
+//   password: string;
+// }
+
+export interface ICustomerApiUpDate {
+  id: string;
+  version: number;
   email: string;
   firstName: string;
   lastName: string;
-  password: string;
+  currentPassword: string;
+  newPassword: string;
+  dateOfBirth: string;
+  addresses: IAddress[];
 }
 
-export interface ICustomerAPI {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  addresses: string[];
+export interface IAddress {
+  streetName: string;
+  postalCode: string;
+  city: string;
+  country: string;
 }
 
 export interface IUpDate {

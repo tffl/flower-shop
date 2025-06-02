@@ -1,4 +1,4 @@
-import { APP_SCOPES, ScopeKey } from "./constants";
+import { APP_SCOPES, ScopeKey } from "../utils/constants";
 
 export function addElement(
   pParent: HTMLElement,
@@ -29,7 +29,7 @@ export function addImgElement(
 }
 
 export function buildScopeString(
-  scopeKeys: ScopeKey[], 
+  scopeKeys: ScopeKey[],
 ): string {
   return scopeKeys
     .map(key => `${APP_SCOPES[key]}`)
