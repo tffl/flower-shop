@@ -1,10 +1,3 @@
-// export interface ICustomer {
-//   email: string;
-//   firstName: string;
-//   lastName: string;
-//   password: string;
-// }
-
 export interface ICustomerApiUpDate {
   id: string;
   version: number;
@@ -22,6 +15,12 @@ export interface IAddress {
   postalCode: string;
   city: string;
   country: string;
+}
+
+export interface IAddressUpdate {
+  action: string;
+  addressId: string;
+  address: IAddress;
 }
 
 export interface IUpDate {
@@ -46,6 +45,31 @@ export interface IUpDate {
       email: string;
     },
   ];
+}
+
+
+export interface IPropsSectionAddress {
+  section: iSectionAddress;
+}
+
+export interface iSectionAddress{
+  id: number;
+  title: string;
+  addresses: IAddressField []
+}
+
+export interface IAddressField {
+  id : string;
+  aFields: IField[];
+}
+
+export interface IField {
+  id: number;
+  name: string;
+  label: string;
+  type: string;
+  placeholder: string;
+  value: string;
 }
 
 // export interface IAction {

@@ -16,7 +16,7 @@
 .profile__div {
   background-color: transparent;
   padding: 30px;
-  border-bottom: 1px solid var(--color-footer-back);
+  border-top: 1px solid var(--color-footer-back);
 }
 
 .profile__section-title h3 {
@@ -84,10 +84,10 @@
 } */
 
 .profile__submit-btn {
-  width: 40%;
+  width: 36%;
   font-size: 1.5rem;
-  /*margin: 20px;
-  padding: 10px 20px;
+  margin: 10px;
+  /*padding: 10px 20px;
   color: var(--color-btn-txt);
   background-color: var(--color-btn-back); */
   transition: all 0.5s ease-in;
@@ -108,4 +108,18 @@
   min-height: 30px;
   color: var(--color-txt-alt);
   font-size: 1.7rem;
+}
+
+.profile__address{
+  border-bottom: 1px solid var(--color-footer-back)
+}
+
+.profile__address-btn{
+  width: 160px;
+  font-size: 1rem;
+  margin: 10px;
+  padding: 10px 20px;
+  color: var(--color-btn-txt);
+  background-color: var(--color-btn-back);
+  transition: all 0.5s ease-in;
 }

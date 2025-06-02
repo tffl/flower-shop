@@ -1,8 +1,9 @@
-// import { useState } from "react";
 import { IPropsSection, IPropsInput } from "../Register/registerTypes";
 import { RegSelect } from "../Register/registerCreate";
 import { useState } from "react";
 import { changeHandler } from "./profileChange";
+import {deleteAddress} from "./profileAddresses.tsx"
+import {IPropsSectionAddress} from "./profileTypes.ts"
 
 export function CreateSection({ section }: IPropsSection) {
   return (
@@ -15,6 +16,7 @@ export function CreateSection({ section }: IPropsSection) {
   );
 }
 
+//......................................................................
 function ProfInfo({ aFields }: IPropsInput) {
   const [show, setShow] = useState(false);
   const togglePasswordVisibility = () => {
@@ -62,3 +64,50 @@ function ProfInfo({ aFields }: IPropsInput) {
     </div>
   );
 }
+
+
+//..................................................................
+export function CreateSectionAddress({ section }: IPropsSectionAddress) {
+  return (
+    <div className="profile__section">
+      <div className={section.title ? "profile__section-title" : ""}>
+        <h3>{section.title}</h3>
+      </div>
+      {section.addresses.map((address) => (
+       <div className="profile__address">
+         <ProfInfoAddress aFields={address.aFields} />
+         <button className="profile__address-btn" onClick={deleteAddress} >
+                        Delete address
+                      </button>
+      </div>
+ ))}
+    </div>
+  );
+}
+
+//...................................................................
+function ProfInfoAddress({ aFields }: IPropsInput) {
+
+  return (
+    <div>
+      {aFields.map((iField, i) => (
+        <div className="register__input" key={i + 17}>
+          <h4>{iField.label}: </h4>
+          {iField.label === "Country" ? (
+            <RegSelect />
+          ) : (
+            <input
+              name={iField.name}
+              defaultValue={iField.value}
+              onChange={(e) => changeHandler(e)}
+              key={iField.id + 200}
+            ></input>
+          )}
+          <div className="register__input-error"></div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
