@@ -1,4 +1,3 @@
-import './catalog.css';
 import { Card } from "../card/Card";
 import { useEffect, useMemo, useState } from "react";
 import { executeApiRequest } from "../../utils/universal";
@@ -6,6 +5,7 @@ import { transformProducts } from '../../utils/transformData';
 import { filterByCategory } from '../../utils/filters';
 import { FormattedProduct } from '../../types/types';
 import { fetchCategoryIds } from '../../utils/categories';
+import './catalog.css';
 
 export const Catalog = () => {
   const [formattedProducts, setFormattedProducts] = useState<FormattedProduct[]>([]);
@@ -16,7 +16,7 @@ export const Catalog = () => {
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [isMainCategory, setIsMainCategory] = useState<boolean>(true);
 
-  // Load data
+ 
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -24,7 +24,7 @@ export const Catalog = () => {
           executeApiRequest({ endpoint: "product-projections", query: { limit: '20' } }),
           fetchCategoryIds()
         ]);
-
+        // console.log(productsData.results)
         setFormattedProducts(transformProducts(productsData.results));
         setCategories(categoriesData);
       } catch (error) {
@@ -42,7 +42,7 @@ export const Catalog = () => {
 
 
   const handleCategoryClick = (categoryId: string|null, isMain: boolean) => {
-    console.log(categoryId)
+    // console.log(categoryId)
     setActiveCategoryId(categoryId);
     setIsMainCategory(isMain);
   };
@@ -59,7 +59,12 @@ export const Catalog = () => {
                   className={`categories__title-button ${
                     activeCategoryId === categories.mainCategories[0] ? 'active' : ''
                   }`}
-                  onClick={() => handleCategoryClick(categories.mainCategories[0] as any, true)}
+                  onClick={() => {
+                    if (categories.mainCategories[0]) {
+                      handleCategoryClick(categories.mainCategories[0], true);
+                    }
+                  }
+                }
                 >
                  Indoor plants
                 </button>
@@ -70,7 +75,11 @@ export const Catalog = () => {
                       className={`categories__subcategory-button ${
                         activeCategoryId === categories.subCategories[0] ? 'active' : ''
                       }`}
-                      onClick={() => handleCategoryClick(categories.subCategories[0] as any, false)}
+                      onClick={() => {
+                        if (categories.subCategories[0]){
+                          handleCategoryClick(categories.subCategories[0], false)}
+                        }
+                      }
                     >
                       flowering plants
                     </button>
@@ -80,7 +89,12 @@ export const Catalog = () => {
                       className={`categories__subcategory-button ${
                         activeCategoryId === categories.subCategories[1] ? 'active' : ''
                       }`}
-                      onClick={() => handleCategoryClick(categories.subCategories[1] as any, false)}
+                      onClick={() => 
+                        {
+                          if (categories.subCategories[1]){
+                            handleCategoryClick(categories.subCategories[1], false)}
+                          }
+                      }
                     >
                       floor plants
                     </button>
@@ -93,7 +107,12 @@ export const Catalog = () => {
                   className={`categories__title-button ${
                     activeCategoryId === categories.mainCategories[1] ? 'active' : ''
                   }`}
-                  onClick={() => handleCategoryClick(categories.mainCategories[1] as any, true)}
+                  onClick={() => {
+                    if (categories.mainCategories[1]) {
+                      handleCategoryClick(categories.mainCategories[1], true);
+                    }
+                  }
+                }
                 >
                  accessories
                 </button>
@@ -102,9 +121,14 @@ export const Catalog = () => {
                  <li  className="categories__subcategory">
                     <button 
                       className={`categories__subcategory-button ${
-                        activeCategoryId === categories.subCategories[3] ? 'active' : ''
+                        activeCategoryId === categories.subCategories[2] ? 'active' : ''
                       }`}
-                      onClick={() => handleCategoryClick(categories.subCategories[2] as any, false)}
+                      onClick={() =>
+                        {
+                          if (categories.subCategories[2]){
+                            handleCategoryClick(categories.subCategories[2], false)}
+                          }
+                      }
                     >
                      flower pots
                     </button>

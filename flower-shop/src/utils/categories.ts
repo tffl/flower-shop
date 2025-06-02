@@ -13,12 +13,7 @@ export const fetchCategoryIds = async (): Promise<{
     });
 
     const categories=response.results as ApiCategory[];
-    console.log(categories
-      .filter(cat => !cat.parent)
-      .map(cat => cat.id),
-   categories
-      .filter(cat => cat.parent)
-      .map(cat => cat.id))
+    
     return {
       mainCategories: categories
         .filter(cat => !cat.parent)

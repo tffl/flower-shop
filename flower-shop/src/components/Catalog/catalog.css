@@ -7,7 +7,7 @@
   gap: 30px;
 }
 .catalog__title{
-  color:var(--color-footer-back)
+  color:var(--color-footer-back);
 }
 h3 {
   text-transform: capitalize;
@@ -35,6 +35,7 @@ h3 {
   text-transform: capitalize;
   cursor: pointer;
   text-align: left;
+  padding: 15px;
 }
 .categories__subcategory{
   text-align: left;
@@ -42,7 +43,6 @@ h3 {
 }
 .catalog__productDisplay{
   width: 70%;
-  outline: 2px solid blue;
 }
 li {
   color:black;
@@ -51,4 +51,7 @@ li {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+}
+.active {
+  font-weight: bold;
 }
