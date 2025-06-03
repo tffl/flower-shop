@@ -1,4 +1,3 @@
-
 import { CardProps } from '../../types/types';
 import { Button } from '../UI/Button/Button';
 import { useNavigate } from 'react-router-dom';
