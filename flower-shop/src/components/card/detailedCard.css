@@ -1,0 +1,67 @@
+.modal-overlay {
+  background: rgba(97, 97, 97, 0.6);
+  position: fixed;
+  inset: 0;
+  box-shadow: 4px 4px 8px #e7e7e7, -8px -8px 16px #ffffff;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  max-width: 50%;
+  margin: 50px auto;
+  position: relative;
+  font-family: Montserrat, sans-serif;
+  border-radius: 6px;
+  color: var(--color-footer-back);
+}
+
+.detailed-card_content {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.detailed-card_images,
+.detailed-card_text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 70%;
+  flex: 1;
+}
+
+.detailed-card_images {
+  max-width: 80%;
+}
+
+.detailed-card_img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.detailed-card_text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 70%;
+}
+
+.detailed-card_name {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.detailed-card_description {
+  font-size: 0.9rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.detailed-card_price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  margin-top: auto;
+}

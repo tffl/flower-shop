@@ -1,13 +1,18 @@
 import { Card } from "../card/Card";
+import { DetailedCard } from '../card/DetailedCard';
 import { useEffect, useMemo, useState } from "react";
 import { executeApiRequest } from "../../utils/universal";
 import { transformProducts } from '../../utils/transformData';
 import { filterByCategory } from '../../utils/filters';
 import { FormattedProduct } from '../../types/types';
 import { fetchCategoryIds } from '../../utils/categories';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import './catalog.css';
 
 export const Catalog = () => {
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+  const productId = params.get('productId');
   const [formattedProducts, setFormattedProducts] = useState<FormattedProduct[]>([]);
   const [categories, setCategories] = useState<{
     mainCategories: string[];
@@ -39,6 +44,8 @@ export const Catalog = () => {
   const filteredProducts = useMemo(() => (
     filterByCategory(formattedProducts, activeCategoryId, isMainCategory)
   ), [formattedProducts, activeCategoryId, isMainCategory]);
+
+  const selectedProduct = formattedProducts.find(product => product.id === productId);
 
 
   const handleCategoryClick = (categoryId: string|null, isMain: boolean) => {
@@ -162,6 +169,9 @@ export const Catalog = () => {
           ))}
         </div>
       </div>
+       {productId && selectedProduct && (
+      <DetailedCard product={selectedProduct} onClose={() => navigate('/catalog')} />
+    )}
     </div>
   );
 };
