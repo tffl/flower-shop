@@ -9,6 +9,8 @@ import { PageProfile } from "./pages/pageProfile";
 import { PageAbout } from "./pages/pageAbout";
 import { PageCatalog } from "./pages/pageCatalog";
 import { AuthProvider } from "./components/contexts/AuthContext";
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 import "./app/styles.css";
 
 const root = ReactDOM.createRoot(
