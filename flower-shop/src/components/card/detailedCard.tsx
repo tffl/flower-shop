@@ -12,20 +12,17 @@ type DetailedCardProps = {
 };
 
 export const DetailedCard = ({ product, onClose }: DetailedCardProps) => {
-  const { name, description, image, price, attributes } = product;
+  const { name, description, images, price } = product;
 
   const fallbackImg = "img/fallback.jpg";
   const minImgCount = 3;
-  const images = Array.isArray(attributes?.images)
-    ? attributes.images
-    : image
-      ? [image]
-      : [];
+  const imageUrls = images 
+        ? images.map(img => img.url)
+        : [];
 
-  while (images.length < minImgCount) {
-    images.push(fallbackImg);
-  }
-
+    while (imageUrls.length < minImgCount) {
+        imageUrls.push(fallbackImg);
+    }
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -52,13 +49,13 @@ export const DetailedCard = ({ product, onClose }: DetailedCardProps) => {
           <div className="detailed-card_content">
             <div className="detailed-card__slider">
               <Slider {...sliderSettings}>
-                {images.map((img, i) => (
+                {imageUrls.map((imgUrl, i) => (
                   <div
                     key={i}
                     className="slider-item"
                     onClick={handleImageClick}
                   >
-                    <img src={img} alt={`img-${i}`} className="slider-img" />
+                    <img src={imgUrl} alt={`img-${i}`} className="slider-img" />
                   </div>
                 ))}
               </Slider>
@@ -89,9 +86,9 @@ export const DetailedCard = ({ product, onClose }: DetailedCardProps) => {
       >
         <div className="zoom-slider-wrapper">
           <Slider {...sliderSettings}>
-            {images.map((img, i) => (
+            {imageUrls.map((imgUrl, i) => (
               <div key={i}>
-                <img src={img} alt={`zoom-${i}`} className="zoom-img" />
+                <img src={imgUrl} alt={`zoom-${i}`} className="zoom-img" />
               </div>
             ))}
           </Slider>
