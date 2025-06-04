@@ -4,10 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { executeApiRequest } from "../../utils/universal";
 import { transformProducts } from "../../utils/transformData";
 import { filterByCategory } from "../../utils/filters";
-import { FormattedProduct } from "../../types/types";
+import { FormattedProduct, SortOption } from "../../types/types";
 import { fetchCategoryIds } from "../../utils/categories";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import "./catalog.css";
+import { sortProducts } from "../../utils/sort";
 
 export const Catalog = () => {
   const [params] = useSearchParams();
@@ -22,6 +23,7 @@ export const Catalog = () => {
   }>({ mainCategories: [], subCategories: [] });
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [isMainCategory, setIsMainCategory] = useState<boolean>(true);
+  const [sortOption, setSortOption] = useState<SortOption>('price-asc');
 
   useEffect(() => {
     const loadData = async () => {
@@ -44,11 +46,11 @@ export const Catalog = () => {
     loadData();
   }, []);
 
-  const filteredProducts = useMemo(
-    () => filterByCategory(formattedProducts, activeCategoryId, isMainCategory),
-    [formattedProducts, activeCategoryId, isMainCategory],
-  );
-
+  const filteredProducts = useMemo(() => {
+    const filtered = filterByCategory(formattedProducts, activeCategoryId, isMainCategory);
+    return sortProducts(filtered, sortOption);
+  }, [formattedProducts, activeCategoryId, isMainCategory,sortOption]);
+  
   const selectedProduct = formattedProducts.find(
     (product) => product.id === productId,
   );
@@ -161,16 +163,32 @@ export const Catalog = () => {
             setActiveCategoryId(null);
             setIsMainCategory(true);
           }}
-          className={`show-all-button ${!activeCategoryId ? "active" : ""}`}
+          className={`catalog__showAll ${!activeCategoryId ? "active" : ""}`}
         >
           All our plants
         </button>
+        <div className="catalog__sorting">
+          <label htmlFor="sort-select">Sort by: </label>
+          <select
+            id="sort-select"
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value as SortOption)}
+            className="catalog__select"
+          >
+            <option value="price-asc">Price (Low to High)</option>
+            <option value="price-desc">Price (High to Low)</option>
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="size-asc">Size (Small to Large)</option>
+            <option value="size-desc">Size (Large to Small)</option>
+          </select>
+        </div>
         <div className="catalog__list list">
           {filteredProducts.map((product) => (
             <Card
               key={product.id}
               id={product.id}
-              image={product.image}
+              image={product.images?.[0]?.url || null}
               name={product.name}
               price={product.price}
               shortDescription={product.attributes.shortDescription}
