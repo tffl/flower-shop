@@ -47,19 +47,18 @@ export interface IUpDate {
   ];
 }
 
-
 export interface IPropsSectionAddress {
   section: iSectionAddress;
 }
 
-export interface iSectionAddress{
+export interface iSectionAddress {
   id: number;
   title: string;
-  addresses: IAddressField []
+  addresses: IAddressField[];
 }
 
 export interface IAddressField {
-  id : string;
+  id: string;
   aFields: IField[];
 }
 
