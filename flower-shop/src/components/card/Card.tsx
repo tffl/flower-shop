@@ -7,6 +7,7 @@ export const Card = ({
   image,
   name,
   price,
+  discountedPrice,
   shortDescription,
 }: CardProps) => {
   const navigate = useNavigate();
@@ -24,7 +25,16 @@ export const Card = ({
         />
       </div>
       <h3 className="card__name">{name["en-US"]}</h3>
-      <div className="card__price">Price: {price} USD</div>
+      <div className="card__price">
+      {discountedPrice ? (
+          <>
+            <span style={{ textDecoration: 'line-through' }}>{price} USD</span>
+            <span style={{ color: 'red', marginLeft: '8px' }}>{discountedPrice} USD</span>
+          </>
+        ) : (
+          <span>{price} USD</span>
+        )}
+      </div>
       <div className="card__description">{shortDescription}</div>
       <Button className="card__btn" onClick={handleClick}>
         more details...

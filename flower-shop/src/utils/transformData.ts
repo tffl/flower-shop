@@ -16,7 +16,8 @@ export const transformProducts = (products: Product[]): FormattedProduct[] => {
       typeId: c.typeId
     })) || [];
 
-    return {
+
+       return {
       id: product.id,
       key,
       name, 
@@ -24,7 +25,10 @@ export const transformProducts = (products: Product[]): FormattedProduct[] => {
       price: product.masterVariant?.prices?.[0]?.value?.centAmount 
         ? product.masterVariant.prices[0].value.centAmount / 100 
         : 0,
-        images: product.masterVariant?.images || null,
+      discountedPrice: product.masterVariant?.prices?.[0]?.discounted?.value?.centAmount
+      ? product.masterVariant.prices[0].discounted.value.centAmount / 100
+      : undefined,
+      images: product.masterVariant?.images || null,
       attributes: {
         size: product.masterVariant?.attributes?.find(attr => attr.name === 'size')?.value as number[] | undefined,
         shortDescription: product.masterVariant?.attributes
