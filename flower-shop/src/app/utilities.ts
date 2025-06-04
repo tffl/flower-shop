@@ -28,11 +28,6 @@ export function addImgElement(
   return pElement;
 }
 
-export function buildScopeString(
-  scopeKeys: ScopeKey[],
-): string {
-  return scopeKeys
-    .map(key => `${APP_SCOPES[key]}`)
-    .join(' ');
+export function buildScopeString(scopeKeys: ScopeKey[]): string {
+  return scopeKeys.map((key) => `${APP_SCOPES[key]}`).join(" ");
 }
-

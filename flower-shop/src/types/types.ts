@@ -35,19 +35,19 @@ export type BurgerProps = {
   className: string;
   iconColor: string;
 };
-export type TokenData ={
+export type TokenData = {
   access_token: string;
   expires_in?: number;
   token_type?: string;
-}
-export type ApiRequestParams ={
-  endpoint: string; 
-  method?: 'GET' | 'POST' | 'DELETE'; 
-  path?: string; 
-  query?: Record<string, string>; 
-  body?: unknown; 
-  isAuthRequest?: boolean; 
-}
+};
+export type ApiRequestParams = {
+  endpoint: string;
+  method?: "GET" | "POST" | "DELETE";
+  path?: string;
+  query?: Record<string, string>;
+  body?: unknown;
+  isAuthRequest?: boolean;
+};
 
 export type Product = {
   id: string;
@@ -87,7 +87,7 @@ export type FormattedProduct = {
   };
   categories: Array<{
     id: string;
-    typeId: string; 
+    typeId: string;
   }>;
 };
 export type CardProps = {
@@ -114,4 +114,3 @@ export type Category = {
   slug: string;
   description?: string;
 };
-

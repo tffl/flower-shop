@@ -1,10 +1,13 @@
-import { ICustomerApiUpDate } from "./profileTypes";
+ import { ICustomerApiUpDate, IField } from "./profileTypes";
 import { takeToken } from "../Register/registerSubmit.ts";
 import { showResult } from "../Register/registerSubmit.ts";
 import { IUpDate, IAddress } from "./profileTypes.ts";
 import { IRegisterSection } from "../Register/registerTypes.ts";
 import { validField } from "../Register/registerValid";
 import { aProfileSections, aProfilePassSections } from "./profileData.ts";
+import {ProfInfoAddress} from "./profileCreate.tsx"
+import ReactDOM from "react-dom/client";
+import { addElement } from "../../app/utilities";
 
 //let BEARER_TOKEN = "";
 // const rHost = "https://auth.europe-west1.commercetools.com";
@@ -19,6 +22,7 @@ import { aProfileSections, aProfilePassSections } from "./profileData.ts";
 // &scope={scope}
 
 const sNoChange = "Yor data has not changed";
+let qAddAddress = 0
 
 //const sLSCustomer = localStorage.getItem("customer");
 let oCustomer: ICustomerApiUpDate = {
@@ -263,7 +267,7 @@ async function upDatePassword(): Promise<boolean> {
   oPassword.currentPassword = oCustomer.currentPassword;
   oPassword.newPassword = oCustomer.newPassword;
 
-  console.log("oPassword", oPassword);
+  //console.log("oPassword", oPassword);
 
   //...................................................................
 
@@ -417,7 +421,7 @@ async function upDateAddress(): Promise<boolean> {
     const dataCustomer = await response.json();
     const sCustomer = JSON.stringify(dataCustomer);
 
-   // console.log("upDate Password sCustomer", sCustomer);
+    // console.log("upDate Password sCustomer", sCustomer);
     localStorage.setItem("customer", sCustomer);
 
     showResult(`Your data has been updated successfully.`, true);
@@ -442,6 +446,78 @@ export async function profileNewAddress() {
   if (await createNewAddress(oNewAddress))
     showResult(`New address add successfully.`, true);
   else showResult("Failed to add address. Try again.", false);
+
+
+  const pSection = document.querySelector('.profile__section-addresses') as HTMLElement
+  if  (pSection){
+    const classAdd = 'add-address' + qAddAddress++
+    addElement(pSection,'div',classAdd,'')
+    const sectionAddresses  = ReactDOM.createRoot(
+    document.querySelector(`.${classAdd}`) as HTMLElement
+    );
+    const pNewAddress = createProfileAddress()
+    sectionAddresses.render(pNewAddress);
+  }
+
+}
+
+//.......................................................
+function createProfileAddress(){
+
+  const aFields: IField[] =[
+       {
+            id: 21,
+            name: "country",
+            label: "Country",
+            type: "text",
+            placeholder: "US",
+            value: "",
+          },
+          {
+            id: 22,
+            name: "city",
+            label: "City",
+            type: "text",
+            placeholder: "Mycity",
+            value: "",
+          },
+          {
+            id: 23,
+            name: "street",
+            label: "Street",
+            type: "text",
+            placeholder: "Street1  272B",
+            value: "",
+          },
+          {
+            id: 24,
+            name: "postcode",
+            label: "Postal code",
+            type: "text",
+            placeholder: "654321",
+            value: "",
+          },
+  ]
+
+  const sLSCustomer = localStorage.getItem("customer");
+  let idAddress ='111'
+  if (sLSCustomer){
+    const oCustomer = JSON.parse(sLSCustomer);
+    idAddress =  oCustomer.addresses[oCustomer.addresses.length-1].id
+  }
+
+  return(
+  <div className="profile__address" key={idAddress}>
+          <ProfInfoAddress aFields={aFields} />
+          <button
+            className="profile__address-btn"
+            name={idAddress}
+            onClick={(e) => deleteAddress(e)}
+          >
+            Delete address
+          </button>
+        </div>
+  )
 }
 
 //.........................................................
@@ -488,7 +564,7 @@ export async function createNewAddress(newAddress: IAddress): Promise<boolean> {
 
   if (response.status === 200) {
     const dataCustomer = await response.json();
-   // console.log("add address dataCustomer", dataCustomer);
+    // console.log("add address dataCustomer", dataCustomer);
 
     const sCustomer = JSON.stringify(dataCustomer);
 
@@ -509,7 +585,6 @@ export async function createNewAddress(newAddress: IAddress): Promise<boolean> {
 export async function deleteAddress(
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 ) {
-
   const pButton = e.target as HTMLButtonElement;
   if (pButton.parentElement) pButton.parentElement.remove();
 
@@ -524,14 +599,14 @@ export async function deleteAddress(
     actions: [
       {
         action: "removeAddress",
-        addressId: 'addressId'
+        addressId: "addressId",
       },
     ],
   };
 
   oDelAddress.version = oCustomer.version;
-  if (oDelAddress.actions[0]) oDelAddress.actions[0].addressId = pButton.name
-  console.log("oDelAddress", oDelAddress);
+  if (oDelAddress.actions[0]) oDelAddress.actions[0].addressId = pButton.name;
+  //console.log("oDelAddress", oDelAddress);
 
   const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/${oCustomer.id}`;
   const token = await takeToken();
@@ -545,20 +620,19 @@ export async function deleteAddress(
     body: JSON.stringify(oDelAddress),
   });
 
-  console.log("delAddress response", response);
+  //console.log("delAddress response", response);
 
   if (response.status === 200) {
     const dataCustomer = await response.json();
-    console.log("remove address dataCustomer", dataCustomer);
+    //console.log("remove address dataCustomer", dataCustomer);
 
     const sCustomer = JSON.stringify(dataCustomer);
 
-    console.log("removeAddress sCustomer", sCustomer);
+    //console.log("removeAddress sCustomer", sCustomer);
     localStorage.setItem("customer", sCustomer);
 
     // showResult(`New address add successfully.`, true);
     // console.log("Your profile updated successful", data);
-
 
     return true;
   } else {
@@ -566,5 +640,4 @@ export async function deleteAddress(
     // showResult("Failed to add address. Try again.", false);
     return false;
   }
-
 }
