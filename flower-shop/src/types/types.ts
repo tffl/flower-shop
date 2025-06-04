@@ -63,6 +63,11 @@ export type Product = {
       value: {
         centAmount: number;
       };
+      discounted?: {
+        value: {
+          centAmount: number;
+        };
+      };
     }>;
     images?: Array<{
       url: string;
@@ -80,6 +85,7 @@ export type FormattedProduct = {
   name: Record<string, string>;
   description: Record<string, string>;
   price: number;
+  discountedPrice?: number;
   images: Array<{ url: string }> | null;
   attributes: {
     size?: number[];
@@ -96,6 +102,7 @@ export type CardProps = {
   image: string | null;
   name: Record<string, string>;
   price: number;
+  discountedPrice?: number;
   description?: Record<string, string>;
   // shortDescription?: Record<string, string>;
   shortDescription?: string;

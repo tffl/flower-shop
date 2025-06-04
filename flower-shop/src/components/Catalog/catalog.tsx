@@ -35,7 +35,7 @@ export const Catalog = () => {
           }),
           fetchCategoryIds(),
         ]);
-        // console.log(productsData.results)
+        console.log(productsData.results)
         setFormattedProducts(transformProducts(productsData.results));
         setCategories(categoriesData);
       } catch (error) {
@@ -191,6 +191,7 @@ export const Catalog = () => {
               image={product.images?.[0]?.url || null}
               name={product.name}
               price={product.price}
+              discountedPrice={product.discountedPrice}
               shortDescription={product.attributes.shortDescription}
             />
           ))}
