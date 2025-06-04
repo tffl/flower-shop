@@ -1,5 +1,5 @@
 import { Card } from "../card/Card";
-import { DetailedCard } from '../card/DetailedCard';
+import { DetailedCard } from '../card/detailedCard';
 import { useEffect, useMemo, useState } from "react";
 import { executeApiRequest } from "../../utils/universal";
 import { transformProducts } from '../../utils/transformData';

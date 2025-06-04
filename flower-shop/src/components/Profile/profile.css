@@ -110,11 +110,12 @@
   font-size: 1.7rem;
 }
 
-.profile__address{
-  border-bottom: 1px solid var(--color-footer-back)
+.profile__address {
+  padding: 20px;
+  border-bottom: 1px solid var(--color-footer-back);
 }
 
-.profile__address-btn{
+.profile__address-btn {
   width: 160px;
   font-size: 1rem;
   margin: 10px;

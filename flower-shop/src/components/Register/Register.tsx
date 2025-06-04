@@ -22,7 +22,7 @@ export const Main = () => {
     <div>
       <div
         className="register"
-        style={{ backgroundImage: "url('img/bgroses33.png')" }}
+        style={{ backgroundImage: "url('img/bgroses23.png')" }}
       >
         <form onSubmit={(e) => registerSubmit(e)}>
           {aSections.map((iSection) => (

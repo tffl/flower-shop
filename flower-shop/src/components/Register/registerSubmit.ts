@@ -1,7 +1,8 @@
 import { isValidForm } from "./registerValid";
 //import { ICustomerApiCreate, IAddress } from "./registerTypes";
-import { ICustomerApiCreate } from "./registerTypes";
+import { IAddress, ICustomerApiCreate } from "./registerTypes";
 import { addElement } from "../../app/utilities";
+import { createNewAddress } from "../Profile/profileSubmit";
 
 let BEARER_TOKEN = "";
 // const rHost = "https://auth.europe-west1.commercetools.com";
@@ -78,6 +79,19 @@ async function newCustomer(): Promise<boolean> {
     // }]
   };
 
+  const oShippingAddress: IAddress = {
+    streetName: "",
+    postalCode: "",
+    city: "",
+    country: "US",
+  };
+  const oBillingAddress: IAddress = {
+    streetName: "",
+    postalCode: "",
+    city: "",
+    country: "US",
+  };
+
   let pInput = document.querySelector(
     `.register input[name="name"]`,
   ) as HTMLInputElement;
@@ -103,29 +117,48 @@ async function newCustomer(): Promise<boolean> {
   ) as HTMLInputElement;
   oCustomer.password = pInput.value;
 
-  // pInput = document.querySelector(
-  //   `.register input[name="country"]`,
-  // ) as HTMLInputElement;
-  // if(oCustomer.addresses[0])
-  // oCustomer.addresses[0].country = pInput.value;
+  //.............................................
+  pInput = document.querySelector(
+    `.register input[name="country"]`,
+  ) as HTMLInputElement;
+  // oShippingAddress.country = pInput.value;
 
-  // pInput = document.querySelector(
-  //   `.register input[name="city"]`,
-  // ) as HTMLInputElement;
-  // if(oCustomer.addresses[0])
-  // oCustomer.addresses[0].city = pInput.value;
+  pInput = document.querySelector(
+    `.register input[name="city"]`,
+  ) as HTMLInputElement;
 
-  // pInput = document.querySelector(
-  //   `.register input[name="street"]`,
-  // ) as HTMLInputElement;
-  // if(oCustomer.addresses[0])
-  // oCustomer.addresses[0].streetName = pInput.value;
+  oShippingAddress.city = pInput.value;
 
-  // pInput = document.querySelector(
-  //   `.register input[name="postcode"]`,
-  // ) as HTMLInputElement;
-  // if(oCustomer.addresses[0])
-  // oCustomer.addresses[0].postalCode = pInput.value;
+  pInput = document.querySelector(
+    `.register input[name="street"]`,
+  ) as HTMLInputElement;
+  oShippingAddress.streetName = pInput.value;
+
+  pInput = document.querySelector(
+    `.register input[name="postcode"]`,
+  ) as HTMLInputElement;
+  oShippingAddress.postalCode = pInput.value;
+
+  //.............................................
+  pInput = document.querySelector(
+    `.register input[name="country2"]`,
+  ) as HTMLInputElement;
+  // oBillingAddress.country = pInput.value;
+
+  pInput = document.querySelector(
+    `.register input[name="city2"]`,
+  ) as HTMLInputElement;
+  oBillingAddress.city = pInput.value;
+
+  pInput = document.querySelector(
+    `.register input[name="street2"]`,
+  ) as HTMLInputElement;
+  oBillingAddress.streetName = pInput.value;
+
+  pInput = document.querySelector(
+    `.register input[name="postcode2"]`,
+  ) as HTMLInputElement;
+  oBillingAddress.postalCode = pInput.value;
 
   //console.log(oCustomer);
 
@@ -150,25 +183,35 @@ async function newCustomer(): Promise<boolean> {
   if (response.status === 201) {
     const dataCustomer = await response.json();
     console.log(dataCustomer);
-
     const sCustomer = JSON.stringify(dataCustomer.customer);
-
     // console.log(sCustomer);
     localStorage.setItem("customer", sCustomer);
 
-    showResult(
-      `Your registration was successful. Welcome ${dataCustomer.customer.firstName}.`,
-      true,
-    );
-    console.log("Your registration was successful", dataCustomer);
-    return true;
+    if (
+      (await createNewAddress(oShippingAddress)) &&
+      (await createNewAddress(oBillingAddress))
+    ) {
+      showResult(
+        `Your registration was successful. Welcome ${dataCustomer.customer.firstName}.`,
+        true,
+      );
+      console.log("Your registration was successful", dataCustomer);
+      return true;
+    } else {
+      showResult(
+        "Failed to create account. A customer with this email already exists. Try again.",
+        false,
+      );
+      return false;
+
+      //..............................................................
+    }
   } else {
     console.log("newCustomer - error", response.status);
     showResult(
       "Failed to create account. A customer with this email already exists. Try again.",
       false,
     );
-    //There is already an existing customer with the provided email.
     return false;
   }
 }
