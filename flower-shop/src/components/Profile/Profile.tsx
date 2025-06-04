@@ -4,7 +4,7 @@ import {
   profileSubmit,
   profilePassSubmit,
   profileAddrSubmit,
-} from "./profileSubmit.ts";
+} from "./profileSubmit.tsx";
 import { aProfileSections, aProfilePassSections } from "./profileData.ts";
 import { IRegisterSection } from "../Register/registerTypes.ts";
 import { Button } from "../UI/Button/Button.tsx";
@@ -19,7 +19,7 @@ export const Main = () => {
   //const aProfileSections = aSections;
   const sCustomer = localStorage.getItem("customer");
 
-  console.log("CreateSection - localstorage", sCustomer);
+  //console.log("CreateSection - localstorage", sCustomer);
 
   const aProfileAddrSections = [
     {
@@ -74,7 +74,7 @@ export const Main = () => {
 
   if (sCustomer) {
     const oCustomer = JSON.parse(sCustomer);
-    console.log(" oCustomer", oCustomer);
+    //console.log(" oCustomer", oCustomer);
 
     aProfileSections.map((iSection) => {
       iSection.aFields.map((iField) => {
@@ -103,7 +103,7 @@ export const Main = () => {
     });
 
     const qAddresses = oCustomer.addresses.length;
-    console.log("qAddresses", qAddresses);
+    //console.log("qAddresses", qAddresses);
 
     for (let i = 1; i < qAddresses; i++) {
       if (aProfileAddrSections[0] && aProfileAddrSections[0].addresses[0])
@@ -120,20 +120,12 @@ export const Main = () => {
       // )
     }
 
-    console.log("aProfileAddrSections >>> add", aProfileAddrSections);
-    console.log("oCustomer", oCustomer);
-
     aProfileAddrSections.map((iSection) => {
       iSection.addresses.forEach((iAddress, i) => {
-        console.log("i>", i);
-        console.log(oCustomer.addresses[i]);
         iAddress.id = oCustomer.addresses[i].id;
-        console.log("oCustomer.addresses[i].id", i, oCustomer.addresses[i].id);
-        console.log("iAddress.id", i, iAddress.id);
 
         iAddress.aFields.map((iField) => {
-          console.log("iField<<<<", iField.name, iField.value);
-          console.log("oCustomer.addresses[i]", oCustomer.addresses[i]);
+
           switch (iField.name) {
             case "country":
               iField.value = oCustomer.addresses[i].country;
@@ -148,13 +140,9 @@ export const Main = () => {
               iField.value = oCustomer.addresses[i].postalCode;
               break;
           }
-          console.log("iField >>>>", iField.name, iField.value);
         });
-        console.log(iAddress.aFields);
       });
     });
-
-    console.log("aProfileAddrSections ### value", aProfileAddrSections);
   }
 
   return (

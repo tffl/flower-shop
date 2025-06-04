@@ -2,7 +2,9 @@
   background: rgba(97, 97, 97, 0.6);
   position: fixed;
   inset: 0;
-  box-shadow: 4px 4px 8px #e7e7e7, -8px -8px 16px #ffffff;
+  box-shadow:
+    4px 4px 8px #e7e7e7,
+    -8px -8px 16px #ffffff;
 }
 
 .modal {
@@ -68,7 +70,9 @@
   background-color: #f1f1f1;
   border: none;
   border-radius: 4px;
-  box-shadow: 4px 4px 8px #e7e7e7, -8px -8px 16px #ffffff;
+  box-shadow:
+    4px 4px 8px #e7e7e7,
+    -8px -8px 16px #ffffff;
   font-size: 1rem;
   padding: 10px;
   cursor: pointer;
@@ -77,14 +81,16 @@
 }
 
 .detailed-card_btn:hover {
-  box-shadow: 2px 2px 2px #4a4e374b, -8px -8px 16px #ffffff;
+  box-shadow:
+    2px 2px 2px #4a4e374b,
+    -8px -8px 16px #ffffff;
 }
 
 .detailed-card__slider {
   width: 50%;
 }
 
-.slick-slide>div,
+.slick-slide > div,
 .slider-item {
   display: flex;
   justify-content: center;

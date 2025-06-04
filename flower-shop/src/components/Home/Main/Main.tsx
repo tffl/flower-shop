@@ -1,4 +1,3 @@
-
 import { HeroSection } from "../HeroSection/HeroSection";
 import { TaglineSection } from "../TaglineSection/TagLineSection";
 import "./main.css";
