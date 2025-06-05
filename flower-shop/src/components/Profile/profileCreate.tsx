@@ -74,7 +74,7 @@ export function CreateSectionAddress({ section }: IPropsSectionAddress) {
         <h3>{section.title}</h3>
       </div>
       {section.addresses.map((address) => (
-        <div className="profile__address" key={address.id}>
+        <div className="profile__address"  key={address.id}>
           <ProfInfoAddress aFields={address.aFields} />
           <button
             className="profile__address-btn"

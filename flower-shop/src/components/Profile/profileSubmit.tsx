@@ -58,9 +58,23 @@ export async function profilePassSubmit(e: React.FormEvent<HTMLFormElement>) {
 //....................................................
 export async function profileAddrSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
-  document.querySelector(".profile__message-addres")!.textContent = "";
+ // document.querySelector(".profile__message-address")!.textContent = "";
   oCustomer = getCustomer();
-  if (isAddressChange()) await upDateAddress();
+
+
+  const aIAdresses = document.getElementsByClassName('profile__address')
+ // console.log('aIAdresses', aIAdresses)
+
+  const aInputBoxes = Array.from(aIAdresses)
+    //console.log('aBoxesInput>>>', aInputBoxes)
+
+    aInputBoxes.forEach((pBox) =>{
+
+      if (pBox.lastChild && pBox.firstChild)
+        upDateAddress ((pBox.lastChild as HTMLButtonElement).name, getVal((pBox.firstChild as HTMLDivElement)))
+
+    })
+
 }
 
 //
@@ -267,8 +281,6 @@ async function upDatePassword(): Promise<boolean> {
   oPassword.currentPassword = oCustomer.currentPassword;
   oPassword.newPassword = oCustomer.newPassword;
 
-  //console.log("oPassword", oPassword);
-
   //...................................................................
 
   const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/password`;
@@ -283,20 +295,16 @@ async function upDatePassword(): Promise<boolean> {
     body: JSON.stringify(oPassword),
   });
 
-  //console.log("upPassword>>await", response);
-
   if (response.status === 200) {
     const dataCustomer = await response.json();
     const sCustomer = JSON.stringify(dataCustomer);
 
-    //console.log("upDate Password sCustomer", sCustomer);
-    localStorage.setItem("customer", sCustomer);
+   localStorage.setItem("customer", sCustomer);
 
     showResult(`Your data has been updated successfully.`, true);
 
     return true;
   } else {
-    //console.log("upDatePassWord error", response.status);
     showResult("Failed to update profile. Try again.", false);
     return false;
   }
@@ -367,43 +375,95 @@ function isValidForm(aSections: IRegisterSection[]) {
 //   "addressId": "{{addressId}}"
 // }
 
+
+function getVal(pAddr : HTMLDivElement) {
+
+// let sError = ''
+// let flValid = true
+
+let address = {
+      streetName: "",
+      postalCode: "",
+      city: "",
+      country: "US",
+    }
+    const aInp = Array.from(pAddr.children)
+    aInp.forEach((i)=>{
+
+      // if (i.childNodes[1] ) {
+      //   sError = validField((i.childNodes[1] as HTMLInputElement).value, (i.childNodes[1] as HTMLInputElement).name);
+
+      //   if (sError) flValid = false;
+      //   if ((i.childNodes[1] as HTMLInputElement).nextElementSibling)
+      //    (i.childNodes[1] as HTMLInputElement).nextElementSibling.textContent = sError;
+      // }
+
+
+
+
+    switch ((i.childNodes[1] as HTMLInputElement).name){
+       case "city":
+        address.city = (i.childNodes[1] as HTMLInputElement).value
+        break;
+      case "street":
+        address.streetName = (i.childNodes[1] as HTMLInputElement).value
+        break;
+      case "postcode":
+        address.postalCode = (i.childNodes[1] as HTMLInputElement).value
+         break
+    }
+})
+
+return address
+  }
+
 //..........................................
-function isAddressChange() {
-  //const sLSCustomer = localStorage.getItem("customer");
-  let flChange = true;
-  // if (sLSCustomer) {
-  //   const oLSCustomer = JSON.parse(sLSCustomer);
-  //   if (
-  //   ) {
-  //     flChange = false;
-  //     document.querySelector(".profile__message-address")!.textContent = sNoChange;
-  //   }
-  // }
-  return flChange;
-}
+// function isAddressChange() {
+//   //const sLSCustomer = localStorage.getItem("customer");
+//   let flChange = true;
+//   // if (sLSCustomer) {
+//   //   const oLSCustomer = JSON.parse(sLSCustomer);
+//   //   if (
+//   //   ) {
+//   //     flChange = false;
+//   //     document.querySelector(".profile__message-address")!.textContent = sNoChange;
+//   //   }
+//   // }
+//   return flChange;
+// }
+
 
 //.......................................................
-async function upDateAddress(): Promise<boolean> {
-  const oAddress = {
+async function upDateAddress( addressIdVal:string, addressVal: IAddress): Promise<boolean> {
+
+  oCustomer = getCustomerVersion();
+  const oAddress  = {
+    version: 1,
+    actions: [
+  {
     action: "changeAddress",
-    addressId: "{{addressId}}",
+    addressId: "",
     address: {
       streetName: "",
       postalCode: "",
       city: "",
       country: "",
-    },
+    }}]
   };
-  // oPassword.id = oCustomer.id;
-  // oPassword.version = oCustomer.version;
-  // oPassword.currentPassword = oCustomer.currentPassword;
-  // oPassword.newPassword = oCustomer.newPassword;
 
+  oAddress.version = oCustomer.version;
+  if( oAddress.actions[0]){
+  oAddress.actions[0].addressId = addressIdVal
+  oAddress.actions[0].address.streetName = addressVal.streetName
+  oAddress.actions[0].address.postalCode = addressVal.postalCode
+  oAddress.actions[0].address.city = addressVal.city
+  oAddress.actions[0].address.country = addressVal.country
+  }
   //console.log("oAddress", oAddress);
 
   //...................................................................
 
-  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/password`;
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/${oCustomer.id}`;
   const token = await takeToken();
 
   const response = await fetch(urlApi, {
@@ -424,12 +484,13 @@ async function upDateAddress(): Promise<boolean> {
     // console.log("upDate Password sCustomer", sCustomer);
     localStorage.setItem("customer", sCustomer);
 
-    showResult(`Your data has been updated successfully.`, true);
+  //  showResult(`Your data has been updated successfully.`, true);
 
     return true;
   } else {
     //console.log("upDatePassWord error", response.status);
-    showResult("Failed to update profile. Try again.", false);
+  //
+  //   showResult("Failed to update profile. Try again.", false);
     return false;
   }
 }
