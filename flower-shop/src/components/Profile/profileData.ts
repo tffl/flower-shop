@@ -1,6 +1,6 @@
 import { IRegisterSection } from "../Register/registerTypes";
 
-export const aSections: IRegisterSection[] = [
+export const aProfileSections: IRegisterSection[] = [
   {
     id: 222,
     title: "Personal info",
@@ -76,55 +76,55 @@ export const aProfilePassSections: IRegisterSection[] = [
   },
 ];
 
-export const aProfileAddrSections  = [
+export const aProfileAddrSections = [
   {
     id: 2,
     title: "Addresses",
     addresses: [
-      {id : '',
-      aFields:  [
       {
-        id: 21,
-        name: "country",
-        label: "Country",
-        type: "text",
-        placeholder: "UK",
-        value: "",
+        id: "111111",
+        aFields: [
+          {
+            id: 21,
+            name: "country",
+            label: "Country",
+            type: "text",
+            placeholder: "US",
+            value: "",
+          },
+          {
+            id: 22,
+            name: "city",
+            label: "City",
+            type: "text",
+            placeholder: "Mycity",
+            value: "",
+          },
+          {
+            id: 23,
+            name: "street",
+            label: "Street",
+            type: "text",
+            placeholder: "Street1  272B",
+            value: "",
+          },
+          {
+            id: 24,
+            name: "postcode",
+            label: "Postal code",
+            type: "text",
+            placeholder: "654321",
+            value: "",
+          },
+        ],
       },
-      {
-        id: 22,
-        name: "city",
-        label: "City",
-        type: "text",
-        placeholder: "Mycity",
-        value: "",
-      },
-      {
-        id: 23,
-        name: "street",
-        label: "Street",
-        type: "text",
-        placeholder: "Street1  272B",
-        value: "",
-      },
-      {
-        id: 24,
-        name: "postcode",
-        label: "Postal code",
-        type: "text",
-        placeholder: "654321",
-        value: "",
-      },
-    ]
+
+      // aChecks: [
+      //   { id: 25, label: "Set Shipping address as default" },
+      //   { id: 26, label: "Set Shipping Address as Billing Address" },
+      // ],
+    ],
   },
-
-    // aChecks: [
-    //   { id: 25, label: "Set Shipping address as default" },
-    //   { id: 26, label: "Set Shipping Address as Billing Address" },
-    // ],
-    ]
-  }
-
 
   //   {
   //     id: 3,

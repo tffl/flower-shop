@@ -1,13 +1,13 @@
-import { ICustomerApiUpDate } from "./profileTypes";
+ import { ICustomerApiUpDate, IField } from "./profileTypes";
 import { takeToken } from "../Register/registerSubmit.ts";
 import { showResult } from "../Register/registerSubmit.ts";
-import { IUpDate } from "./profileTypes.ts";
+import { IUpDate, IAddress } from "./profileTypes.ts";
 import { IRegisterSection } from "../Register/registerTypes.ts";
 import { validField } from "../Register/registerValid";
-import {
-  aSections,
-  aProfilePassSections,
-} from "./profileData.ts";
+import { aProfileSections, aProfilePassSections } from "./profileData.ts";
+import {ProfInfoAddress} from "./profileCreate.tsx"
+import ReactDOM from "react-dom/client";
+import { addElement } from "../../app/utilities";
 
 //let BEARER_TOKEN = "";
 // const rHost = "https://auth.europe-west1.commercetools.com";
@@ -22,6 +22,7 @@ import {
 // &scope={scope}
 
 const sNoChange = "Yor data has not changed";
+let qAddAddress = 0
 
 //const sLSCustomer = localStorage.getItem("customer");
 let oCustomer: ICustomerApiUpDate = {
@@ -41,7 +42,8 @@ export async function profileSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
   document.querySelector(".profile__message")!.textContent = "";
   oCustomer = getCustomer();
-  if (isValidForm(aSections) && isCustomerChange()) await upDateCustomer();
+  if (isValidForm(aProfileSections) && isCustomerChange())
+    await upDateCustomer();
 }
 
 //....................................................
@@ -56,14 +58,53 @@ export async function profilePassSubmit(e: React.FormEvent<HTMLFormElement>) {
 //....................................................
 export async function profileAddrSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
-  document.querySelector(".profile__message-addres")!.textContent = "";
+ // document.querySelector(".profile__message-address")!.textContent = "";
   oCustomer = getCustomer();
-  if (isAddressChange())
-    await upDateAddress();
+
+
+  const aIAdresses = document.getElementsByClassName('profile__address')
+ // console.log('aIAdresses', aIAdresses)
+
+  const aInputBoxes = Array.from(aIAdresses)
+    //console.log('aBoxesInput>>>', aInputBoxes)
+
+    aInputBoxes.forEach((pBox) =>{
+
+      if (pBox.lastChild && pBox.firstChild)
+        upDateAddress ((pBox.lastChild as HTMLButtonElement).name, getVal((pBox.firstChild as HTMLDivElement)))
+
+    })
+
+}
+
+//
+//....................................................................
+export function getCustomerVersion() {
+  const oCustomer: ICustomerApiUpDate = {
+    id: "",
+    version: 1,
+    email: "",
+    firstName: "",
+    lastName: "",
+    currentPassword: "",
+    newPassword: "",
+    dateOfBirth: "",
+    addresses: [],
+  };
+
+  const sLSCustomer = localStorage.getItem("customer");
+
+  if (sLSCustomer) {
+    const oLSCustomer = JSON.parse(sLSCustomer);
+
+    oCustomer.id = oLSCustomer.id;
+    oCustomer.version = oLSCustomer.version;
+  }
+  return oCustomer;
 }
 
 //....................................................................
-function getCustomer() {
+export function getCustomer() {
   const oCustomer: ICustomerApiUpDate = {
     id: "",
     version: 1,
@@ -182,7 +223,7 @@ async function upDateCustomer(): Promise<boolean> {
     body: JSON.stringify(oUpDate),
   });
 
-  console.log("upDateCustomer>>await", response);
+  //console.log("upDateCustomer>>await", response);
   if (response.status === 200) {
     const dataCustomer = await response.json();
     //console.log('update dataCustomer', dataCustomer);
@@ -196,7 +237,7 @@ async function upDateCustomer(): Promise<boolean> {
     // console.log("Your profile updated successful", data);
     return true;
   } else {
-    console.log("upDateCustomer - error", response.status);
+    //console.log("upDateCustomer - error", response.status);
     showResult("Failed to update profile. Try again.", false);
     return false;
   }
@@ -240,8 +281,6 @@ async function upDatePassword(): Promise<boolean> {
   oPassword.currentPassword = oCustomer.currentPassword;
   oPassword.newPassword = oCustomer.newPassword;
 
-  console.log("oPassword", oPassword);
-
   //...................................................................
 
   const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/password`;
@@ -256,20 +295,16 @@ async function upDatePassword(): Promise<boolean> {
     body: JSON.stringify(oPassword),
   });
 
-  //console.log("upPassword>>await", response);
-
   if (response.status === 200) {
     const dataCustomer = await response.json();
     const sCustomer = JSON.stringify(dataCustomer);
 
-    console.log("upDate Password sCustomer", sCustomer);
-    localStorage.setItem("customer", sCustomer);
+   localStorage.setItem("customer", sCustomer);
 
     showResult(`Your data has been updated successfully.`, true);
 
     return true;
   } else {
-    console.log("upDatePassWord error", response.status);
     showResult("Failed to update profile. Try again.", false);
     return false;
   }
@@ -340,43 +375,95 @@ function isValidForm(aSections: IRegisterSection[]) {
 //   "addressId": "{{addressId}}"
 // }
 
+
+function getVal(pAddr : HTMLDivElement) {
+
+// let sError = ''
+// let flValid = true
+
+let address = {
+      streetName: "",
+      postalCode: "",
+      city: "",
+      country: "US",
+    }
+    const aInp = Array.from(pAddr.children)
+    aInp.forEach((i)=>{
+
+      // if (i.childNodes[1] ) {
+      //   sError = validField((i.childNodes[1] as HTMLInputElement).value, (i.childNodes[1] as HTMLInputElement).name);
+
+      //   if (sError) flValid = false;
+      //   if ((i.childNodes[1] as HTMLInputElement).nextElementSibling)
+      //    (i.childNodes[1] as HTMLInputElement).nextElementSibling.textContent = sError;
+      // }
+
+
+
+
+    switch ((i.childNodes[1] as HTMLInputElement).name){
+       case "city":
+        address.city = (i.childNodes[1] as HTMLInputElement).value
+        break;
+      case "street":
+        address.streetName = (i.childNodes[1] as HTMLInputElement).value
+        break;
+      case "postcode":
+        address.postalCode = (i.childNodes[1] as HTMLInputElement).value
+         break
+    }
+})
+
+return address
+  }
+
 //..........................................
-function isAddressChange() {
-  //const sLSCustomer = localStorage.getItem("customer");
-  let flChange = true;
-  // if (sLSCustomer) {
-  //   const oLSCustomer = JSON.parse(sLSCustomer);
-  //   if (
-  //   ) {
-  //     flChange = false;
-  //     document.querySelector(".profile__message-address")!.textContent = sNoChange;
-  //   }
-  // }
-  return flChange;
-}
+// function isAddressChange() {
+//   //const sLSCustomer = localStorage.getItem("customer");
+//   let flChange = true;
+//   // if (sLSCustomer) {
+//   //   const oLSCustomer = JSON.parse(sLSCustomer);
+//   //   if (
+//   //   ) {
+//   //     flChange = false;
+//   //     document.querySelector(".profile__message-address")!.textContent = sNoChange;
+//   //   }
+//   // }
+//   return flChange;
+// }
+
 
 //.......................................................
-async function upDateAddress(): Promise<boolean> {
-  const oAddress = {
+async function upDateAddress( addressIdVal:string, addressVal: IAddress): Promise<boolean> {
+
+  oCustomer = getCustomerVersion();
+  const oAddress  = {
+    version: 1,
+    actions: [
+  {
     action: "changeAddress",
-    addressId: "{{addressId}}",
+    addressId: "",
     address: {
       streetName: "",
       postalCode: "",
       city: "",
       country: "",
-    },
+    }}]
   };
-  // oPassword.id = oCustomer.id;
-  // oPassword.version = oCustomer.version;
-  // oPassword.currentPassword = oCustomer.currentPassword;
-  // oPassword.newPassword = oCustomer.newPassword;
 
-  console.log("oAddress", oAddress);
+  oAddress.version = oCustomer.version;
+  if( oAddress.actions[0]){
+  oAddress.actions[0].addressId = addressIdVal
+  oAddress.actions[0].address.streetName = addressVal.streetName
+  oAddress.actions[0].address.postalCode = addressVal.postalCode
+  oAddress.actions[0].address.city = addressVal.city
+  oAddress.actions[0].address.country = addressVal.country
+  }
+  //console.log("oAddress", oAddress);
 
   //...................................................................
 
-  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/password`;
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/${oCustomer.id}`;
   const token = await takeToken();
 
   const response = await fetch(urlApi, {
@@ -394,22 +481,109 @@ async function upDateAddress(): Promise<boolean> {
     const dataCustomer = await response.json();
     const sCustomer = JSON.stringify(dataCustomer);
 
-    console.log("upDate Password sCustomer", sCustomer);
+    // console.log("upDate Password sCustomer", sCustomer);
     localStorage.setItem("customer", sCustomer);
 
-    showResult(`Your data has been updated successfully.`, true);
+  //  showResult(`Your data has been updated successfully.`, true);
 
     return true;
   } else {
-    console.log("upDatePassWord error", response.status);
-    showResult("Failed to update profile. Try again.", false);
+    //console.log("upDatePassWord error", response.status);
+  //
+  //   showResult("Failed to update profile. Try again.", false);
     return false;
   }
 }
 
+//.......................................................
+export async function profileNewAddress() {
+  let oNewAddress: IAddress = {
+    streetName: "New street",
+    postalCode: "11111",
+    city: "New city",
+    country: "US",
+  };
+
+  if (await createNewAddress(oNewAddress))
+    showResult(`New address add successfully.`, true);
+  else showResult("Failed to add address. Try again.", false);
+
+
+  const pSection = document.querySelector('.profile__section-addresses') as HTMLElement
+  if  (pSection){
+    const classAdd = 'add-address' + qAddAddress++
+    addElement(pSection,'div',classAdd,'')
+    const sectionAddresses  = ReactDOM.createRoot(
+    document.querySelector(`.${classAdd}`) as HTMLElement
+    );
+    const pNewAddress = createProfileAddress()
+    sectionAddresses.render(pNewAddress);
+  }
+
+}
+
+//.......................................................
+function createProfileAddress(){
+
+  const aFields: IField[] =[
+       {
+            id: 21,
+            name: "country",
+            label: "Country",
+            type: "text",
+            placeholder: "US",
+            value: "",
+          },
+          {
+            id: 22,
+            name: "city",
+            label: "City",
+            type: "text",
+            placeholder: "Mycity",
+            value: "",
+          },
+          {
+            id: 23,
+            name: "street",
+            label: "Street",
+            type: "text",
+            placeholder: "Street1  272B",
+            value: "",
+          },
+          {
+            id: 24,
+            name: "postcode",
+            label: "Postal code",
+            type: "text",
+            placeholder: "654321",
+            value: "",
+          },
+  ]
+
+  const sLSCustomer = localStorage.getItem("customer");
+  let idAddress ='111'
+  if (sLSCustomer){
+    const oCustomer = JSON.parse(sLSCustomer);
+    idAddress =  oCustomer.addresses[oCustomer.addresses.length-1].id
+  }
+
+  return(
+  <div className="profile__address" key={idAddress}>
+          <ProfInfoAddress aFields={aFields} />
+          <button
+            className="profile__address-btn"
+            name={idAddress}
+            onClick={(e) => deleteAddress(e)}
+          >
+            Delete address
+          </button>
+        </div>
+  )
+}
+
 //.........................................................
-export async function createNewAddress() {
-  oCustomer = getCustomer();
+export async function createNewAddress(newAddress: IAddress): Promise<boolean> {
+  oCustomer = getCustomerVersion();
 
   let oAddAddress = {
     version: 0,
@@ -417,18 +591,23 @@ export async function createNewAddress() {
       {
         action: "addAddress",
         address: {
-          streetName: "Any Street",
-          streetNumber: "1337",
-          postalCode: "11111",
-          city: "Any City",
-          country: "US",
+          streetName: "",
+          postalCode: "",
+          city: "",
+          country: "",
         },
       },
     ],
   };
 
   oAddAddress.version = oCustomer.version;
-  console.log("oAddress", oAddAddress);
+  //console.log("oAddAddress", oAddAddress);
+  if (oAddAddress.actions[0]) {
+    oAddAddress.actions[0].address.country = newAddress.country;
+    oAddAddress.actions[0].address.city = newAddress.city;
+    oAddAddress.actions[0].address.streetName = newAddress.streetName;
+    oAddAddress.actions[0].address.postalCode = newAddress.postalCode;
+  }
 
   const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/${oCustomer.id}`;
   const token = await takeToken();
@@ -442,25 +621,84 @@ export async function createNewAddress() {
     body: JSON.stringify(oAddAddress),
   });
 
-  console.log("addAddress response", response);
+  //console.log("addAddress response", response);
 
-if (response.status === 200) {
+  if (response.status === 200) {
     const dataCustomer = await response.json();
-    console.log('add address dataCustomer', dataCustomer);
+    // console.log("add address dataCustomer", dataCustomer);
 
-    //const sCustomer = JSON.stringify(dataCustomer);
+    const sCustomer = JSON.stringify(dataCustomer);
 
-    // console.log('upDate sCustomer',sCustomer);
-    //localStorage.setItem("customer", sCustomer);
+    //console.log("addAddress sCustomer", sCustomer);
+    localStorage.setItem("customer", sCustomer);
 
-    showResult(`New address add successfully.`, true);
+    // showResult(`New address add successfully.`, true);
     // console.log("Your profile updated successful", data);
     return true;
   } else {
-    console.log("add address - error", response.status);
-    showResult("Failed to add address. Try again.", false);
+    //console.log("add address - error", response.status);
+    // showResult("Failed to add address. Try again.", false);
     return false;
   }
+}
 
+//.......................................
+export async function deleteAddress(
+  e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+) {
+  const pButton = e.target as HTMLButtonElement;
+  if (pButton.parentElement) pButton.parentElement.remove();
 
+  oCustomer = getCustomerVersion();
+
+  // let addressId = ''
+  // addressId = pButton.name
+  // console.log('addressId', addressId)
+
+  let oDelAddress = {
+    version: 0,
+    actions: [
+      {
+        action: "removeAddress",
+        addressId: "addressId",
+      },
+    ],
+  };
+
+  oDelAddress.version = oCustomer.version;
+  if (oDelAddress.actions[0]) oDelAddress.actions[0].addressId = pButton.name;
+  //console.log("oDelAddress", oDelAddress);
+
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/customers/${oCustomer.id}`;
+  const token = await takeToken();
+
+  const response = await fetch(urlApi, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(oDelAddress),
+  });
+
+  //console.log("delAddress response", response);
+
+  if (response.status === 200) {
+    const dataCustomer = await response.json();
+    //console.log("remove address dataCustomer", dataCustomer);
+
+    const sCustomer = JSON.stringify(dataCustomer);
+
+    //console.log("removeAddress sCustomer", sCustomer);
+    localStorage.setItem("customer", sCustomer);
+
+    // showResult(`New address add successfully.`, true);
+    // console.log("Your profile updated successful", data);
+
+    return true;
+  } else {
+    console.log("remove address - error", response.status);
+    // showResult("Failed to add address. Try again.", false);
+    return false;
+  }
 }

@@ -2,9 +2,10 @@ import { IPropsSection, IPropsInput } from "../Register/registerTypes";
 import { RegSelect } from "../Register/registerCreate";
 import { useState } from "react";
 import { changeHandler } from "./profileChange";
-import {deleteAddress} from "./profileAddresses.tsx"
-import {IPropsSectionAddress} from "./profileTypes.ts"
+import { deleteAddress } from "./profileSubmit.tsx";
+import { IPropsSectionAddress } from "./profileTypes.ts";
 
+//...............................................................
 export function CreateSection({ section }: IPropsSection) {
   return (
     <div className="profile__section">
@@ -65,29 +66,31 @@ function ProfInfo({ aFields }: IPropsInput) {
   );
 }
 
-
 //..................................................................
 export function CreateSectionAddress({ section }: IPropsSectionAddress) {
   return (
-    <div className="profile__section">
+    <div className="profile__section-addresses">
       <div className={section.title ? "profile__section-title" : ""}>
         <h3>{section.title}</h3>
       </div>
       {section.addresses.map((address) => (
-       <div className="profile__address">
-         <ProfInfoAddress aFields={address.aFields} />
-         <button className="profile__address-btn" onClick={deleteAddress} >
-                        Delete address
-                      </button>
-      </div>
- ))}
+        <div className="profile__address"  key={address.id}>
+          <ProfInfoAddress aFields={address.aFields} />
+          <button
+            className="profile__address-btn"
+            name={address.id}
+            onClick={(e) => deleteAddress(e)}
+          >
+            Delete address
+          </button>
+        </div>
+      ))}
     </div>
   );
 }
 
 //...................................................................
-function ProfInfoAddress({ aFields }: IPropsInput) {
-
+export function ProfInfoAddress({ aFields }: IPropsInput) {
   return (
     <div>
       {aFields.map((iField, i) => (
@@ -109,5 +112,3 @@ function ProfInfoAddress({ aFields }: IPropsInput) {
     </div>
   );
 }
-
-

@@ -63,6 +63,11 @@ export type Product = {
       value: {
         centAmount: number;
       };
+      discounted?: {
+        value: {
+          centAmount: number;
+        };
+      };
     }>;
     images?: Array<{
       url: string;
@@ -80,10 +85,12 @@ export type FormattedProduct = {
   name: Record<string, string>;
   description: Record<string, string>;
   price: number;
-  image: string | null;
+  discountedPrice?: number;
+  images: Array<{ url: string }> | null;
   attributes: {
+    size?: number[];
     shortDescription?: string;
-    [key: string]: string | number | boolean | undefined;
+    [key: string]: unknown;
   };
   categories: Array<{
     id: string;
@@ -95,6 +102,7 @@ export type CardProps = {
   image: string | null;
   name: Record<string, string>;
   price: number;
+  discountedPrice?: number;
   description?: Record<string, string>;
   // shortDescription?: Record<string, string>;
   shortDescription?: string;
@@ -115,3 +123,4 @@ export type Category = {
   description?: string;
 };
 
+export type SortOption = 'price-asc' | 'price-desc' | 'name-asc' | 'name-desc' | 'size-asc' | 'size-desc';
