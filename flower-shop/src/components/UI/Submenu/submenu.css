@@ -32,3 +32,21 @@ button.submenu__link:hover {
 .submenu__link.active {
   opacity: 1;
 }
+
+.quantity-goods{
+  min-width: 30px;
+  min-height: 30px;
+  padding: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 50%;
+  color: var(--color-cart-qg-txt);
+  background-color: var(--color-cart-qg-back);
+}
+
+.basket{
+  display: flex;
+  align-items: center;
+  /* gap: 5px; */
+}

@@ -3,7 +3,24 @@
   --color-txt: #ffffff;
   --color-footer-back: #4a4e37;
   --color-btnHover: #5b6145;
+
+  --color-r-title: #4a4e37;
+  --color-r-txt: #717171;
+  --color-r-back: #f2f2f2;
+  --color-r-prime: #717171;
+  --color-btn-txt: #ffffff;
+  --color-btn-back: #4a4e37;
+  --color-btn-back-hover: #5b6145;
+
+  --color-r-border: #d9d9d9;
+  --color-txt-alt: #075826;
+  --color-txt-mess: #75b38d;
+  --color-txt-err: #b95555;
+
+  --color-cart-qg-txt: #000000;
+  --color-cart-qg-back: #ffb749;
 }
+
 * {
   box-sizing: border-box;
   margin: 0;

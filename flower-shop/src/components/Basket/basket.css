@@ -1,0 +1,14 @@
+.basket__main {
+  min-height: 80vh;
+  padding: 50px 10px;
+}
+
+.basket {
+  font-family: Montserrat;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 10px;
+  background-position: center;
+  color: var(--color-r-txt);
+}
+

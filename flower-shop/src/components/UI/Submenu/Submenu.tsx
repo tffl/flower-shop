@@ -12,7 +12,9 @@ export const Submenu = ({ textColor, iconColor }: SubMenuProps) => {
   return (
     <ul className="submenu">
       <li className="submenu__item">
-        <Link className="submenu__basket" to="/">
+        <Link className="submenu__basket" to="/basket">
+        <div className="basket">
+         <div className="quantity-goods">0</div>
           <svg
             width="29"
             height="26"
@@ -26,6 +28,7 @@ export const Submenu = ({ textColor, iconColor }: SubMenuProps) => {
               stroke={iconColor}
             />
           </svg>
+          </div>
         </Link>
       </li>
       {isAuthenticated ? (

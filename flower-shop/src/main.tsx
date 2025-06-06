@@ -6,6 +6,7 @@ import { PageNotFound } from "./pages/pageNotFound";
 import { PageLogin } from "./pages/pageLogin";
 import { PageRegister } from "./pages/pageRegister";
 import { PageProfile } from "./pages/pageProfile";
+import { PageBasket } from "./pages/pageBasket";
 import { PageAbout } from "./pages/pageAbout";
 import { PageCatalog } from "./pages/pageCatalog";
 import { AuthProvider } from "./components/contexts/AuthContext";
@@ -26,6 +27,7 @@ root.render(
           <Route path="/profile" element={<PageProfile />} />
           <Route path="/about" element={<PageAbout />} />
           <Route path="/catalog" element={<PageCatalog />} />
+          <Route path="/basket" element={<PageBasket />} />
           <Route path="/" element={<PageHome />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
