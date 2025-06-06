@@ -23,7 +23,7 @@ export const Catalog = () => {
   }>({ mainCategories: [], subCategories: [] });
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [isMainCategory, setIsMainCategory] = useState<boolean>(true);
-  const [sortOption, setSortOption] = useState<SortOption>('price-asc');
+  const [sortOption, setSortOption] = useState<SortOption>("price-asc");
 
   useEffect(() => {
     const loadData = async () => {
@@ -35,7 +35,7 @@ export const Catalog = () => {
           }),
           fetchCategoryIds(),
         ]);
-        console.log(productsData.results)
+        console.log(productsData.results);
         setFormattedProducts(transformProducts(productsData.results));
         setCategories(categoriesData);
       } catch (error) {
@@ -47,10 +47,14 @@ export const Catalog = () => {
   }, []);
 
   const filteredProducts = useMemo(() => {
-    const filtered = filterByCategory(formattedProducts, activeCategoryId, isMainCategory);
+    const filtered = filterByCategory(
+      formattedProducts,
+      activeCategoryId,
+      isMainCategory,
+    );
     return sortProducts(filtered, sortOption);
-  }, [formattedProducts, activeCategoryId, isMainCategory,sortOption]);
-  
+  }, [formattedProducts, activeCategoryId, isMainCategory, sortOption]);
+
   const selectedProduct = formattedProducts.find(
     (product) => product.id === productId,
   );

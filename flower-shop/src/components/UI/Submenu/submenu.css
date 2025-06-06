@@ -33,7 +33,7 @@ button.submenu__link:hover {
   opacity: 1;
 }
 
-.quantity-goods{
+.quantity-goods {
   min-width: 30px;
   min-height: 30px;
   padding: 4px;
@@ -45,7 +45,7 @@ button.submenu__link:hover {
   background-color: var(--color-cart-qg-back);
 }
 
-.basket{
+.basket {
   display: flex;
   align-items: center;
   /* gap: 5px; */
