@@ -26,10 +26,12 @@ export const Card = ({
       </div>
       <h3 className="card__name">{name["en-US"]}</h3>
       <div className="card__price">
-      {discountedPrice ? (
+        {discountedPrice ? (
           <>
-            <span style={{ textDecoration: 'line-through' }}>{price} USD</span>
-            <span style={{ color: 'red', marginLeft: '8px' }}>{discountedPrice} USD</span>
+            <span style={{ textDecoration: "line-through" }}>{price} USD</span>
+            <span style={{ color: "red", marginLeft: "8px" }}>
+              {discountedPrice} USD
+            </span>
           </>
         ) : (
           <span>{price} USD</span>
