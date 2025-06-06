@@ -4,17 +4,17 @@
   display: flex;
   flex-direction: column;
   background-color: var(--color-footer-back);
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
 }
 
 .footer__wrapper {
   width: 100%;
   display: flex;
-  /* gap: 20px; */
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   padding: 40px 120px;
+  font-size: 1.5rem;
 }
 
 .footer__logo {
@@ -49,6 +49,7 @@
 @media (max-width: 950px) {
   .footer__wrapper {
     padding: 29px 70px;
+    font-size: 1rem;
   }
 }
 @media (max-width: 850px) {
