@@ -3,11 +3,21 @@
   padding: 50px 10px;
 }
 
-.basket {
+.basket__content {
   font-family: Montserrat;
   max-width: 800px;
+  min-height: 400px;
   margin: 20px auto;
   padding: 10px;
   background-position: center;
   color: var(--color-r-txt);
+}
+
+.basket__total {
+  font-size: 2.2rem;
+  line-height: 200%;
+}
+
+.basket__txt-mark {
+  color: var(--color-basket-txt-mark);
 }
