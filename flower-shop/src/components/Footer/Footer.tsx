@@ -9,6 +9,7 @@ export const Footer = () => {
           alt="logo schools"
         />
         <div className="footer__contacts"></div>
+        <p className="footer__txt">This is a non-commercial project built for educational purposes.</p>
         <p className="footer__txt">2025</p>
       </div>
     </footer>
