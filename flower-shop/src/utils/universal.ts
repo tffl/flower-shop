@@ -24,7 +24,7 @@ export async function executeApiRequest(params: ApiRequestParams) {
   };
 
   if (isAuthRequest) {
-    console.log("тут");
+    // console.log("тут");
     const authString = btoa(
       `${import.meta.env.VITE_CTP_CLIENT_ID}:${import.meta.env.VITE_CTP_CLIENT_SECRET}`,
     );

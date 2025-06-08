@@ -9,6 +9,8 @@ import { fetchCategoryIds } from "../../utils/categories";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import "./catalog.css";
 import { sortProducts } from "../../utils/sort";
+import { Pagination } from "../Pagination/Pagination";
+
 
 export const Catalog = () => {
   const [params] = useSearchParams();
@@ -24,6 +26,9 @@ export const Catalog = () => {
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [isMainCategory, setIsMainCategory] = useState<boolean>(true);
   const [sortOption, setSortOption] = useState<SortOption>("price-asc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalProducts, setTotalProducts] = useState(0);
+const productsPerPage = 9
 
   useEffect(() => {
     const loadData = async () => {
@@ -31,20 +36,24 @@ export const Catalog = () => {
         const [productsData, categoriesData] = await Promise.all([
           executeApiRequest({
             endpoint: "product-projections",
-            query: { limit: "20" },
+            query: {
+              limit: productsPerPage.toString(),
+              offset: ((currentPage - 1) * productsPerPage).toString()
+            },
           }),
           fetchCategoryIds(),
         ]);
         console.log(productsData.results);
         setFormattedProducts(transformProducts(productsData.results));
         setCategories(categoriesData);
+        setTotalProducts(productsData.total || 0);
       } catch (error) {
         console.error("Error loading data:", error);
       }
     };
 
     loadData();
-  }, []);
+  }, [totalProducts, productsPerPage]);
 
   const filteredProducts = useMemo(() => {
     const filtered = filterByCategory(
@@ -63,6 +72,7 @@ export const Catalog = () => {
     // console.log(categoryId)
     setActiveCategoryId(categoryId);
     setIsMainCategory(isMain);
+    setTotalProducts(1);
   };
 
   return (
@@ -200,6 +210,12 @@ export const Catalog = () => {
             />
           ))}
         </div>
+        <Pagination
+      currentPage={currentPage}
+      totalItems={totalProducts}
+      itemsPerPage={productsPerPage}
+      onPageChange={setCurrentPage}
+    />
       </div>
       {productId && selectedProduct && (
         <DetailedCard
