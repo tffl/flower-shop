@@ -1,6 +1,8 @@
 import { CardProps } from "../../types/types";
 import { Button } from "../UI/Button/Button";
 import { useNavigate } from "react-router-dom";
+import {addCart} from "../Basket/APICart.ts"
+
 import "./card.css";
 export const Card = ({
   id,
@@ -40,6 +42,11 @@ export const Card = ({
       <div className="card__description">{shortDescription}</div>
       <Button className="card__btn" onClick={handleClick}>
         more details...
+      </Button>
+
+
+      <Button className="add__btn" onClick={(e) => addCart(e, id)}>
+       add to cart
       </Button>
     </div>
   );
