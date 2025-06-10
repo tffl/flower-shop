@@ -45,7 +45,7 @@ export const Card = ({
       </Button>
 
 
-      <Button className="add__btn" onClick={(e) => addCart(e, id)}>
+      <Button className="add__btn" onClick={(e) => addCart(e, id, image)}>
        add to cart
       </Button>
     </div>

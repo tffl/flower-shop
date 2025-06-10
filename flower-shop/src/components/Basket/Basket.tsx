@@ -2,97 +2,63 @@ import "./basket.css";
 import { Link } from "react-router-dom";
 import { Button } from "../UI/Button/Button.tsx";
 import { BasketCard } from "./basketProduct";
-import { IBasketProduct } from "./basketTypes.ts";
-import {createCart} from "./APICart.ts"
+import { IBasketProduct, IProductImages} from "./basketTypes.ts";
+import { createCart } from "./APICart.ts";
 
 let goodsQuantityAll = 0;
 let goodsCostAll = 0;
-let cartId = '';
+let cartId = "";
 
 //................................................................
 export const Main = () => {
 
+  let aImages: IProductImages[] = []
+  let sImages: string | null = ''
+
+  sImages = localStorage.getItem('Images')
+  if (sImages) aImages = JSON.parse(sImages);
+  console.log (aImages)
+
   goodsQuantityAll = 0;
   goodsCostAll = 0;
+  const aProducts: IBasketProduct[] = [];
 
-  let sCart: string | null = ''
-  sCart =  localStorage.getItem("Cart")
+  let sCart: string | null = "";
+  sCart = localStorage.getItem("Cart");
 
-  console.log('sCart <<<<< LS ', sCart)
-
-  if (sCart === undefined || sCart === 'undefined') {
+  if (sCart === undefined || sCart === "undefined") {
     createCart();
-   sCart =  localStorage.getItem("Cart")
+    sCart = localStorage.getItem("Cart");
   }
 
-  if(sCart){
-
-    //console.log('sCart+++', sCart)
+  if (sCart) {
     const oCart = JSON.parse(sCart);
+    console.log("oCart:", oCart);
 
-    console.log ('oCart++++++++++++',oCart)
+    cartId = oCart.id;
 
-    cartId = oCart.id
+    goodsQuantityAll = oCart.lineItems.reduce(
+      (sum: number, iItem: any) => sum + iItem.quantity,
+      0,
+    );
+    goodsCostAll = oCart.totalPrice.centAmount / 100;
 
-    console.log ('cartId', cartId)
-    goodsQuantityAll =  oCart.lineItems.reduce((sum: number, iItem: number) => (sum + iItem.quantity), 0)  //calculateTotalQuantity(oCart.lineItems);
-    goodsCostAll =  oCart.totalPrice.centAmount //calculateTotalCost();
+    for (let i = 0; i < oCart.lineItems.length; i++) {
+      aProducts[i] = {
+        id: oCart.lineItems[i].productId,
+        name: oCart.lineItems[i].name["en-US"],
+        price: oCart.lineItems[i].price.value.centAmount / 100,
+        quantity: oCart.lineItems[i].quantity,
+        image: "img/flowers/image2.png",
+      };
 
+      aImages.forEach((val) =>{
+      if (aProducts[i] && val && val.image && val.id === aProducts[i].id)
+        aProducts[i].image = val.image
+      })
+    }
+    console.log(aProducts);
   }
-
-  console.log ('Q:', goodsQuantityAll, goodsCostAll)
-
-  const aProducts: IBasketProduct[] = [
-    {
-      id: 1,
-      name: "product-1",
-      image: "img/flowers/image1.png",
-      price: 22.3,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: "product-2",
-      image: "img/flowers/image2.png",
-      price: 24.1,
-      quantity: 2,
-    },
-    {
-      id: 3,
-      name: "product-3",
-      image: "img/flowers/image3.png",
-      price: 25.3,
-      quantity: 1,
-    },
-    {
-      id: 4,
-      name: "product-4",
-      image: "img/flowers/image2.png",
-      price: 18.6,
-      quantity: 4,
-    },
-    {
-      id: 5,
-      name: "product-5",
-      image: "img/flowers/image3.png",
-      price: 21.7,
-      quantity: 5,
-    },
-    {
-      id: 6,
-      name: "product-6",
-      image: "img/flowers/image1.png",
-      price: 22.5,
-      quantity: 2,
-    },
-    {
-      id: 7,
-      name: "product-7",
-      image: "img/flowers/image2.png",
-      price: 24.1,
-      quantity: 1,
-    },
-  ];
 
   //.................................................................
   return (
@@ -157,17 +123,8 @@ export const Main = () => {
       </div>
     </div>
   );
-};
 
-//..............................................
-// function calculateTotalCost() {
-//   return 247.53;
-// }
-
-//..............................................
-// function calculateTotalQuantity(aItems: ILineItems[]) {
-//   return 7;
-// }
+}
 
 //..............................................
 function basketPromocode() {}
