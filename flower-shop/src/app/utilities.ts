@@ -13,20 +13,20 @@ export function addElement(
   return pElement;
 }
 
-export function addImgElement(
-  pParent: HTMLElement,
-  eClass: string,
-  eSrc: string,
-  eAlt: string,
-): HTMLImageElement {
-  const pElement = document.createElement("img");
-  pParent.appendChild(pElement);
-  if (eClass) pElement.classList.add(eClass);
-  if (eSrc) pElement.src = eSrc;
-  if (eAlt) pElement.alt = eAlt;
+// export function addImgElement(
+//   pParent: HTMLElement,
+//   eClass: string,
+//   eSrc: string,
+//   eAlt: string,
+// ): HTMLImageElement {
+//   const pElement = document.createElement("img");
+//   pParent.appendChild(pElement);
+//   if (eClass) pElement.classList.add(eClass);
+//   if (eSrc) pElement.src = eSrc;
+//   if (eAlt) pElement.alt = eAlt;
 
-  return pElement;
-}
+//   return pElement;
+// }
 
 export function buildScopeString(scopeKeys: ScopeKey[]): string {
   return scopeKeys.map((key) => `${APP_SCOPES[key]}`).join(" ");
