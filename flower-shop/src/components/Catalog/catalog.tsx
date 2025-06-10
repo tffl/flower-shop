@@ -16,9 +16,9 @@ export const Catalog = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const productId = params.get("productId");
-  const [formattedProducts, setFormattedProducts] = useState<
-    FormattedProduct[]
-  >([]);
+  // const [formattedProducts, setFormattedProducts] = useState<
+  //   FormattedProduct[]
+  // >([]);
   const [categories, setCategories] = useState<{
     mainCategories: string[];
     subCategories: string[];
@@ -27,8 +27,8 @@ export const Catalog = () => {
   const [isMainCategory, setIsMainCategory] = useState<boolean>(true);
   const [sortOption, setSortOption] = useState<SortOption>("price-asc");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalProducts, setTotalProducts] = useState(0);
-const productsPerPage = 9
+  const [allProducts, setAllProducts] = useState<FormattedProduct[]>([]);
+  const productsPerPage = 9
 
   useEffect(() => {
     const loadData = async () => {
@@ -37,43 +37,43 @@ const productsPerPage = 9
           executeApiRequest({
             endpoint: "product-projections",
             query: {
-              limit: productsPerPage.toString(),
-              offset: ((currentPage - 1) * productsPerPage).toString()
+              limit: "500", 
+              nocache: Date.now().toString()
             },
           }),
           fetchCategoryIds(),
         ]);
-        console.log(productsData.results);
-        setFormattedProducts(transformProducts(productsData.results));
+        
+        setAllProducts(transformProducts(productsData.results));
         setCategories(categoriesData);
-        setTotalProducts(productsData.total || 0);
       } catch (error) {
         console.error("Error loading data:", error);
       }
     };
-
+  
     loadData();
-  }, [totalProducts, productsPerPage]);
+  }, []);
 
-  const filteredProducts = useMemo(() => {
-    const filtered = filterByCategory(
-      formattedProducts,
-      activeCategoryId,
-      isMainCategory,
-    );
-    return sortProducts(filtered, sortOption);
-  }, [formattedProducts, activeCategoryId, isMainCategory, sortOption]);
-
-  const selectedProduct = formattedProducts.find(
-    (product) => product.id === productId,
-  );
-
-  const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
-    // console.log(categoryId)
-    setActiveCategoryId(categoryId);
-    setIsMainCategory(isMain);
-    setTotalProducts(1);
+  const { filteredProducts, totalFiltered } = useMemo(() => {
+    const filtered = filterByCategory(allProducts, activeCategoryId, isMainCategory);
+        
+    const sorted = sortProducts(filtered, sortOption);
+  
+  const startIdx = (currentPage - 1) * productsPerPage;
+  const paginated = sorted.slice(startIdx, startIdx + productsPerPage);
+  
+  return {
+    filteredProducts: paginated,
+    totalFiltered: filtered.length
   };
+}, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage]);
+  
+const selectedProduct = allProducts.find((product) => product.id === productId);
+const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
+  setActiveCategoryId(categoryId);
+  setIsMainCategory(isMain);
+  setCurrentPage(1); 
+};
 
   return (
     <div className="catalog">
@@ -200,7 +200,7 @@ const productsPerPage = 9
         <div className="catalog__list list">
           {filteredProducts.map((product) => (
             <Card
-              key={product.id}
+              key={`${product.id}-${currentPage}`}
               id={product.id}
               image={product.images?.[0]?.url || null}
               name={product.name}
@@ -211,11 +211,11 @@ const productsPerPage = 9
           ))}
         </div>
         <Pagination
-      currentPage={currentPage}
-      totalItems={totalProducts}
-      itemsPerPage={productsPerPage}
-      onPageChange={setCurrentPage}
-    />
+  currentPage={currentPage}
+  totalItems={totalFiltered} 
+  itemsPerPage={productsPerPage}
+  onPageChange={setCurrentPage}
+/>
       </div>
       {productId && selectedProduct && (
         <DetailedCard
