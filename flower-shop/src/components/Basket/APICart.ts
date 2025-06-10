@@ -1,11 +1,7 @@
 import { getToken } from "../../utils/token";
-import { IProductImages} from "./basketTypes";
+import { IProductImages } from "./basketTypes";
 
 export async function createCart() {
-  // : Promise<boolean>
-
-  //console.log('createCart <<<<<<<<<<<<<<<')
-
   const oNewCart = {
     currency: "USD",
     country: "US",
@@ -14,15 +10,12 @@ export async function createCart() {
   const urlApi =
     "https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts";
 
-  // const BEARER_TOKEN = localStorage.getItem("token");
   const tokenResponse = await getToken();
   const token = tokenResponse.access_token;
 
+  console.log("create-------", token);
+
   localStorage.setItem("Token", token);
-
-  // console.log('create token~~~~~', token);
-
-  //const token = await takeToken();
 
   const response = await fetch(urlApi, {
     method: "POST",
@@ -35,8 +28,6 @@ export async function createCart() {
 
   if (response.status === 201) {
     const dataCart = await response.json();
-    // console.log('createCart >>>>>>>>>>>>>>>>', dataCart);
-
     const sCart = JSON.stringify(dataCart);
     localStorage.setItem("Cart", sCart);
   } else {
@@ -48,22 +39,17 @@ export async function createCart() {
 
 //.........................................................................
 export async function addCart(
-  e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  // e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   id: string,
   image: string | null,
-)
+) {
+  //console.log(e.target);
 
-{
+  let aImages: IProductImages[] = [];
+  let sImages: string | null = "";
 
-  console.log(e.target);
-  console.log('add<<<', id, image)
-  let aImages: IProductImages[] = []
-  let sImages: string | null = ''
-
-  sImages = localStorage.getItem('Images')
- //console.log(sImages)
- if (sImages) aImages = JSON.parse(sImages);
- console.log('mImages <<', aImages )
+  sImages = localStorage.getItem("Images");
+  if (sImages) aImages = JSON.parse(sImages);
 
   const oAddProductCart = {
     version: 1,
@@ -79,17 +65,15 @@ export async function addCart(
 
   let cartId = "";
 
+  let sCart: string | null = "";
+  sCart = localStorage.getItem("Cart");
 
-  // let sCart: string | null = "";
-  // sCart = localStorage.getItem("Cart");
+  if (sCart === undefined || sCart === "undefined" || sCart === null) {
+    await createCart();
+    sCart = localStorage.getItem("Cart");
+  }
 
-  // if (sCart === undefined || sCart === "undefined") {
-  //   createCart();
-  //   sCart = localStorage.getItem("Cart");
-  // }
-
-
-  const sCart = localStorage.getItem("Cart");
+  //  const sCart = localStorage.getItem("Cart");
 
   if (sCart) {
     const oCart = JSON.parse(sCart);
@@ -98,11 +82,8 @@ export async function addCart(
   }
 
   if (oAddProductCart.actions[0]) oAddProductCart.actions[0].productId = id;
-  console.log ('productId<<<', id)
-  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts/${cartId}`;
 
-  //  const tokenResponse = await getToken();
-  //   const token = tokenResponse.access_token
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts/${cartId}`;
 
   const token = localStorage.getItem("Token");
 
@@ -117,19 +98,22 @@ export async function addCart(
 
   if (response.status === 200) {
     const dataCart = await response.json();
-    console.log ('dataCart', dataCart)
+    //console.log ('dataCart', dataCart)
 
     const sCart = JSON.stringify(dataCart);
     localStorage.setItem("Cart", sCart);
 
-    //mImages.set(id, image)
-    aImages[aImages.length] = {id: id, image: image}
+    aImages[aImages.length] = { id: id, image: image };
 
-    console.log ('aImages>>>', id, image, aImages )
     sImages = JSON.stringify(aImages);
-    localStorage.setItem('Images', sImages)
+    localStorage.setItem("Images", sImages);
 
+    const pCartQuantity = document.querySelector(".quantity-goods");
+    if (pCartQuantity) {
+      let goodQuantity = Number(pCartQuantity.textContent) + 1;
+      pCartQuantity.textContent = "" + goodQuantity;
+    }
   } else {
-    console.log("addCart - error", response.status);
+    console.log("add Product to Cart - error", response.status);
   }
 }

@@ -14,7 +14,7 @@ export function BasketCard(product: IPropsProduct) {
         type="number"
         defaultValue={product.product.quantity}
         min="1"
-        max="55"
+        max="25"
       ></input>
       <Button
         className="card__delete-btn"
@@ -27,6 +27,7 @@ export function BasketCard(product: IPropsProduct) {
   );
 }
 
+//..........................................................................
 function deleteProduct(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
   const pButton = e.target as HTMLButtonElement;
   if (pButton.parentElement) pButton.parentElement.remove();
