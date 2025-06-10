@@ -7,7 +7,7 @@ import { createCart } from "./APICart.ts";
 
 let goodsQuantityAll = 0;
 let goodsCostAll = 0;
-let cartId = "";
+//let cartId = "";
 
 //................................................................
 export const Main = () => {
@@ -35,7 +35,7 @@ export const Main = () => {
     const oCart = JSON.parse(sCart);
     console.log("oCart:", oCart);
 
-    cartId = oCart.id;
+   // let cartId = oCart.id;
 
     goodsQuantityAll = oCart.lineItems.reduce(
       (sum: number, iItem: any) => sum + iItem.quantity,
@@ -52,9 +52,10 @@ export const Main = () => {
         image: "img/flowers/image2.png",
       };
 
+
       aImages.forEach((val) =>{
-      if (aProducts[i] && val && val.image && val.id === aProducts[i].id)
-        aProducts[i].image = val.image
+      if (aProducts[i] && val && val.image && val.id === aProducts[i]!.id)
+        aProducts[i]!.image = val.image
       })
     }
     console.log(aProducts);
