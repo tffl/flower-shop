@@ -49,7 +49,7 @@
 }
 
 .card__img {
-  width: 200px;
+  width: 100%;
 }
 
 .card__delete-btn {

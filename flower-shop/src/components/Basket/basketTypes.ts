@@ -18,5 +18,5 @@ export interface ILineItems {
 
 export interface IProductImages {
   id: string;
-  image : string| null;
+  image: string | null;
 }
