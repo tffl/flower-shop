@@ -9,14 +9,16 @@ import { fetchCategoryIds } from "../../utils/categories";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import "./catalog.css";
 import { sortProducts } from "../../utils/sort";
+import { Pagination } from "../Pagination/Pagination";
+
 
 export const Catalog = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const productId = params.get("productId");
-  const [formattedProducts, setFormattedProducts] = useState<
-    FormattedProduct[]
-  >([]);
+  // const [formattedProducts, setFormattedProducts] = useState<
+  //   FormattedProduct[]
+  // >([]);
   const [categories, setCategories] = useState<{
     mainCategories: string[];
     subCategories: string[];
@@ -24,6 +26,9 @@ export const Catalog = () => {
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [isMainCategory, setIsMainCategory] = useState<boolean>(true);
   const [sortOption, setSortOption] = useState<SortOption>("price-asc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [allProducts, setAllProducts] = useState<FormattedProduct[]>([]);
+  const productsPerPage = 9
 
   useEffect(() => {
     const loadData = async () => {
@@ -31,39 +36,44 @@ export const Catalog = () => {
         const [productsData, categoriesData] = await Promise.all([
           executeApiRequest({
             endpoint: "product-projections",
-            query: { limit: "20" },
+            query: {
+              limit: "500", 
+              nocache: Date.now().toString()
+            },
           }),
           fetchCategoryIds(),
         ]);
-        console.log(productsData.results);
-        setFormattedProducts(transformProducts(productsData.results));
+        
+        setAllProducts(transformProducts(productsData.results));
         setCategories(categoriesData);
       } catch (error) {
         console.error("Error loading data:", error);
       }
     };
-
+  
     loadData();
   }, []);
 
-  const filteredProducts = useMemo(() => {
-    const filtered = filterByCategory(
-      formattedProducts,
-      activeCategoryId,
-      isMainCategory,
-    );
-    return sortProducts(filtered, sortOption);
-  }, [formattedProducts, activeCategoryId, isMainCategory, sortOption]);
-
-  const selectedProduct = formattedProducts.find(
-    (product) => product.id === productId,
-  );
-
-  const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
-    // console.log(categoryId)
-    setActiveCategoryId(categoryId);
-    setIsMainCategory(isMain);
+  const { filteredProducts, totalFiltered } = useMemo(() => {
+    const filtered = filterByCategory(allProducts, activeCategoryId, isMainCategory);
+        
+    const sorted = sortProducts(filtered, sortOption);
+  
+  const startIdx = (currentPage - 1) * productsPerPage;
+  const paginated = sorted.slice(startIdx, startIdx + productsPerPage);
+  
+  return {
+    filteredProducts: paginated,
+    totalFiltered: filtered.length
   };
+}, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage]);
+  
+const selectedProduct = allProducts.find((product) => product.id === productId);
+const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
+  setActiveCategoryId(categoryId);
+  setIsMainCategory(isMain);
+  setCurrentPage(1); 
+};
 
   return (
     <div className="catalog">
@@ -190,7 +200,7 @@ export const Catalog = () => {
         <div className="catalog__list list">
           {filteredProducts.map((product) => (
             <Card
-              key={product.id}
+              key={`${product.id}-${currentPage}`}
               id={product.id}
               image={product.images?.[0]?.url || null}
               name={product.name}
@@ -200,6 +210,12 @@ export const Catalog = () => {
             />
           ))}
         </div>
+        <Pagination
+  currentPage={currentPage}
+  totalItems={totalFiltered} 
+  itemsPerPage={productsPerPage}
+  onPageChange={setCurrentPage}
+/>
       </div>
       {productId && selectedProduct && (
         <DetailedCard
