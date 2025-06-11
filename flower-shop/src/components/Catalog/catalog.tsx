@@ -10,7 +10,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import "./catalog.css";
 import { sortProducts } from "../../utils/sort";
 import { Pagination } from "../Pagination/Pagination";
-
+import { Loader } from "../UI/loader/Loader";
 
 export const Catalog = () => {
   const [params] = useSearchParams();
@@ -28,52 +28,63 @@ export const Catalog = () => {
   const [sortOption, setSortOption] = useState<SortOption>("price-asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [allProducts, setAllProducts] = useState<FormattedProduct[]>([]);
-  const productsPerPage = 9
+  const [isLoading, setIsLoading] = useState(true);
+  const productsPerPage = 9;
 
   useEffect(() => {
     const loadData = async () => {
       try {
+        setIsLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         const [productsData, categoriesData] = await Promise.all([
           executeApiRequest({
             endpoint: "product-projections",
             query: {
-              limit: "500", 
-              nocache: Date.now().toString()
+              limit: "500",
+              nocache: Date.now().toString(),
             },
           }),
           fetchCategoryIds(),
         ]);
-        
+
         setAllProducts(transformProducts(productsData.results));
         setCategories(categoriesData);
       } catch (error) {
         console.error("Error loading data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
-  
+
     loadData();
   }, []);
 
   const { filteredProducts, totalFiltered } = useMemo(() => {
-    const filtered = filterByCategory(allProducts, activeCategoryId, isMainCategory);
-        
+    const filtered = filterByCategory(
+      allProducts,
+      activeCategoryId,
+      isMainCategory,
+    );
+
     const sorted = sortProducts(filtered, sortOption);
-  
-  const startIdx = (currentPage - 1) * productsPerPage;
-  const paginated = sorted.slice(startIdx, startIdx + productsPerPage);
-  
-  return {
-    filteredProducts: paginated,
-    totalFiltered: filtered.length
+
+    const startIdx = (currentPage - 1) * productsPerPage;
+    const paginated = sorted.slice(startIdx, startIdx + productsPerPage);
+
+    return {
+      filteredProducts: paginated,
+      totalFiltered: filtered.length,
+    };
+  }, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage]);
+
+  const selectedProduct = allProducts.find(
+    (product) => product.id === productId,
+  );
+  const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
+    setActiveCategoryId(categoryId);
+    setIsMainCategory(isMain);
+    setCurrentPage(1);
   };
-}, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage]);
-  
-const selectedProduct = allProducts.find((product) => product.id === productId);
-const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
-  setActiveCategoryId(categoryId);
-  setIsMainCategory(isMain);
-  setCurrentPage(1); 
-};
 
   return (
     <div className="catalog">
@@ -197,25 +208,33 @@ const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
             <option value="size-desc">Size (Large to Small)</option>
           </select>
         </div>
-        <div className="catalog__list list">
-          {filteredProducts.map((product) => (
-            <Card
-              key={`${product.id}-${currentPage}`}
-              id={product.id}
-              image={product.images?.[0]?.url || null}
-              name={product.name}
-              price={product.price}
-              discountedPrice={product.discountedPrice}
-              shortDescription={product.attributes.shortDescription}
+        {isLoading ? (
+          <div className="catalog__loader-container">
+            <Loader />
+          </div>
+        ) : (
+          <>
+            <div className="catalog__list list">
+              {filteredProducts.map((product) => (
+                <Card
+                  key={`${product.id}-${currentPage}`}
+                  id={product.id}
+                  image={product.images?.[0]?.url || null}
+                  name={product.name}
+                  price={product.price}
+                  discountedPrice={product.discountedPrice}
+                  shortDescription={product.attributes.shortDescription}
+                />
+              ))}
+            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalItems={totalFiltered}
+              itemsPerPage={productsPerPage}
+              onPageChange={setCurrentPage}
             />
-          ))}
-        </div>
-        <Pagination
-  currentPage={currentPage}
-  totalItems={totalFiltered} 
-  itemsPerPage={productsPerPage}
-  onPageChange={setCurrentPage}
-/>
+          </>
+        )}
       </div>
       {productId && selectedProduct && (
         <DetailedCard

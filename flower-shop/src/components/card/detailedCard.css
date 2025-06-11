@@ -45,7 +45,7 @@
 @media (max-width: 650px) {
   .detailed-card_content {
     flex-direction: column;
-    align-items:center;
+    align-items: center;
   }
 }
 .detailed-card_images,
