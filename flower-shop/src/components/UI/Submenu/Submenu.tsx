@@ -14,7 +14,7 @@ export const Submenu = ({ textColor, iconColor }: SubMenuProps) => {
       <li className="submenu__item">
         <Link className="submenu__basket" to="/basket">
           <div className="basket">
-            <div className="quantity-goods">0</div>
+            <div className="quantity-goods"></div>
             <svg
               width="29"
               height="26"

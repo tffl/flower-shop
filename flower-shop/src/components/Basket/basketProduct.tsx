@@ -1,6 +1,8 @@
 import { IPropsProduct } from "./basketTypes.ts";
 import { Button } from "../UI/Button/Button.tsx";
+import {updateCartQuantity} from './APICart.ts'
 
+//...........................................................
 export function BasketCard(product: IPropsProduct) {
   return (
     <div className="good-card" key={product.product.id}>
@@ -11,10 +13,12 @@ export function BasketCard(product: IPropsProduct) {
       <p>${product.product.price}</p>
       <input
         className="card__count"
+        name={product.product.id}
         type="number"
         defaultValue={product.product.quantity}
         min="1"
         max="25"
+        onChange={(e) => updateQuantity(e)}
       ></input>
       <Button
         className="card__delete-btn"
@@ -28,7 +32,42 @@ export function BasketCard(product: IPropsProduct) {
 }
 
 //..........................................................................
-function deleteProduct(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+async function deleteProduct(
+  e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+) {
   const pButton = e.target as HTMLButtonElement;
   if (pButton.parentElement) pButton.parentElement.remove();
+
+  // {
+  //   "action": "removeLineItem",
+  //   "lineItemId": "{{lineItemId}}",
+  //   "quantity": 1,
+  //   "externalPrice": {
+  //     "currencyCode": "EUR",
+  //     "centAmount": 4000
+  //   },
+  //   "shippingDetailsToRemove": {
+  //     "targets": [
+  //       {
+  //         "addressKey": "AddressKeyStringFromAddress",
+  //         "quantity": 2
+  //       }
+  //     ]
+  //   }
+  // }
+}
+
+//.........................................................................
+async function updateQuantity(e: React.ChangeEvent<HTMLInputElement>) {
+
+  console.log(e);
+
+  const pInput = e.target as HTMLInputElement;
+  let productCount = 0
+  if(pInput) productCount = Number(pInput.value)
+
+  let itemId = e.target.name
+  updateCartQuantity(itemId, productCount)
+
+  //  if (pCartQuantity) pCartQuantity.innerHTML = goodsQuantityAll.toString();
 }
