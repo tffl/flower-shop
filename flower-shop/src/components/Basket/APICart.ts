@@ -97,7 +97,7 @@ export async function addCart(
 
   if (response.status === 200) {
     const dataCart = await response.json();
-    console.log (' addCart - 200', dataCart)
+    console.log(" addCart - 200", dataCart);
 
     const goodsQuantity = dataCart.lineItems.reduce(
       (sum: number, iItem: any) => sum + iItem.quantity,
@@ -113,9 +113,7 @@ export async function addCart(
     localStorage.setItem("Images", sImages);
 
     const pCartQuantity = document.querySelector(".quantity-goods");
-    if (pCartQuantity)
-       pCartQuantity.textContent = "" + goodsQuantity;
-
+    if (pCartQuantity) pCartQuantity.textContent = "" + goodsQuantity;
   } else {
     console.log("add Product to Cart - error", response.status);
   }
@@ -123,8 +121,7 @@ export async function addCart(
 
 //........................................................................
 export async function updateCartQuantity(Id: string, newQuantity: number) {
-
-  console.log('updateCartQuantity<<<', Id, newQuantity)
+  console.log("updateCartQuantity<<<", Id, newQuantity);
   const oAddProductCart = {
     version: 1,
     actions: [
@@ -176,15 +173,11 @@ export async function updateCartQuantity(Id: string, newQuantity: number) {
     if (pCartQuantity) pCartQuantity.textContent = goodsQuantity.toString();
 
     const pSum = document.querySelector(".basket__total-cost");
-    if (pSum) pSum.textContent = `$${(dataCart.totalPrice.centAmount / 100)}`;
+    if (pSum) pSum.textContent = `$${dataCart.totalPrice.centAmount / 100}`;
 
     const pQuant = document.querySelector(".basket__total-quantity");
     if (pQuant) pQuant.textContent = goodsQuantity.toString();
-
-
-  }
-
-  else{
+  } else {
     console.log("upDateCart -error", response);
   }
 }

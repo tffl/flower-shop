@@ -11,7 +11,6 @@ import "./catalog.css";
 import { sortProducts } from "../../utils/sort";
 import { Pagination } from "../Pagination/Pagination";
 
-
 export const Catalog = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ export const Catalog = () => {
   const [sortOption, setSortOption] = useState<SortOption>("price-asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [allProducts, setAllProducts] = useState<FormattedProduct[]>([]);
-  const productsPerPage = 9
+  const productsPerPage = 9;
 
   useEffect(() => {
     const loadData = async () => {
@@ -37,43 +36,49 @@ export const Catalog = () => {
           executeApiRequest({
             endpoint: "product-projections",
             query: {
-              limit: "500", 
-              nocache: Date.now().toString()
+              limit: "500",
+              nocache: Date.now().toString(),
             },
           }),
           fetchCategoryIds(),
         ]);
-        
+
         setAllProducts(transformProducts(productsData.results));
         setCategories(categoriesData);
       } catch (error) {
         console.error("Error loading data:", error);
       }
     };
-  
+
     loadData();
   }, []);
 
   const { filteredProducts, totalFiltered } = useMemo(() => {
-    const filtered = filterByCategory(allProducts, activeCategoryId, isMainCategory);
-        
+    const filtered = filterByCategory(
+      allProducts,
+      activeCategoryId,
+      isMainCategory,
+    );
+
     const sorted = sortProducts(filtered, sortOption);
-  
-  const startIdx = (currentPage - 1) * productsPerPage;
-  const paginated = sorted.slice(startIdx, startIdx + productsPerPage);
-  
-  return {
-    filteredProducts: paginated,
-    totalFiltered: filtered.length
+
+    const startIdx = (currentPage - 1) * productsPerPage;
+    const paginated = sorted.slice(startIdx, startIdx + productsPerPage);
+
+    return {
+      filteredProducts: paginated,
+      totalFiltered: filtered.length,
+    };
+  }, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage]);
+
+  const selectedProduct = allProducts.find(
+    (product) => product.id === productId,
+  );
+  const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
+    setActiveCategoryId(categoryId);
+    setIsMainCategory(isMain);
+    setCurrentPage(1);
   };
-}, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage]);
-  
-const selectedProduct = allProducts.find((product) => product.id === productId);
-const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
-  setActiveCategoryId(categoryId);
-  setIsMainCategory(isMain);
-  setCurrentPage(1); 
-};
 
   return (
     <div className="catalog">
@@ -211,11 +216,11 @@ const handleCategoryClick = (categoryId: string | null, isMain: boolean) => {
           ))}
         </div>
         <Pagination
-  currentPage={currentPage}
-  totalItems={totalFiltered} 
-  itemsPerPage={productsPerPage}
-  onPageChange={setCurrentPage}
-/>
+          currentPage={currentPage}
+          totalItems={totalFiltered}
+          itemsPerPage={productsPerPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
       {productId && selectedProduct && (
         <DetailedCard

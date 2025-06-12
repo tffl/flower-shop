@@ -55,7 +55,12 @@ export const Main = () => {
       };
 
       aImages.forEach((val) => {
-        if (aProducts[i] && val && val.image && val.id === aProducts[i]!.productId)
+        if (
+          aProducts[i] &&
+          val &&
+          val.image &&
+          val.id === aProducts[i]!.productId
+        )
           aProducts[i]!.image = val.image;
       });
     }
@@ -85,11 +90,15 @@ export const Main = () => {
                 <p>
                   {" "}
                   Total cost:{" "}
-                  <span className="basket__total-cost basket__txt-mark">${goodsCostAll}</span>
+                  <span className="basket__total-cost basket__txt-mark">
+                    ${goodsCostAll}
+                  </span>
                 </p>
                 <p>
                   You have selected{" "}
-                  <span className="basket__total-quantity basket__txt-mark">{goodsQuantityAll}</span>{" "}
+                  <span className="basket__total-quantity basket__txt-mark">
+                    {goodsQuantityAll}
+                  </span>{" "}
                   goods
                   {/* (<span className="basket__txt-mark">{goodsQuantityAll}</span>{" "} items). */}
                 </p>

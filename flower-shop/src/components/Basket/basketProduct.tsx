@@ -1,6 +1,6 @@
 import { IPropsProduct } from "./basketTypes.ts";
 import { Button } from "../UI/Button/Button.tsx";
-import {updateCartQuantity} from './APICart.ts'
+import { updateCartQuantity } from "./APICart.ts";
 
 //...........................................................
 export function BasketCard(product: IPropsProduct) {
@@ -22,7 +22,7 @@ export function BasketCard(product: IPropsProduct) {
       ></input>
       <Button
         className="card__delete-btn"
-        //   name={address.id}
+        name={product.product.id}
         onClick={(e) => deleteProduct(e)}
       >
         Delete
@@ -36,6 +36,9 @@ async function deleteProduct(
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 ) {
   const pButton = e.target as HTMLButtonElement;
+  let itemId = pButton.name;
+  updateCartQuantity(itemId, 0);
+
   if (pButton.parentElement) pButton.parentElement.remove();
 
   // {
@@ -59,15 +62,12 @@ async function deleteProduct(
 
 //.........................................................................
 async function updateQuantity(e: React.ChangeEvent<HTMLInputElement>) {
-
-  console.log(e);
-
   const pInput = e.target as HTMLInputElement;
-  let productCount = 0
-  if(pInput) productCount = Number(pInput.value)
+  let productCount = 0;
+  if (pInput) productCount = Number(pInput.value);
 
-  let itemId = e.target.name
-  updateCartQuantity(itemId, productCount)
+  let itemId = e.target.name;
+  updateCartQuantity(itemId, productCount);
 
   //  if (pCartQuantity) pCartQuantity.innerHTML = goodsQuantityAll.toString();
 }
