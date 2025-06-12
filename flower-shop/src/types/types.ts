@@ -130,3 +130,10 @@ export type SortOption =
   | "name-desc"
   | "size-asc"
   | "size-desc";
+
+export type PaginationProps = {
+  currentPage: number;
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+};
