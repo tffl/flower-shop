@@ -1,6 +1,6 @@
 import { PaginationProps } from "../../types/types";
 import { Button } from "../UI/Button/Button";
-import './pagination.css'
+import "./pagination.css";
 
 export const Pagination = ({
   currentPage,

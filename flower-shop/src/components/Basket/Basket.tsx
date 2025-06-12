@@ -39,16 +39,15 @@ export const Main = () => {
       0,
     );
 
-    //console.log('goodsQuantityAll', goodsQuantityAll)
-
     const pCartQuantity = document.querySelector(".quantity-goods");
-    if (pCartQuantity) pCartQuantity.textContent = "" + goodsQuantityAll;
+    if (pCartQuantity) pCartQuantity.textContent = goodsQuantityAll.toString();
 
     goodsCostAll = oCart.totalPrice.centAmount / 100;
 
     for (let i = 0; i < oCart.lineItems.length; i++) {
       aProducts[i] = {
-        id: oCart.lineItems[i].productId,
+        id: oCart.lineItems[i].id,
+        productId: oCart.lineItems[i].productId,
         name: oCart.lineItems[i].name["en-US"],
         price: oCart.lineItems[i].price.value.centAmount / 100,
         quantity: oCart.lineItems[i].quantity,
@@ -56,7 +55,12 @@ export const Main = () => {
       };
 
       aImages.forEach((val) => {
-        if (aProducts[i] && val && val.image && val.id === aProducts[i]!.id)
+        if (
+          aProducts[i] &&
+          val &&
+          val.image &&
+          val.id === aProducts[i]!.productId
+        )
           aProducts[i]!.image = val.image;
       });
     }
@@ -83,14 +87,18 @@ export const Main = () => {
               </>
             ) : (
               <>
-                <p className="basket__total-cost">
+                <p>
                   {" "}
                   Total cost:{" "}
-                  <span className="basket__txt-mark">${goodsCostAll}</span>
+                  <span className="basket__total-cost basket__txt-mark">
+                    ${goodsCostAll}
+                  </span>
                 </p>
                 <p>
                   You have selected{" "}
-                  <span className="basket__txt-mark">{goodsQuantityAll}</span>{" "}
+                  <span className="basket__total-quantity basket__txt-mark">
+                    {goodsQuantityAll}
+                  </span>{" "}
                   goods
                   {/* (<span className="basket__txt-mark">{goodsQuantityAll}</span>{" "} items). */}
                 </p>
