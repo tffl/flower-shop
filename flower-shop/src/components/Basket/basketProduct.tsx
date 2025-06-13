@@ -41,23 +41,6 @@ async function deleteProduct(
 
   if (pButton.parentElement) pButton.parentElement.remove();
 
-  // {
-  //   "action": "removeLineItem",
-  //   "lineItemId": "{{lineItemId}}",
-  //   "quantity": 1,
-  //   "externalPrice": {
-  //     "currencyCode": "EUR",
-  //     "centAmount": 4000
-  //   },
-  //   "shippingDetailsToRemove": {
-  //     "targets": [
-  //       {
-  //         "addressKey": "AddressKeyStringFromAddress",
-  //         "quantity": 2
-  //       }
-  //     ]
-  //   }
-  // }
 }
 
 //.........................................................................
@@ -69,5 +52,4 @@ async function updateQuantity(e: React.ChangeEvent<HTMLInputElement>) {
   let itemId = e.target.name;
   updateCartQuantity(itemId, productCount);
 
-  //  if (pCartQuantity) pCartQuantity.innerHTML = goodsQuantityAll.toString();
 }
