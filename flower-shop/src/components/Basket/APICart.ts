@@ -1,6 +1,7 @@
 import { getToken } from "../../utils/token";
 import { IProductImages } from "./basketTypes";
 
+
 //............................................................
 export async function createCart() {
   const oNewCart = {
@@ -238,7 +239,7 @@ export async function clearCart() {
     localStorage.setItem("Cart", sCart);
 
     const pCartQuantity = document.querySelector(".quantity-goods");
-    if (pCartQuantity) pCartQuantity.textContent = ''
+    if (pCartQuantity) pCartQuantity.textContent = '0'
 
     // const pSum = document.querySelector(".basket__total-cost");
     // if (pSum) pSum.textContent = `$${dataCart.totalPrice.centAmount / 100}`;
@@ -248,4 +249,5 @@ export async function clearCart() {
   } else {
     console.log("clearCart -error", response);
   }
+
 }

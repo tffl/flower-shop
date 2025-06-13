@@ -94,3 +94,7 @@ h2 {
   text-align: center;
   color: #1d5f23;
 }
+
+.add__btn {
+  width: 120px;
+}

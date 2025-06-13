@@ -5,11 +5,13 @@ import { BasketCard } from "./basketProduct";
 import { IBasketProduct, IProductImages } from "./basketTypes.ts";
 import {clearCart} from "./APICart.ts"
 
+
 let goodsQuantityAll = 0;
 let goodsCostAll = 0;
 
 //................................................................
 export const Main = () => {
+
   let aImages: IProductImages[] = [];
   let sImages: string | null = "";
 
@@ -25,7 +27,6 @@ export const Main = () => {
 
   if (sCart) {
     const oCart = JSON.parse(sCart);
-    //console.log("oCart:", oCart);
 
     goodsQuantityAll = oCart.lineItems.reduce(
       (sum: number, iItem: any) => sum + iItem.quantity,
@@ -128,13 +129,39 @@ export const Main = () => {
 };
 
 //..............................................
+  async function basketClear() {
+    clearCart()
+    document.querySelector(".basket__content")?.remove();
+  }
+
+//..............................................
 function basketPromocode() {}
 
 //..............................................
-async function basketClear() {
+ export function getQuantity() : number{
 
-  clearCart()
+  let goodsQuantity = 0
 
+  let sCart: string | null = "";
+  sCart = localStorage.getItem("Cart");
+
+  if (sCart) {
+    const oCart = JSON.parse(sCart);
+    goodsQuantity = oCart.lineItems.reduce(
+      (sum: number, iItem: any) => sum + iItem.quantity,
+      0,
+    )};
+
+ return goodsQuantity
+ }
+
+
+
+
+ // async function basketClear() {
+
+//   clearCart()
+//   navigate("/basket");
 //   let sCart: string | null = "";
 //   sCart = localStorage.getItem("Cart");
 
@@ -149,4 +176,4 @@ async function basketClear() {
 //   const pCartQuantity = document.querySelector(".quantity-goods");
 //   if (pCartQuantity) pCartQuantity.textContent = '';
   // goodsQuantityAll = 0;
-}
+//}//
