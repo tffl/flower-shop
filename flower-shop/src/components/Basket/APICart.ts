@@ -121,7 +121,6 @@ export async function addCart(
 
 //........................................................................
 export async function updateCartQuantity(Id: string, newQuantity: number) {
-  console.log("updateCartQuantity<<<", Id, newQuantity);
   const oAddProductCart = {
     version: 1,
     actions: [
@@ -179,5 +178,74 @@ export async function updateCartQuantity(Id: string, newQuantity: number) {
     if (pQuant) pQuant.textContent = goodsQuantity.toString();
   } else {
     console.log("upDateCart -error", response);
+  }
+}
+
+//........................................................................
+export async function clearCart() {
+
+  const oAddProductCart = {
+    version: 1,
+    actions: [{
+      action: "changeLineItemQuantity",
+      lineItemId: '',
+      quantity: 0,
+    }
+    ],
+  };
+
+  let cartId = "";
+
+  let sCart: string | null = "";
+  sCart = localStorage.getItem("Cart");
+
+  if (sCart) {
+    const oCart = JSON.parse(sCart);
+    oAddProductCart.version = oCart.version;
+    cartId = oCart.id;
+
+    let i = 0
+    oCart.lineItems.map((item: any) => {
+    oAddProductCart.actions[i++]=  {
+        action: "changeLineItemQuantity",
+        lineItemId: item.id,
+        quantity: 0,
+      }
+
+    })
+    console.log (oAddProductCart)
+
+  }
+
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts/${cartId}`;
+
+  const token = localStorage.getItem("Token");
+
+  const response = await fetch(urlApi, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(oAddProductCart),
+  });
+
+  if (response.status === 200) {
+    const dataCart = await response.json();
+    console.log("clearCart 200", dataCart);
+
+    const sCart = JSON.stringify(dataCart);
+    localStorage.setItem("Cart", sCart);
+
+    const pCartQuantity = document.querySelector(".quantity-goods");
+    if (pCartQuantity) pCartQuantity.textContent = ''
+
+    // const pSum = document.querySelector(".basket__total-cost");
+    // if (pSum) pSum.textContent = `$${dataCart.totalPrice.centAmount / 100}`;
+
+    // const pQuant = document.querySelector(".basket__total-quantity");
+    // if (pQuant) pQuant.textContent = goodsQuantity.toString();
+  } else {
+    console.log("clearCart -error", response);
   }
 }
