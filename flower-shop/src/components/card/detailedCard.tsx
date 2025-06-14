@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { FormattedProduct } from "../../types/types";
 import { useState } from "react";
 import "./detailedCard.css";
+import { Button } from "../UI/Button/Button";
 
 type DetailedCardProps = {
   product: FormattedProduct;
@@ -65,12 +66,12 @@ export const DetailedCard = ({ product, onClose }: DetailedCardProps) => {
                 {description["en-US"]}
               </p>
               <div className="detailed-card_price">Price: {price} USD</div>
-              <button
+              <Button
                 className="detailed-card_btn"
                 onClick={() => console.log("Add to cart")}
               >
                 Add to cart
-              </button>
+              </Button>
             </div>
           </div>
         </div>

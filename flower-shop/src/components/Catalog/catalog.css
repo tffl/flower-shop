@@ -87,7 +87,7 @@
 }
 .categories__subcategory {
   text-align: left;
-  padding: 5px;
+  padding: 5px 0 5px 10px;
 }
 
 .catalog__productDisplay {
@@ -103,6 +103,7 @@ li {
 }
 
 .list {
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -118,7 +119,20 @@ li {
 .active {
   font-weight: bold;
 }
+.catalog__search {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+.catalog__search-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+}
 .catalog__sorting {
   margin-bottom: 20px;
   display: flex;

@@ -7,24 +7,22 @@ import { filterByCategory } from "../../utils/filters";
 import { FormattedProduct, SortOption } from "../../types/types";
 import { fetchCategoryIds } from "../../utils/categories";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import "./catalog.css";
 import { sortProducts } from "../../utils/sort";
 import { Pagination } from "../Pagination/Pagination";
 import { Loader } from "../UI/loader/Loader";
+import "./catalog.css";
 
 export const Catalog = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const productId = params.get("productId");
-  // const [formattedProducts, setFormattedProducts] = useState<
-  //   FormattedProduct[]
-  // >([]);
   const [categories, setCategories] = useState<{
     mainCategories: string[];
     subCategories: string[];
   }>({ mainCategories: [], subCategories: [] });
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [isMainCategory, setIsMainCategory] = useState<boolean>(true);
+  const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState<SortOption>("price-asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [allProducts, setAllProducts] = useState<FormattedProduct[]>([]);
@@ -35,7 +33,7 @@ export const Catalog = () => {
     const loadData = async () => {
       try {
         setIsLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         const [productsData, categoriesData] = await Promise.all([
           executeApiRequest({
             endpoint: "product-projections",
@@ -60,11 +58,19 @@ export const Catalog = () => {
   }, []);
 
   const { filteredProducts, totalFiltered } = useMemo(() => {
-    const filtered = filterByCategory(
+    let filtered = filterByCategory(
       allProducts,
       activeCategoryId,
       isMainCategory,
     );
+
+    if (searchQuery) {
+      filtered = filtered.filter(product => {
+        const productName = product.name?.["en-US"];
+        return productName?.toLowerCase().includes(searchQuery.toLowerCase());
+      }
+      );
+    }
 
     const sorted = sortProducts(filtered, sortOption);
 
@@ -75,7 +81,7 @@ export const Catalog = () => {
       filteredProducts: paginated,
       totalFiltered: filtered.length,
     };
-  }, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage]);
+  }, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage,searchQuery]);
 
   const selectedProduct = allProducts.find(
     (product) => product.id === productId,
@@ -192,6 +198,20 @@ export const Catalog = () => {
         >
           All our plants
         </button>
+        <div className="catalog__search">
+          <label htmlFor="search-input">Search: </label>
+          <input
+            id="search-input"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1); 
+            }}
+            placeholder="Type plant name..."
+            className="catalog__search-input"
+          />
+      </div>
         <div className="catalog__sorting">
           <label htmlFor="sort-select">Sort by: </label>
           <select
