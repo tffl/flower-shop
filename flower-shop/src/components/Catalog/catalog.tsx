@@ -12,6 +12,7 @@ import { Pagination } from "../Pagination/Pagination";
 import { Loader } from "../UI/loader/Loader";
 import "./catalog.css";
 
+
 export const Catalog = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ export const Catalog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [allProducts, setAllProducts] = useState<FormattedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
   const productsPerPage = 9;
 
   useEffect(() => {
@@ -59,6 +61,7 @@ export const Catalog = () => {
 
   const { filteredProducts, totalFiltered } = useMemo(() => {
     let filtered = filterByCategory(
+
       allProducts,
       activeCategoryId,
       isMainCategory,
@@ -81,6 +84,7 @@ export const Catalog = () => {
       filteredProducts: paginated,
       totalFiltered: filtered.length,
     };
+
   }, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage,searchQuery]);
 
   const selectedProduct = allProducts.find(
@@ -255,6 +259,7 @@ export const Catalog = () => {
             />
           </>
         )}
+
       </div>
       {productId && selectedProduct && (
         <DetailedCard

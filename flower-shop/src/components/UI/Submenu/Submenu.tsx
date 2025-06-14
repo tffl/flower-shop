@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { SubMenuProps } from "../../../types/types";
 import { useAuth } from "../../contexts/AuthContext";
+import { getQuantity } from "../../Basket/Basket"
 import "./submenu.css";
 
 export const Submenu = ({ textColor, iconColor }: SubMenuProps) => {
@@ -14,7 +15,7 @@ export const Submenu = ({ textColor, iconColor }: SubMenuProps) => {
       <li className="submenu__item">
         <Link className="submenu__basket" to="/basket">
           <div className="basket">
-            <div className="quantity-goods">0</div>
+            <div className="quantity-goods">{getQuantity().toString()}</div>
             <svg
               width="29"
               height="26"
