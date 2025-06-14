@@ -1,0 +1,34 @@
+.loader {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px dashed var(--color-footer-back);
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: rotate 1s infinite linear;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(360deg) scale(1.5);
+  }
+}
+.loader__inner {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 10px dashed var(--color-footer-back);
+  animation: rotate 1s infinite linear;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(-360deg) scale(1.5);
+  }
+}
