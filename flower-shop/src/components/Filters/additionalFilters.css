@@ -1,47 +1,44 @@
 .additional__filters {
   width: 100%;
-  padding: 1rem;
-  background: var(--color-bg-secondary);
+  padding: 16px;
   border-radius: 8px;
-  margin-top: 1.5rem;
 }
 
 .filters__title {
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+  margin-bottom: 16px;
+  font-size: 16px;
 }
 
 .filters__group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 16px;
 }
 
-.filter-group h4 {
-  margin-bottom: 0.75rem;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
+.filters__group h4 {
+  margin-bottom: 8px;
+  font-size: 14px;
 }
 
 .filters__options {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .filters__option {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 10px;
   cursor: pointer;
 }
 
 .price__slider {
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 10px;
 }
 
 .color__options {
   display: flex;
-  gap: 0.5rem;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -55,7 +52,7 @@
 }
 
 .color__option.active {
-  border-color: var(--color-primary);
+  border-color: var(--color-footer-back);
   transform: scale(1.1);
 }
 
