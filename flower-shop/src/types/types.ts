@@ -87,9 +87,11 @@ export type FormattedProduct = {
   price: number;
   discountedPrice?: number;
   images: Array<{ url: string }> | null;
+  color?: string;
   attributes: {
     size?: number[];
     shortDescription?: string;
+
     [key: string]: unknown;
   };
   categories: Array<{
@@ -136,4 +138,16 @@ export type PaginationProps = {
   totalItems: number;
   itemsPerPage: number;
   onPageChange: (page: number) => void;
+};
+
+export type FilterOptions = {
+  size?: number[];
+  priceRange?: [number, number];
+  colors?: string[];
+  onSale?: boolean;
+};
+
+export type AdditionalFiltersProps = {
+  products: FormattedProduct[];
+  onFilterChange: (filters: FilterOptions) => void;
 };

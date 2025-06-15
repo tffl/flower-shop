@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { SubMenuProps } from "../../../types/types";
 import { useAuth } from "../../contexts/AuthContext";
-import { getQuantity } from "../../Basket/Basket"
+import { getQuantity } from "../../Basket/Basket";
 import "./submenu.css";
 
 export const Submenu = ({ textColor, iconColor }: SubMenuProps) => {

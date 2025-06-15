@@ -1,7 +1,6 @@
 import { getToken } from "../../utils/token";
 import { IProductImages } from "./basketTypes";
 
-
 //............................................................
 export async function createCart() {
   const oNewCart = {
@@ -184,14 +183,14 @@ export async function updateCartQuantity(Id: string, newQuantity: number) {
 
 //........................................................................
 export async function clearCart() {
-
   const oAddProductCart = {
     version: 1,
-    actions: [{
-      action: "changeLineItemQuantity",
-      lineItemId: '',
-      quantity: 0,
-    }
+    actions: [
+      {
+        action: "changeLineItemQuantity",
+        lineItemId: "",
+        quantity: 0,
+      },
     ],
   };
 
@@ -205,17 +204,15 @@ export async function clearCart() {
     oAddProductCart.version = oCart.version;
     cartId = oCart.id;
 
-    let i = 0
+    let i = 0;
     oCart.lineItems.map((item: any) => {
-    oAddProductCart.actions[i++]=  {
+      oAddProductCart.actions[i++] = {
         action: "changeLineItemQuantity",
         lineItemId: item.id,
         quantity: 0,
-      }
-
-    })
-    console.log (oAddProductCart)
-
+      };
+    });
+    console.log(oAddProductCart);
   }
 
   const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts/${cartId}`;
@@ -239,7 +236,7 @@ export async function clearCart() {
     localStorage.setItem("Cart", sCart);
 
     const pCartQuantity = document.querySelector(".quantity-goods");
-    if (pCartQuantity) pCartQuantity.textContent = '0'
+    if (pCartQuantity) pCartQuantity.textContent = "0";
 
     // const pSum = document.querySelector(".basket__total-cost");
     // if (pSum) pSum.textContent = `$${dataCart.totalPrice.centAmount / 100}`;
@@ -249,5 +246,4 @@ export async function clearCart() {
   } else {
     console.log("clearCart -error", response);
   }
-
 }

@@ -1,0 +1,67 @@
+.additional__filters {
+  width: 100%;
+  padding: 1rem;
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.filters__title {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.filters__group {
+  margin-bottom: 1.25rem;
+}
+
+.filter-group h4 {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.filters__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filters__option {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.price__slider {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.color__options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.color__option {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color__option.active {
+  border-color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.discount__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}

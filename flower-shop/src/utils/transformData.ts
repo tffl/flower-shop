@@ -13,6 +13,21 @@ export const transformProducts = (products: Product[]): FormattedProduct[] => {
 
     const key = product.key || "";
 
+    const colorSource = product.key || "";
+    const colorMatch = colorSource.split("-").pop();
+    const color = [
+      "red",
+      "orange",
+      "yellow",
+      "green",
+      "blue",
+      "violet",
+      "pink",
+      "white",
+    ].includes(colorMatch?.toLowerCase() || "")
+      ? colorMatch
+      : undefined;
+
     const categories =
       product.categories?.map((c) => ({
         id: c.id,
@@ -32,10 +47,12 @@ export const transformProducts = (products: Product[]): FormattedProduct[] => {
         ? product.masterVariant.prices[0].discounted.value.centAmount / 100
         : undefined,
       images: product.masterVariant?.images || null,
+      color,
       attributes: {
         size: product.masterVariant?.attributes?.find(
           (attr) => attr.name === "size",
         )?.value as number[] | undefined,
+
         shortDescription: product.masterVariant?.attributes?.find(
           (attr) => attr.name === "shortDescription",
         )?.value as string | undefined,
