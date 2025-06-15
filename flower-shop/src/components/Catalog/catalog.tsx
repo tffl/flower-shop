@@ -4,14 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import { executeApiRequest } from "../../utils/universal";
 import { transformProducts } from "../../utils/transformData";
 import { filterByCategory } from "../../utils/filters";
-import { FormattedProduct, SortOption } from "../../types/types";
+import { FilterOptions, FormattedProduct, SortOption } from "../../types/types";
 import { fetchCategoryIds } from "../../utils/categories";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { sortProducts } from "../../utils/sort";
 import { Pagination } from "../Pagination/Pagination";
 import { Loader } from "../UI/loader/Loader";
 import "./catalog.css";
-
+import { AdditionalFilters } from "../Filters/AdditionalFilters";
 
 export const Catalog = () => {
   const [params] = useSearchParams();
@@ -23,11 +23,12 @@ export const Catalog = () => {
   }>({ mainCategories: [], subCategories: [] });
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [isMainCategory, setIsMainCategory] = useState<boolean>(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState<SortOption>("price-asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [allProducts, setAllProducts] = useState<FormattedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [filters, setFilters] = useState<FilterOptions>({});
 
   const productsPerPage = 9;
 
@@ -61,18 +62,41 @@ export const Catalog = () => {
 
   const { filteredProducts, totalFiltered } = useMemo(() => {
     let filtered = filterByCategory(
-
       allProducts,
       activeCategoryId,
       isMainCategory,
     );
 
     if (searchQuery) {
-      filtered = filtered.filter(product => {
+      filtered = filtered.filter((product) => {
         const productName = product.name?.["en-US"];
         return productName?.toLowerCase().includes(searchQuery.toLowerCase());
-      }
+      });
+    }
+
+    if (filters.size && filters.size.length > 0) {
+      filtered = filtered.filter((p) => {
+        const productSizes = p.attributes.size || [];
+        return productSizes.some((size) => filters.size!.includes(size));
+      });
+    }
+
+    if (filters.priceRange && filters.priceRange.length === 2) {
+      filtered = filtered.filter(
+        (p) =>
+          p.price >= filters.priceRange![0] &&
+          p.price <= filters.priceRange![1],
       );
+    }
+
+    if (filters.colors && filters.colors.length > 0) {
+      filtered = filtered.filter(
+        (p) => p.color && filters.colors!.includes(p.color),
+      );
+    }
+
+    if (filters.onSale) {
+      filtered = filtered.filter((p) => p.discountedPrice !== undefined);
     }
 
     const sorted = sortProducts(filtered, sortOption);
@@ -84,8 +108,15 @@ export const Catalog = () => {
       filteredProducts: paginated,
       totalFiltered: filtered.length,
     };
-
-  }, [allProducts, activeCategoryId, isMainCategory, sortOption, currentPage,searchQuery]);
+  }, [
+    allProducts,
+    activeCategoryId,
+    isMainCategory,
+    filters,
+    sortOption,
+    currentPage,
+    searchQuery,
+  ]);
 
   const selectedProduct = allProducts.find(
     (product) => product.id === productId,
@@ -190,6 +221,12 @@ export const Catalog = () => {
             </ul>
           </section>
         </div>
+        <div className="catalog__filters">
+          <AdditionalFilters
+            products={allProducts}
+            onFilterChange={setFilters}
+          />
+        </div>
       </div>
 
       <div className="catalog__productDisplay">
@@ -210,12 +247,12 @@ export const Catalog = () => {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              setCurrentPage(1); 
+              setCurrentPage(1);
             }}
             placeholder="Type plant name..."
             className="catalog__search-input"
           />
-      </div>
+        </div>
         <div className="catalog__sorting">
           <label htmlFor="sort-select">Sort by: </label>
           <select
@@ -259,7 +296,6 @@ export const Catalog = () => {
             />
           </>
         )}
-
       </div>
       {productId && selectedProduct && (
         <DetailedCard

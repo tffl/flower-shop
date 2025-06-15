@@ -40,7 +40,6 @@ async function deleteProduct(
   updateCartQuantity(itemId, 0);
 
   if (pButton.parentElement) pButton.parentElement.remove();
-
 }
 
 //.........................................................................
@@ -51,5 +50,4 @@ async function updateQuantity(e: React.ChangeEvent<HTMLInputElement>) {
 
   let itemId = e.target.name;
   updateCartQuantity(itemId, productCount);
-
 }

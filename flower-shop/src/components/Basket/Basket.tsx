@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import { Button } from "../UI/Button/Button.tsx";
 import { BasketCard } from "./basketProduct";
 import { IBasketProduct, IProductImages } from "./basketTypes.ts";
-import {clearCart} from "./APICart.ts"
-
+import { clearCart } from "./APICart.ts";
 
 let goodsQuantityAll = 0;
 let goodsCostAll = 0;
 
 //................................................................
 export const Main = () => {
-
   let aImages: IProductImages[] = [];
   let sImages: string | null = "";
 
@@ -129,18 +127,17 @@ export const Main = () => {
 };
 
 //..............................................
-  async function basketClear() {
-    clearCart()
-    document.querySelector(".basket__content")?.remove();
-  }
+async function basketClear() {
+  clearCart();
+  document.querySelector(".basket__content")?.remove();
+}
 
 //..............................................
 function basketPromocode() {}
 
 //..............................................
- export function getQuantity() : number{
-
-  let goodsQuantity = 0
+export function getQuantity(): number {
+  let goodsQuantity = 0;
 
   let sCart: string | null = "";
   sCart = localStorage.getItem("Cart");
@@ -150,15 +147,13 @@ function basketPromocode() {}
     goodsQuantity = oCart.lineItems.reduce(
       (sum: number, iItem: any) => sum + iItem.quantity,
       0,
-    )};
+    );
+  }
 
- return goodsQuantity
- }
+  return goodsQuantity;
+}
 
-
-
-
- // async function basketClear() {
+// async function basketClear() {
 
 //   clearCart()
 //   navigate("/basket");
@@ -170,10 +165,9 @@ function basketPromocode() {}
 //     oCart.lineItems.map(async (item: any) => { await updateCartQuantity(item.id, 0);})
 //   }
 
-
- // document.querySelector(".basket__content")?.remove();
+// document.querySelector(".basket__content")?.remove();
 
 //   const pCartQuantity = document.querySelector(".quantity-goods");
 //   if (pCartQuantity) pCartQuantity.textContent = '';
-  // goodsQuantityAll = 0;
+// goodsQuantityAll = 0;
 //}//
