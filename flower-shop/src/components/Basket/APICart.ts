@@ -14,7 +14,7 @@ export async function createCart() {
   const tokenResponse = await getToken();
   const token = tokenResponse.access_token;
 
-  console.log("create-------", token);
+ // console.log("create-------", token);
 
   localStorage.setItem("Token", token);
 
@@ -97,7 +97,7 @@ export async function addCart(
 
   if (response.status === 200) {
     const dataCart = await response.json();
-    console.log(" addCart - 200", dataCart);
+    //console.log(" addCart - 200", dataCart);
 
     const goodsQuantity = dataCart.lineItems.reduce(
       (sum: number, iItem: any) => sum + iItem.quantity,
@@ -158,7 +158,7 @@ export async function updateCartQuantity(Id: string, newQuantity: number) {
 
   if (response.status === 200) {
     const dataCart = await response.json();
-    console.log("upDateCart 200", dataCart);
+    //console.log("upDateCart 200", dataCart);
 
     const sCart = JSON.stringify(dataCart);
     localStorage.setItem("Cart", sCart);
@@ -212,7 +212,7 @@ export async function clearCart() {
         quantity: 0,
       };
     });
-    console.log(oAddProductCart);
+    //console.log(oAddProductCart);
   }
 
   const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts/${cartId}`;
@@ -230,7 +230,7 @@ export async function clearCart() {
 
   if (response.status === 200) {
     const dataCart = await response.json();
-    console.log("clearCart 200", dataCart);
+    //console.log("clearCart 200", dataCart);
 
     const sCart = JSON.stringify(dataCart);
     localStorage.setItem("Cart", sCart);
@@ -245,5 +245,64 @@ export async function clearCart() {
     // if (pQuant) pQuant.textContent = goodsQuantity.toString();
   } else {
     console.log("clearCart -error", response);
+  }
+}
+
+//...................................................
+export async function addPromocode(promoCode: string) {
+
+
+ const oAddProductCart = {
+    version: 1,
+    actions: [
+      {
+        action: "addDiscountCode",
+        code: promoCode, //"flower20"
+      },
+    ],
+  };
+
+  let cartId = "";
+
+  let oldPrice = 0;
+
+  let sCart: string | null = "";
+  sCart = localStorage.getItem("Cart");
+
+  if (sCart) {
+    const oCart = JSON.parse(sCart);
+    oAddProductCart.version = oCart.version;
+    cartId = oCart.id;
+    oldPrice = oCart.totalPrice.centAmount / 100
+  }
+
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts/${cartId}`;
+
+  const token = localStorage.getItem("Token");
+
+  const response = await fetch(urlApi, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(oAddProductCart),
+  });
+
+  if (response.status === 200) {
+    const dataCart = await response.json();
+   // console.log("promocode 200", dataCart);
+
+    const sCart = JSON.stringify(dataCart);
+    localStorage.setItem("Cart", sCart);
+
+    const pOld = document.querySelector(".basket__total-old-cost");
+    if (pOld) pOld.textContent = ` $${oldPrice} `;
+
+    const pSum = document.querySelector(".basket__total-cost");
+    if (pSum) pSum.textContent =`$${dataCart.totalPrice.centAmount / 100}` ;
+
+  } else {
+    console.log("promocode-error", response);
   }
 }

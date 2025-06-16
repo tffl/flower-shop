@@ -10,7 +10,25 @@ export function BasketCard(product: IPropsProduct) {
         <img src={product.product.image} alt="img"></img>
       </div>
       <p>{product.product.name}</p>
-      <p>${product.product.price}</p>
+
+      {product.product.price === product.product.oldprice ? (
+        <p>
+          {" "}
+          <span className="cart__card-price">${product.product.price}</span>
+        </p>
+      ) : (
+        <p>
+          {" "}
+          <span className="cart__card-price">
+            ${product.product.price}
+          </span> ({" "}
+          <span className="cart__card-price-old">
+            ${product.product.oldprice}
+          </span>
+          )
+        </p>
+      )}
+
       <input
         className="card__count"
         name={product.product.id}
