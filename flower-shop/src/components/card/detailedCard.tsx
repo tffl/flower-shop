@@ -6,6 +6,7 @@ import { FormattedProduct } from "../../types/types";
 import { useState } from "react";
 import "./detailedCard.css";
 import { Button } from "../UI/Button/Button";
+import { addCart } from "../Basket/APICart.ts";
 
 type DetailedCardProps = {
   product: FormattedProduct;
@@ -13,7 +14,8 @@ type DetailedCardProps = {
 };
 
 export const DetailedCard = ({ product, onClose }: DetailedCardProps) => {
-  const { name, description, images, price } = product;
+  const { id, name, description, images, price } = product;
+  const image = images?.[0]?.url || "img/fallback.jpg";
 
   const fallbackImg = "img/fallback.jpg";
   const minImgCount = 3;
@@ -66,12 +68,11 @@ export const DetailedCard = ({ product, onClose }: DetailedCardProps) => {
                 {description["en-US"]}
               </p>
               <div className="detailed-card_price">Price: {price} USD</div>
-              <Button
-                className="detailed-card_btn"
-                onClick={() => console.log("Add to cart")}
-              >
-                Add to cart
-              </Button>
+              <div className="add-btn-wrapper">
+                <Button className="add__btn" onClick={() => addCart(id, image)}>
+                  add to cart
+                </Button>
+              </div>
             </div>
           </div>
         </div>
