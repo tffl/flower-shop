@@ -1,0 +1,64 @@
+.additional__filters {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.filters__title {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.filters__group {
+  margin-bottom: 16px;
+}
+
+.filters__group h4 {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.filters__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filters__option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.price__slider {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.color__options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.color__option {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color__option.active {
+  border-color: var(--color-footer-back);
+  transform: scale(1.1);
+}
+
+.discount__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}

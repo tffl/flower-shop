@@ -125,7 +125,6 @@ export const Main = () => {
         iAddress.id = oCustomer.addresses[i].id;
 
         iAddress.aFields.map((iField) => {
-
           switch (iField.name) {
             case "country":
               iField.value = oCustomer.addresses[i].country;

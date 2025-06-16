@@ -1,6 +1,6 @@
 import { Header } from "../components/Header/Header";
-import { Main } from "../components/About/main";
-// import { Footer } from "../components/Footer/Footer";
+import { About } from "../components/About/about";
+import { Footer } from "../components/Footer/Footer";
 
 export const PageAbout = () => {
   return (
@@ -10,8 +10,8 @@ export const PageAbout = () => {
         position="static"
         iconColor="var(--color-footer-back)"
       />
-      <Main />
-      {/* <Footer /> */}
+      <About />
+      <Footer />
     </>
   );
 };

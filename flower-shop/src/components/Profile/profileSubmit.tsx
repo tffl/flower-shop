@@ -1,11 +1,11 @@
- import { ICustomerApiUpDate, IField } from "./profileTypes";
+import { ICustomerApiUpDate, IField } from "./profileTypes";
 import { takeToken } from "../Register/registerSubmit.ts";
 import { showResult } from "../Register/registerSubmit.ts";
 import { IUpDate, IAddress } from "./profileTypes.ts";
 import { IRegisterSection } from "../Register/registerTypes.ts";
 import { validField } from "../Register/registerValid";
 import { aProfileSections, aProfilePassSections } from "./profileData.ts";
-import {ProfInfoAddress} from "./profileCreate.tsx"
+import { ProfInfoAddress } from "./profileCreate.tsx";
 import ReactDOM from "react-dom/client";
 import { addElement } from "../../app/utilities";
 
@@ -22,7 +22,7 @@ import { addElement } from "../../app/utilities";
 // &scope={scope}
 
 const sNoChange = "Yor data has not changed";
-let qAddAddress = 0
+let qAddAddress = 0;
 
 //const sLSCustomer = localStorage.getItem("customer");
 let oCustomer: ICustomerApiUpDate = {
@@ -58,23 +58,22 @@ export async function profilePassSubmit(e: React.FormEvent<HTMLFormElement>) {
 //....................................................
 export async function profileAddrSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
- // document.querySelector(".profile__message-address")!.textContent = "";
+  // document.querySelector(".profile__message-address")!.textContent = "";
   oCustomer = getCustomer();
 
+  const aIAdresses = document.getElementsByClassName("profile__address");
+  // console.log('aIAdresses', aIAdresses)
 
-  const aIAdresses = document.getElementsByClassName('profile__address')
- // console.log('aIAdresses', aIAdresses)
+  const aInputBoxes = Array.from(aIAdresses);
+  //console.log('aBoxesInput>>>', aInputBoxes)
 
-  const aInputBoxes = Array.from(aIAdresses)
-    //console.log('aBoxesInput>>>', aInputBoxes)
-
-    aInputBoxes.forEach((pBox) =>{
-
-      if (pBox.lastChild && pBox.firstChild)
-        upDateAddress ((pBox.lastChild as HTMLButtonElement).name, getVal((pBox.firstChild as HTMLDivElement)))
-
-    })
-
+  aInputBoxes.forEach((pBox) => {
+    if (pBox.lastChild && pBox.firstChild)
+      upDateAddress(
+        (pBox.lastChild as HTMLButtonElement).name,
+        getVal(pBox.firstChild as HTMLDivElement),
+      );
+  });
 }
 
 //
@@ -299,7 +298,7 @@ async function upDatePassword(): Promise<boolean> {
     const dataCustomer = await response.json();
     const sCustomer = JSON.stringify(dataCustomer);
 
-   localStorage.setItem("customer", sCustomer);
+    localStorage.setItem("customer", sCustomer);
 
     showResult(`Your data has been updated successfully.`, true);
 
@@ -375,47 +374,41 @@ function isValidForm(aSections: IRegisterSection[]) {
 //   "addressId": "{{addressId}}"
 // }
 
+function getVal(pAddr: HTMLDivElement) {
+  // let sError = ''
+  // let flValid = true
 
-function getVal(pAddr : HTMLDivElement) {
+  let address = {
+    streetName: "",
+    postalCode: "",
+    city: "",
+    country: "US",
+  };
+  const aInp = Array.from(pAddr.children);
+  aInp.forEach((i) => {
+    // if (i.childNodes[1] ) {
+    //   sError = validField((i.childNodes[1] as HTMLInputElement).value, (i.childNodes[1] as HTMLInputElement).name);
 
-// let sError = ''
-// let flValid = true
+    //   if (sError) flValid = false;
+    //   if ((i.childNodes[1] as HTMLInputElement).nextElementSibling)
+    //    (i.childNodes[1] as HTMLInputElement).nextElementSibling.textContent = sError;
+    // }
 
-let address = {
-      streetName: "",
-      postalCode: "",
-      city: "",
-      country: "US",
-    }
-    const aInp = Array.from(pAddr.children)
-    aInp.forEach((i)=>{
-
-      // if (i.childNodes[1] ) {
-      //   sError = validField((i.childNodes[1] as HTMLInputElement).value, (i.childNodes[1] as HTMLInputElement).name);
-
-      //   if (sError) flValid = false;
-      //   if ((i.childNodes[1] as HTMLInputElement).nextElementSibling)
-      //    (i.childNodes[1] as HTMLInputElement).nextElementSibling.textContent = sError;
-      // }
-
-
-
-
-    switch ((i.childNodes[1] as HTMLInputElement).name){
-       case "city":
-        address.city = (i.childNodes[1] as HTMLInputElement).value
+    switch ((i.childNodes[1] as HTMLInputElement).name) {
+      case "city":
+        address.city = (i.childNodes[1] as HTMLInputElement).value;
         break;
       case "street":
-        address.streetName = (i.childNodes[1] as HTMLInputElement).value
+        address.streetName = (i.childNodes[1] as HTMLInputElement).value;
         break;
       case "postcode":
-        address.postalCode = (i.childNodes[1] as HTMLInputElement).value
-         break
+        address.postalCode = (i.childNodes[1] as HTMLInputElement).value;
+        break;
     }
-})
+  });
 
-return address
-  }
+  return address;
+}
 
 //..........................................
 // function isAddressChange() {
@@ -432,32 +425,35 @@ return address
 //   return flChange;
 // }
 
-
 //.......................................................
-async function upDateAddress( addressIdVal:string, addressVal: IAddress): Promise<boolean> {
-
+async function upDateAddress(
+  addressIdVal: string,
+  addressVal: IAddress,
+): Promise<boolean> {
   oCustomer = getCustomerVersion();
-  const oAddress  = {
+  const oAddress = {
     version: 1,
     actions: [
-  {
-    action: "changeAddress",
-    addressId: "",
-    address: {
-      streetName: "",
-      postalCode: "",
-      city: "",
-      country: "",
-    }}]
+      {
+        action: "changeAddress",
+        addressId: "",
+        address: {
+          streetName: "",
+          postalCode: "",
+          city: "",
+          country: "",
+        },
+      },
+    ],
   };
 
   oAddress.version = oCustomer.version;
-  if( oAddress.actions[0]){
-  oAddress.actions[0].addressId = addressIdVal
-  oAddress.actions[0].address.streetName = addressVal.streetName
-  oAddress.actions[0].address.postalCode = addressVal.postalCode
-  oAddress.actions[0].address.city = addressVal.city
-  oAddress.actions[0].address.country = addressVal.country
+  if (oAddress.actions[0]) {
+    oAddress.actions[0].addressId = addressIdVal;
+    oAddress.actions[0].address.streetName = addressVal.streetName;
+    oAddress.actions[0].address.postalCode = addressVal.postalCode;
+    oAddress.actions[0].address.city = addressVal.city;
+    oAddress.actions[0].address.country = addressVal.country;
   }
   //console.log("oAddress", oAddress);
 
@@ -484,13 +480,13 @@ async function upDateAddress( addressIdVal:string, addressVal: IAddress): Promis
     // console.log("upDate Password sCustomer", sCustomer);
     localStorage.setItem("customer", sCustomer);
 
-  //  showResult(`Your data has been updated successfully.`, true);
+    //  showResult(`Your data has been updated successfully.`, true);
 
     return true;
   } else {
     //console.log("upDatePassWord error", response.status);
-  //
-  //   showResult("Failed to update profile. Try again.", false);
+    //
+    //   showResult("Failed to update profile. Try again.", false);
     return false;
   }
 }
@@ -508,77 +504,76 @@ export async function profileNewAddress() {
     showResult(`New address add successfully.`, true);
   else showResult("Failed to add address. Try again.", false);
 
-
-  const pSection = document.querySelector('.profile__section-addresses') as HTMLElement
-  if  (pSection){
-    const classAdd = 'add-address' + qAddAddress++
-    addElement(pSection,'div',classAdd,'')
-    const sectionAddresses  = ReactDOM.createRoot(
-    document.querySelector(`.${classAdd}`) as HTMLElement
+  const pSection = document.querySelector(
+    ".profile__section-addresses",
+  ) as HTMLElement;
+  if (pSection) {
+    const classAdd = "add-address" + qAddAddress++;
+    addElement(pSection, "div", classAdd, "");
+    const sectionAddresses = ReactDOM.createRoot(
+      document.querySelector(`.${classAdd}`) as HTMLElement,
     );
-    const pNewAddress = createProfileAddress()
+    const pNewAddress = createProfileAddress();
     sectionAddresses.render(pNewAddress);
   }
-
 }
 
 //.......................................................
-function createProfileAddress(){
-
-  const aFields: IField[] =[
-       {
-            id: 21,
-            name: "country",
-            label: "Country",
-            type: "text",
-            placeholder: "US",
-            value: "",
-          },
-          {
-            id: 22,
-            name: "city",
-            label: "City",
-            type: "text",
-            placeholder: "Mycity",
-            value: "",
-          },
-          {
-            id: 23,
-            name: "street",
-            label: "Street",
-            type: "text",
-            placeholder: "Street1  272B",
-            value: "",
-          },
-          {
-            id: 24,
-            name: "postcode",
-            label: "Postal code",
-            type: "text",
-            placeholder: "654321",
-            value: "",
-          },
-  ]
+function createProfileAddress() {
+  const aFields: IField[] = [
+    {
+      id: 21,
+      name: "country",
+      label: "Country",
+      type: "text",
+      placeholder: "US",
+      value: "",
+    },
+    {
+      id: 22,
+      name: "city",
+      label: "City",
+      type: "text",
+      placeholder: "Mycity",
+      value: "",
+    },
+    {
+      id: 23,
+      name: "street",
+      label: "Street",
+      type: "text",
+      placeholder: "Street1  272B",
+      value: "",
+    },
+    {
+      id: 24,
+      name: "postcode",
+      label: "Postal code",
+      type: "text",
+      placeholder: "654321",
+      value: "",
+    },
+  ];
 
   const sLSCustomer = localStorage.getItem("customer");
-  let idAddress ='111'
-  if (sLSCustomer){
+  let idAddress = "111";
+  if (sLSCustomer) {
     const oCustomer = JSON.parse(sLSCustomer);
-    idAddress =  oCustomer.addresses[oCustomer.addresses.length-1].id
+    idAddress = oCustomer.addresses[oCustomer.addresses.length - 1].id;
   }
 
-  return(
-  <div className="profile__address" key={idAddress}>
-          <ProfInfoAddress aFields={aFields} />
-          <button
-            className="profile__address-btn"
-            name={idAddress}
-            onClick={(e) => deleteAddress(e)}
-          >
-            Delete address
-          </button>
-        </div>
-  )
+  return (
+    <div className="profile__address" key={idAddress}>
+      <ProfInfoAddress aFields={aFields} />
+      <button
+        className="profile__address-btn"
+        name={idAddress}
+        onClick={(e) => deleteAddress(e)}
+      >
+        Delete address
+      </button>
+    </div>
+  );
 }
 
 //.........................................................

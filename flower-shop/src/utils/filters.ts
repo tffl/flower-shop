@@ -9,7 +9,7 @@ export const filterByCategory = (
 
   return products.filter((product) => {
     return isMainCategory
-      ? product.categories[0]?.id === categoryId
+      ? product.categories.some((c) => c.id === categoryId)
       : product.categories.some((c) => c.id === categoryId);
   });
 };

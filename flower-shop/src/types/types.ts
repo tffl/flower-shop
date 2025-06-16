@@ -35,19 +35,19 @@ export type BurgerProps = {
   className: string;
   iconColor: string;
 };
-export type TokenData ={
+export type TokenData = {
   access_token: string;
   expires_in?: number;
   token_type?: string;
-}
-export type ApiRequestParams ={
-  endpoint: string; 
-  method?: 'GET' | 'POST' | 'DELETE'; 
-  path?: string; 
-  query?: Record<string, string>; 
-  body?: unknown; 
-  isAuthRequest?: boolean; 
-}
+};
+export type ApiRequestParams = {
+  endpoint: string;
+  method?: "GET" | "POST" | "DELETE";
+  path?: string;
+  query?: Record<string, string>;
+  body?: unknown;
+  isAuthRequest?: boolean;
+};
 
 export type Product = {
   id: string;
@@ -87,14 +87,16 @@ export type FormattedProduct = {
   price: number;
   discountedPrice?: number;
   images: Array<{ url: string }> | null;
+  color?: string;
   attributes: {
     size?: number[];
     shortDescription?: string;
+
     [key: string]: unknown;
   };
   categories: Array<{
     id: string;
-    typeId: string; 
+    typeId: string;
   }>;
 };
 export type CardProps = {
@@ -123,4 +125,29 @@ export type Category = {
   description?: string;
 };
 
-export type SortOption = 'price-asc' | 'price-desc' | 'name-asc' | 'name-desc' | 'size-asc' | 'size-desc';
+export type SortOption =
+  | "price-asc"
+  | "price-desc"
+  | "name-asc"
+  | "name-desc"
+  | "size-asc"
+  | "size-desc";
+
+export type PaginationProps = {
+  currentPage: number;
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+};
+
+export type FilterOptions = {
+  size?: number[];
+  priceRange?: [number, number];
+  colors?: string[];
+  onSale?: boolean;
+};
+
+export type AdditionalFiltersProps = {
+  products: FormattedProduct[];
+  onFilterChange: (filters: FilterOptions) => void;
+};

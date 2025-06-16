@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { FormattedProduct } from "../../types/types";
 import { useState } from "react";
 import "./detailedCard.css";
+import { Button } from "../UI/Button/Button";
 
 type DetailedCardProps = {
   product: FormattedProduct;
@@ -16,13 +17,11 @@ export const DetailedCard = ({ product, onClose }: DetailedCardProps) => {
 
   const fallbackImg = "img/fallback.jpg";
   const minImgCount = 3;
-  const imageUrls = images 
-        ? images.map(img => img.url)
-        : [];
+  const imageUrls = images ? images.map((img) => img.url) : [];
 
-    while (imageUrls.length < minImgCount) {
-        imageUrls.push(fallbackImg);
-    }
+  while (imageUrls.length < minImgCount) {
+    imageUrls.push(fallbackImg);
+  }
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -67,12 +66,12 @@ export const DetailedCard = ({ product, onClose }: DetailedCardProps) => {
                 {description["en-US"]}
               </p>
               <div className="detailed-card_price">Price: {price} USD</div>
-              <button
+              <Button
                 className="detailed-card_btn"
                 onClick={() => console.log("Add to cart")}
               >
                 Add to cart
-              </button>
+              </Button>
             </div>
           </div>
         </div>

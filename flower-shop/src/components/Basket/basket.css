@@ -1,0 +1,98 @@
+.basket__main {
+  min-height: 80vh;
+  /* padding: 50px 10px; */
+  /* background-size: cover; */
+  /* background-position: center; */
+}
+
+.basket__content {
+  font-family: Montserrat;
+  width: 100%;
+  min-height: 400px;
+  margin: 0 20px 60px;
+  padding: 10px 40px;
+  background-position: center;
+  color: var(--color-r-txt);
+}
+
+.basket__total {
+  font-size: 2rem;
+  line-height: 200%;
+}
+
+.basket__txt-mark {
+  color: var(--color-basket-txt-mark);
+}
+
+.basket__total-cost {
+  font-size: 2.5rem;
+}
+
+.basket__goods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+.good-card {
+  width: 300px;
+  min-height: 400px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-basket-card-back);
+  border: 1px solid var(--color-footer-back);
+}
+
+.card__img {
+  width: 100%;
+}
+
+.card__delete-btn {
+  max-width: 100px;
+  padding: 0 10px;
+}
+
+.card__count {
+  max-width: 70px;
+  padding: 5px;
+  margin: 20px;
+  font-size: 1.7rem;
+  color: var(--color-basket-txt-mark);
+}
+
+.add__btn {
+  width: 120px;
+}
+
+.cart__card-price {
+  color: var(--color-txt-alt);
+}
+
+.cart__card-price-old {
+  text-decoration: line-through;
+}
+
+.basket__total-old-cost{
+  text-decoration: line-through;
+}
+
+.cart__promo input {
+  padding: 5px 15px;
+  margin: 0 10px;
+  font-size: 2rem;
+  line-height: 150%;
+  color: var(--color-r-txt);
+  border: 1px solid var(--color-r-border);
+  text-align: left;
+}
+
+.cart__promo input::placeholder {
+  color: rgb(210, 214, 216);
+  font-size: 1.5rem;
+  font-style: italic;
+}

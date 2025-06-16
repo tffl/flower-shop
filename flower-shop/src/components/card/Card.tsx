@@ -1,6 +1,8 @@
 import { CardProps } from "../../types/types";
 import { Button } from "../UI/Button/Button";
 import { useNavigate } from "react-router-dom";
+import { addCart } from "../Basket/APICart.ts";
+
 import "./card.css";
 export const Card = ({
   id,
@@ -26,10 +28,12 @@ export const Card = ({
       </div>
       <h3 className="card__name">{name["en-US"]}</h3>
       <div className="card__price">
-      {discountedPrice ? (
+        {discountedPrice ? (
           <>
-            <span style={{ textDecoration: 'line-through' }}>{price} USD</span>
-            <span style={{ color: 'red', marginLeft: '8px' }}>{discountedPrice} USD</span>
+            <span style={{ textDecoration: "line-through" }}>{price} USD</span>
+            <span style={{ color: "red", marginLeft: "8px" }}>
+              {discountedPrice} USD
+            </span>
           </>
         ) : (
           <span>{price} USD</span>
@@ -38,6 +42,10 @@ export const Card = ({
       <div className="card__description">{shortDescription}</div>
       <Button className="card__btn" onClick={handleClick}>
         more details...
+      </Button>
+
+      <Button className="add__btn" onClick={() => addCart(id, image)}>
+        add to cart
       </Button>
     </div>
   );
