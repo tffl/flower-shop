@@ -68,3 +68,11 @@
 .add__btn {
   width: 120px;
 }
+
+.cart__card-price{
+  color: var(--color-txt-alt)
+}
+
+.cart__card-price-old{
+  text-decoration: line-through;
+}

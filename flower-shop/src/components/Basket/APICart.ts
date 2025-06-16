@@ -251,3 +251,81 @@ export async function clearCart() {
   }
 
 }
+
+
+//........................................................................
+export async function discountCart() {
+
+  //Url ='https://api.{region}.commercetools.com/{projectKey}/cart-discounts'
+
+
+const oDiscountCart = {
+
+  "key" : "black-friday-sale",
+  "name" : {
+  "en" : "Black Friday Sale"
+  },
+  "description" : {
+    "en" : "10% discount on all items in cart"
+  },
+  "value" : {
+    "type" : "relative",
+    "permyriad" : 1000
+  },
+}
+
+
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/cart-discounts`;
+
+  const token = localStorage.getItem("Token");
+
+  const response = await fetch(urlApi, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(oDiscountCart),
+  });
+
+  if (response.status === 201) {
+    const dataDiscount = await response.json();
+    console.log("discountCart 201", dataDiscount);
+  }
+  else{
+    console.log("discountCart -error", response);
+  }
+
+
+  // --header "Authorization: Bearer ${BEARER_TOKEN}" \
+// --header 'Content-Type: application/json' \
+// --data-binary @- << DATA 
+// {
+//   "key" : "black-friday-sale",
+//   "name" : {
+//     "en" : "Black Friday Sale"
+//   },
+//   "description" : {
+//     "en" : "10% discount on all items in cart"
+//   },
+//   "value" : {
+//     "type" : "relative",
+//     "permyriad" : 1000
+//   },
+//   "cartPredicate" : "lineItemTotal(true = true) >= "500.00 USD"",
+//   "target" : {
+//     "type" : "lineItems",
+//     "predicate" : "categories.id = ("{{category-id}}")"
+//   },
+//   "sortOrder" : "0.01",
+//   "stores" : [ {
+//     "key" : "europe",
+//     "typeId" : "store"
+//   } ],
+//   "isActive" : true,
+//   "requiresDiscountCode" : true,
+//   "stackingMode" : "Stacking"
+// }
+// DATA
+
+}

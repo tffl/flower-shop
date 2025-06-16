@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../UI/Button/Button.tsx";
 import { BasketCard } from "./basketProduct";
 import { IBasketProduct, IProductImages } from "./basketTypes.ts";
-import {clearCart} from "./APICart.ts"
+import {clearCart,  discountCart} from "./APICart.ts"
 
 
 let goodsQuantityAll = 0;
@@ -44,9 +44,12 @@ export const Main = () => {
         productId: oCart.lineItems[i].productId,
         name: oCart.lineItems[i].name["en-US"],
         price: oCart.lineItems[i].price.value.centAmount / 100,
+        oldprice: oCart.lineItems[i].price.value.centAmount / 100,
         quantity: oCart.lineItems[i].quantity,
         image: "img/flowers/image2.png",
       };
+
+      if(oCart.lineItems[i].price.discounted) aProducts[i]!.price = oCart.lineItems[i].price.discounted.value.centAmount / 100
 
       aImages.forEach((val) => {
         if (
@@ -135,7 +138,29 @@ export const Main = () => {
   }
 
 //..............................................
-function basketPromocode() {}
+function basketPromocode() {
+
+  discountCart()
+  // {
+  // "id": "{{cart-discount-id}}",
+  // "version": 1,
+  // "key": "black-friday-sale",
+  // "name": {
+  //   "en": "Black Friday Sale"
+  // },
+  // "description": {
+  //   "en": "10% discount on all items in cart"
+  // },
+  // "value": {
+  //   "type": "relative",
+  //   "permyriad": 1000
+  // },
+
+
+
+
+
+}
 
 //..............................................
  export function getQuantity() : number{
@@ -155,25 +180,3 @@ function basketPromocode() {}
  return goodsQuantity
  }
 
-
-
-
- // async function basketClear() {
-
-//   clearCart()
-//   navigate("/basket");
-//   let sCart: string | null = "";
-//   sCart = localStorage.getItem("Cart");
-
-//   if (sCart) {
-//     const oCart = JSON.parse(sCart);
-//     oCart.lineItems.map(async (item: any) => { await updateCartQuantity(item.id, 0);})
-//   }
-
-
- // document.querySelector(".basket__content")?.remove();
-
-//   const pCartQuantity = document.querySelector(".quantity-goods");
-//   if (pCartQuantity) pCartQuantity.textContent = '';
-  // goodsQuantityAll = 0;
-//}//
