@@ -1,5 +1,7 @@
 .about-page {
     font-family: Montserrat, sans-serif;
+    min-height: 80vh;
+    padding: 50px 10px;
 }
 
 .team-container {
