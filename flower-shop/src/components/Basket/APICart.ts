@@ -247,3 +247,62 @@ export async function clearCart() {
     console.log("clearCart -error", response);
   }
 }
+
+//...................................................
+export async function addPromocode(promoCode: string) {
+
+
+ const oAddProductCart = {
+    version: 1,
+    actions: [
+      {
+        action: "addDiscountCode",
+        code: promoCode, //"flower20"
+      },
+    ],
+  };
+
+  let cartId = "";
+
+  let oldPrice = 0;
+
+  let sCart: string | null = "";
+  sCart = localStorage.getItem("Cart");
+
+  if (sCart) {
+    const oCart = JSON.parse(sCart);
+    oAddProductCart.version = oCart.version;
+    cartId = oCart.id;
+    oldPrice = oCart.totalPrice.centAmount / 100
+  }
+
+  const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts/${cartId}`;
+
+  const token = localStorage.getItem("Token");
+
+  const response = await fetch(urlApi, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(oAddProductCart),
+  });
+
+  if (response.status === 200) {
+    const dataCart = await response.json();
+    console.log("promocode 200", dataCart);
+
+    const sCart = JSON.stringify(dataCart);
+    localStorage.setItem("Cart", sCart);
+
+    const pOld = document.querySelector(".basket__total-old-cost");
+    if (pOld) pOld.textContent = ` $${oldPrice} `;
+
+    const pSum = document.querySelector(".basket__total-cost");
+    if (pSum) pSum.textContent =`$${dataCart.totalPrice.centAmount / 100}` ;
+
+  } else {
+    console.log("promocode-error", response);
+  }
+}

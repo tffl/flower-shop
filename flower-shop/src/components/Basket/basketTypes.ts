@@ -4,6 +4,7 @@ export interface IBasketProduct {
   name: string;
   image: string;
   price: number;
+  oldprice: number;
   quantity: number;
 }
 

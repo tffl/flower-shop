@@ -68,3 +68,31 @@
 .add__btn {
   width: 120px;
 }
+
+.cart__card-price {
+  color: var(--color-txt-alt);
+}
+
+.cart__card-price-old {
+  text-decoration: line-through;
+}
+
+.basket__total-old-cost{
+  text-decoration: line-through;
+}
+
+.cart__promo input {
+  padding: 5px 15px;
+  margin: 0 10px;
+  font-size: 2rem;
+  line-height: 150%;
+  color: var(--color-r-txt);
+  border: 1px solid var(--color-r-border);
+  text-align: left;
+}
+
+.cart__promo input::placeholder {
+  color: rgb(210, 214, 216);
+  font-size: 1.5rem;
+  font-style: italic;
+}

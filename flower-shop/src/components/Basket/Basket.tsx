@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { Button } from "../UI/Button/Button.tsx";
 import { BasketCard } from "./basketProduct";
 import { IBasketProduct, IProductImages } from "./basketTypes.ts";
-import { clearCart } from "./APICart.ts";
+import { clearCart, addPromocode } from "./APICart.ts";
 
 let goodsQuantityAll = 0;
 let goodsCostAll = 0;
+let goodsOldCostAll = 0;
 
 //................................................................
 export const Main = () => {
@@ -35,6 +36,7 @@ export const Main = () => {
     if (pCartQuantity) pCartQuantity.textContent = goodsQuantityAll.toString();
 
     goodsCostAll = oCart.totalPrice.centAmount / 100;
+    goodsOldCostAll = goodsCostAll;
 
     for (let i = 0; i < oCart.lineItems.length; i++) {
       aProducts[i] = {
@@ -42,9 +44,14 @@ export const Main = () => {
         productId: oCart.lineItems[i].productId,
         name: oCart.lineItems[i].name["en-US"],
         price: oCart.lineItems[i].price.value.centAmount / 100,
+        oldprice: oCart.lineItems[i].price.value.centAmount / 100,
         quantity: oCart.lineItems[i].quantity,
         image: "img/flowers/image2.png",
       };
+
+      if (oCart.lineItems[i].price.discounted)
+        aProducts[i]!.price =
+          oCart.lineItems[i].price.discounted.value.centAmount / 100;
 
       aImages.forEach((val) => {
         if (
@@ -66,7 +73,7 @@ export const Main = () => {
     >
       <div className="container">
         <div className="basket__content">
-          <h2> Basket </h2>
+          <h2> Cart </h2>
           <div className="basket__total">
             {goodsQuantityAll < 1 ? (
               <>
@@ -81,6 +88,7 @@ export const Main = () => {
                 <p>
                   {" "}
                   Total cost:{" "}
+                  <span className="basket__total-old-cost"></span>
                   <span className="basket__total-cost basket__txt-mark">
                     ${goodsCostAll}
                   </span>
@@ -92,6 +100,25 @@ export const Main = () => {
                   </span>{" "}
                   goods
                 </p>
+
+                <form onSubmit={(e) => promoHandler(e)}>
+
+                    <p className="cart__promo">
+                      You can use a promo code to get a discount :
+                      <input type="text" placeholder="flower20"></input>
+                    </p>
+
+                </form>
+
+                {/* <p className="cart__promo">
+                  You can use a promo code to get a discount :
+                  <input
+                    type="text"
+                    placeholder="flower20"
+                    onChange={(e) => promoHandler(e)}
+                  ></input>
+                </p> */}
+
                 <p>
                   {" "}
                   You can continue shopping:{" "}
@@ -100,16 +127,8 @@ export const Main = () => {
                   </Link>
                 </p>
 
-                <Button
-                  className="profile__submit-btn"
-                  onClick={basketPromocode}
-                >
-                  Promo Code
-                </Button>
-
                 <div className="basket__goods">
                   {aProducts.map((iProduct: IBasketProduct) => (
-                    // <div className="good-card" key={s.id}> Item {s.name}</div>
                     <BasketCard product={iProduct} key={iProduct.id} />
                   ))}
                 </div>
@@ -133,7 +152,15 @@ async function basketClear() {
 }
 
 //..............................................
-function basketPromocode() {}
+function promoHandler(e: React.FormEvent<HTMLFormElement>) {
+
+  e.preventDefault();
+
+  const pInput = document.querySelector('.cart__promo input')as HTMLInputElement;
+  const promoCode = pInput.value.trim();
+
+  addPromocode(promoCode);
+}
 
 //..............................................
 export function getQuantity(): number {
