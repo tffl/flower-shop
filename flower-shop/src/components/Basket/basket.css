@@ -81,6 +81,11 @@
   text-decoration: line-through;
 }
 
+
+.promo{
+  margin: 10px 0;
+}
+
 .cart__promo input {
   padding: 5px 15px;
   margin: 0 10px;
@@ -95,4 +100,10 @@
   color: rgb(210, 214, 216);
   font-size: 1.5rem;
   font-style: italic;
+}
+
+.cart__promo-message{
+  min-height: 30px;
+  font-size: 1.8;
+  color: var(--color-txt-alt)
 }
