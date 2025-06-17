@@ -251,7 +251,6 @@ export async function clearCart() {
 //...................................................
 export async function addPromocode(promoCode: string) {
 
-
  const oAddProductCart = {
     version: 1,
     actions: [
@@ -276,6 +275,8 @@ export async function addPromocode(promoCode: string) {
     oldPrice = oCart.totalPrice.centAmount / 100
   }
 
+  const pMessage = document.querySelector('.cart__promo-message') as HTMLElement
+
   const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts/${cartId}`;
 
   const token = localStorage.getItem("Token");
@@ -291,10 +292,13 @@ export async function addPromocode(promoCode: string) {
 
   if (response.status === 200) {
     const dataCart = await response.json();
-   // console.log("promocode 200", dataCart);
+    console.log("promocode 200", dataCart);
 
     const sCart = JSON.stringify(dataCart);
     localStorage.setItem("Cart", sCart);
+
+
+    if (pMessage) pMessage.textContent = 'Your promo code has been successfully applied.'
 
     const pOld = document.querySelector(".basket__total-old-cost");
     if (pOld) pOld.textContent = ` $${oldPrice} `;
@@ -304,5 +308,7 @@ export async function addPromocode(promoCode: string) {
 
   } else {
     console.log("promocode-error", response);
+    if (pMessage) pMessage.textContent = `The discount code '${promoCode}' was not found `
+
   }
 }

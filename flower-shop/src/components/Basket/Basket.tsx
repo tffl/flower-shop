@@ -7,7 +7,7 @@ import { clearCart, addPromocode } from "./APICart.ts";
 
 let goodsQuantityAll = 0;
 let goodsCostAll = 0;
-let goodsOldCostAll = 0;
+//let goodsOldCostAll = 0;
 
 //................................................................
 export const Main = () => {
@@ -36,7 +36,7 @@ export const Main = () => {
     if (pCartQuantity) pCartQuantity.textContent = goodsQuantityAll.toString();
 
     goodsCostAll = oCart.totalPrice.centAmount / 100;
-    goodsOldCostAll = goodsCostAll;
+   // goodsOldCostAll = goodsCostAll;
 
     for (let i = 0; i < oCart.lineItems.length; i++) {
       aProducts[i] = {
@@ -90,9 +90,12 @@ export const Main = () => {
                   Total cost:{" "}
                   <span className="basket__total-old-cost"></span>
                   <span className="basket__total-cost basket__txt-mark">
+                    {" "}
                     ${goodsCostAll}
+                    {" "}
                   </span>
                 </p>
+                <p></p>
                 <p>
                   You have selected{" "}
                   <span className="basket__total-quantity basket__txt-mark">
@@ -101,23 +104,16 @@ export const Main = () => {
                   goods
                 </p>
 
-                <form onSubmit={(e) => promoHandler(e)}>
+                <form className='promo' onSubmit={(e) => promoHandler(e)}>
 
-                    <p className="cart__promo">
-                      You can use a promo code to get a discount :
-                      <input type="text" placeholder="flower20"></input>
-                    </p>
+                  <p className="cart__promo">
+                    You can use a promo code to get a discount :
+                    <input type="text" placeholder="flower20"></input>
+                  </p>
+
+                  <p className="cart__promo-message"></p>
 
                 </form>
-
-                {/* <p className="cart__promo">
-                  You can use a promo code to get a discount :
-                  <input
-                    type="text"
-                    placeholder="flower20"
-                    onChange={(e) => promoHandler(e)}
-                  ></input>
-                </p> */}
 
                 <p>
                   {" "}
@@ -160,6 +156,7 @@ function promoHandler(e: React.FormEvent<HTMLFormElement>) {
   const promoCode = pInput.value.trim();
 
   addPromocode(promoCode);
+
 }
 
 //..............................................
@@ -180,21 +177,3 @@ export function getQuantity(): number {
   return goodsQuantity;
 }
 
-// async function basketClear() {
-
-//   clearCart()
-//   navigate("/basket");
-//   let sCart: string | null = "";
-//   sCart = localStorage.getItem("Cart");
-
-//   if (sCart) {
-//     const oCart = JSON.parse(sCart);
-//     oCart.lineItems.map(async (item: any) => { await updateCartQuantity(item.id, 0);})
-//   }
-
-// document.querySelector(".basket__content")?.remove();
-
-//   const pCartQuantity = document.querySelector(".quantity-goods");
-//   if (pCartQuantity) pCartQuantity.textContent = '';
-// goodsQuantityAll = 0;
-//}//

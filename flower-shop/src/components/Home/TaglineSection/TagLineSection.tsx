@@ -10,6 +10,10 @@ export const TaglineSection = () => {
         magic
       </p>
       <div className="decor-line"></div>
+
+      <p className="tagline__txt">
+       Summer discounts 20% on everything with promo code flower20
+      </p>
     </section>
   );
 };
