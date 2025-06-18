@@ -1,4 +1,5 @@
 .footer {
+  font-family: Montserrat, sans-serif;
   width: 100%;
   margin-top: auto;
   display: flex;
@@ -10,15 +11,18 @@
 .footer__wrapper {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding: 40px 120px;
-  font-size: 1.5rem;
+  padding: 20px 20px;
+  font-size: 1.3rem;
+
 }
 
 .footer__logo {
-  width: 80px;
+  width: 60px;
+  margin: 20px;
 }
 
 .footer_names,
@@ -27,6 +31,7 @@
   align-items: center;
   gap: 30px;
 }
+
 .footer__name {
   display: flex;
   align-items: center;
@@ -41,33 +46,82 @@
   .footer__wrapper {
     padding: 29px 100px;
   }
+
   .footer__logo {
     font-size: 25px;
   }
 }
+
 @media (max-width: 950px) {
   .footer__wrapper {
     padding: 29px 70px;
     font-size: 1rem;
   }
 }
+
 @media (max-width: 850px) {
   .footer__wrapper {
     padding: 29px 50px;
   }
 }
+
 @media (max-width: 600px) {
   .footer__wrapper {
     padding: 29px 30px;
   }
 }
+
 @media (max-width: 500px) {
   .footer__wrapper {
     padding: 29px 20px;
   }
 }
+
 @media (max-width: 400px) {
   .footer__wrapper {
     padding: 29px 15px;
   }
+}
+
+.github__link {
+  color: rgb(207, 207, 207);
+  position: relative;
+  text-decoration: none;
+  background-color: inherit;
+}
+
+.footer a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: width 0.5s ease;
+}
+
+.footer a:hover::after {
+  width: 100%;
+}
+
+.footer a:hover {
+  background-color: transparent;
+}
+
+.footer__txt {
+  color: rgb(207, 207, 207);
+  font-size: 1.3rem;
+}
+
+.footer__txt_year {
+  color: rgb(159, 159, 159);
+  font-size: 1.1rem;
+  margin: 10px;
+}
+
+.decor-line {
+  width: 30%;
+  height: 5px;
+  border-top: 1px solid rgb(207, 207, 207)
 }

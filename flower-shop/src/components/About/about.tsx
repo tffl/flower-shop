@@ -53,8 +53,8 @@ const team: TeamMember[] = [
 export const About = () => {
   return (
     <div className="about-page">
-      <h2>Our team</h2>
       <div className="team-container">
+        <h2>Our team</h2>
         <div className="team-cards-row">
           {team.map((member) => (
             <div className="team-card" key={member.github}>
@@ -79,6 +79,11 @@ export const About = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="team-description">
+        <div className="team-description-text">Our team consisted of specialists with diverse backgrounds, which allowed us to distribute roles effectively and organize our workflow smoothly. Each member brought unique strengths, making the collaboration efficient and well-balanced.
+          We began by planning the layout in Figma, and then moved on to implementation. Clear task distribution helped us stay organized and focused throughout the process.
+          Our pleasant communication within the team helps us to developed a modern, structured and user-friendly e-commerce application.</div>
         <div className="logo">
           <a href="https://rs.school/" target="_blank" rel="noopener noreferrer">
             <img src="svg/logoRss2.svg" alt="RSS Logo" className="rss-logo" />
