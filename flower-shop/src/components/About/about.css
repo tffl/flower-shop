@@ -1,7 +1,5 @@
 .about-page {
     font-family: Montserrat, sans-serif;
-    min-height: 80vh;
-    padding: 50px 10px;
 }
 
 .team-container {
@@ -14,7 +12,8 @@
     padding: 40px;
     border-radius: 16px;
     box-sizing: border-box;
-    background: url('img/bgroses_all.png') center/cover;
+    background: url(/img/bgroses_all.png) center/cover;
+    background-attachment: fixed;
 }
 
 .team-cards-row {
@@ -38,15 +37,19 @@
     text-align: center;
     flex-shrink: 0;
     box-shadow:
-        4px 4px 8px #e7e7e7,
-        8px 8px 16px #ffffff;
+        4px 4px 8px #e7e7e7;
     transition: box-shadow 0.5s ease;
 }
 
 @media (max-width: 600px) {
+    .team-cards-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
     .team-card {
         width: 90%;
-        margin: 0 auto;
     }
 }
 
@@ -110,7 +113,29 @@ h3,
 }
 
 .rss-logo {
-    margin: 20px;
+    margin-bottom: 20%;
     width: 120px;
-    height: auto;
+    height: 40px;
+}
+
+.team-description {
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    text-align: center;
+    background: url(/img/bgmain.png) center/cover;
+    flex-shrink: 0;
+    transition: box-shadow 0.5s ease;
+    color: #ffffff;
+    font-size: 1.1rem;
+    line-height: 140%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-attachment: fixed;
+}
+
+.team-description-text {
+    width: 60%;
+    padding: 2%;
 }
