@@ -36,7 +36,7 @@ export const Main = () => {
     if (pCartQuantity) pCartQuantity.textContent = goodsQuantityAll.toString();
 
     goodsCostAll = oCart.totalPrice.centAmount / 100;
-   // goodsOldCostAll = goodsCostAll;
+    // goodsOldCostAll = goodsCostAll;
 
     for (let i = 0; i < oCart.lineItems.length; i++) {
       aProducts[i] = {
@@ -74,6 +74,8 @@ export const Main = () => {
       <div className="container">
         <div className="basket__content">
           <h2> Cart </h2>
+          <p className="basket__clear"></p>
+
           <div className="basket__total">
             {goodsQuantityAll < 1 ? (
               <>
@@ -87,12 +89,10 @@ export const Main = () => {
               <>
                 <p>
                   {" "}
-                  Total cost:{" "}
-                  <span className="basket__total-old-cost"></span>
+                  Total cost: <span className="basket__total-old-cost"></span>
                   <span className="basket__total-cost basket__txt-mark">
                     {" "}
-                    ${goodsCostAll}
-                    {" "}
+                    ${goodsCostAll}{" "}
                   </span>
                 </p>
                 <p></p>
@@ -104,15 +104,13 @@ export const Main = () => {
                   goods
                 </p>
 
-                <form className='promo' onSubmit={(e) => promoHandler(e)}>
-
+                <form className="promo" onSubmit={(e) => promoHandler(e)}>
                   <p className="cart__promo">
                     You can use a promo code to get a discount :
                     <input type="text" placeholder="flower20"></input>
                   </p>
 
                   <p className="cart__promo-message"></p>
-
                 </form>
 
                 <p>
@@ -143,20 +141,22 @@ export const Main = () => {
 
 //..............................................
 async function basketClear() {
-  clearCart();
-  document.querySelector(".basket__content")?.remove();
+  await clearCart();
+  document.querySelector(".basket__total")?.remove();
+  const pMess = document.querySelector(".basket__clear");
+  if (pMess) pMess.textContent = "Your cart is empty yet";
 }
 
 //..............................................
 function promoHandler(e: React.FormEvent<HTMLFormElement>) {
-
   e.preventDefault();
 
-  const pInput = document.querySelector('.cart__promo input')as HTMLInputElement;
+  const pInput = document.querySelector(
+    ".cart__promo input",
+  ) as HTMLInputElement;
   const promoCode = pInput.value.trim();
 
   addPromocode(promoCode);
-
 }
 
 //..............................................
@@ -176,4 +176,3 @@ export function getQuantity(): number {
 
   return goodsQuantity;
 }
-

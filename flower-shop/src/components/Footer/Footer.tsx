@@ -30,7 +30,8 @@ export const Footer = () => {
           <div className="footer__name">
             <img className="footer__icon" src="svg/github.svg" alt="icon"></img>
             <p>
-              <a href="https://github.com/scheslen"
+              <a
+                href="https://github.com/scheslen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="github__link"
@@ -43,7 +44,8 @@ export const Footer = () => {
           <div className="footer__name">
             <img className="footer__icon" src="svg/github.svg" alt="icon"></img>
             <p>
-              <a href="https://github.com/tffl"
+              <a
+                href="https://github.com/tffl"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="github__link"

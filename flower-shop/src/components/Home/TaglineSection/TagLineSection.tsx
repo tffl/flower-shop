@@ -12,7 +12,8 @@ export const TaglineSection = () => {
       <div className="decor-line"></div>
 
       <p className="tagline__txt">
-       Summer discounts <b>20%</b> on everything with promo code <b>flower20</b>
+        Summer discounts <b>20%</b> on everything with promo code{" "}
+        <b>flower20</b>
       </p>
     </section>
   );
