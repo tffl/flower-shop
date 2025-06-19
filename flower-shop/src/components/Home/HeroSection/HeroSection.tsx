@@ -9,7 +9,6 @@ export const HeroSection = () => {
         Bringing beauty to every garden. Fresh plants, quality tools and
         blooming inspiration.
       </h1>
-      <div className="decor-line white"></div>
     </section>
   );
 };

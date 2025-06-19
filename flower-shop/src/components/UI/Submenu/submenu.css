@@ -4,25 +4,31 @@
   align-items: center;
   gap: 10px;
 }
+
 @media (max-width: 768px) {
   .submenu {
     z-index: 5;
   }
 }
+
 .submenu__item {
   text-transform: capitalize;
 }
+
 .submenu__item a {
   color: var(--color-txt);
 }
+
 .submenu__item a:hover,
 .submenu__item a:active,
 button.submenu__link:hover {
   opacity: 1;
 }
+
 .active a {
   opacity: 1;
 }
+
 .submenu__link {
   font-size: 18px;
   opacity: 0.5;
@@ -34,15 +40,18 @@ button.submenu__link:hover {
 }
 
 .quantity-goods {
-  min-width: 30px;
-  min-height: 30px;
-  padding: 4px;
+  font-family: Montserrat, sans-serif;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 8px;
+  margin: 5px;
   font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
   border-radius: 50%;
   color: var(--color-cart-qg-txt);
-  background-color: var(--color-cart-qg-back);
+  background-color: #6c9d5d;
+  color: #fff;
 }
 
 .basket {

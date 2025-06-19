@@ -78,12 +78,11 @@
   text-decoration: line-through;
 }
 
-.basket__total-old-cost{
+.basket__total-old-cost {
   text-decoration: line-through;
 }
 
-
-.promo{
+.promo {
   margin: 10px 0;
 }
 
@@ -103,8 +102,8 @@
   font-style: italic;
 }
 
-.cart__promo-message{
+.cart__promo-message {
   min-height: 30px;
   font-size: 1.8;
-  color: var(--color-txt-alt)
+  color: var(--color-txt-alt);
 }

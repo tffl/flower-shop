@@ -128,7 +128,7 @@ export const Catalog = () => {
   };
 
   return (
-    <div className="catalog">
+    <div className="catalog"  style={{ backgroundImage: "url('img/bgroses53b.png')" }}>
       <div className="catalog__options">
         <h2 className="catalog__title">Categories</h2>
         <div className="catalog__categories categories">

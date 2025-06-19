@@ -14,7 +14,7 @@ export async function createCart() {
   const tokenResponse = await getToken();
   const token = tokenResponse.access_token;
 
- // console.log("create-------", token);
+  // console.log("create-------", token);
 
   localStorage.setItem("Token", token);
 
@@ -250,8 +250,7 @@ export async function clearCart() {
 
 //...................................................
 export async function addPromocode(promoCode: string) {
-
- const oAddProductCart = {
+  const oAddProductCart = {
     version: 1,
     actions: [
       {
@@ -272,10 +271,12 @@ export async function addPromocode(promoCode: string) {
     const oCart = JSON.parse(sCart);
     oAddProductCart.version = oCart.version;
     cartId = oCart.id;
-    oldPrice = oCart.totalPrice.centAmount / 100
+    oldPrice = oCart.totalPrice.centAmount / 100;
   }
 
-  const pMessage = document.querySelector('.cart__promo-message') as HTMLElement
+  const pMessage = document.querySelector(
+    ".cart__promo-message",
+  ) as HTMLElement;
 
   const urlApi = `https://api.europe-west1.gcp.commercetools.com/flower-shop2025/me/carts/${cartId}`;
 
@@ -297,18 +298,17 @@ export async function addPromocode(promoCode: string) {
     const sCart = JSON.stringify(dataCart);
     localStorage.setItem("Cart", sCart);
 
-
-    if (pMessage) pMessage.textContent = 'Your promo code has been successfully applied.'
+    if (pMessage)
+      pMessage.textContent = "Your promo code has been successfully applied.";
 
     const pOld = document.querySelector(".basket__total-old-cost");
     if (pOld) pOld.textContent = ` $${oldPrice} `;
 
     const pSum = document.querySelector(".basket__total-cost");
-    if (pSum) pSum.textContent =`$${dataCart.totalPrice.centAmount / 100}` ;
-
+    if (pSum) pSum.textContent = `$${dataCart.totalPrice.centAmount / 100}`;
   } else {
     console.log("promocode-error", response);
-    if (pMessage) pMessage.textContent = `The discount code '${promoCode}' was not found `
-
+    if (pMessage)
+      pMessage.textContent = `The discount code '${promoCode}' was not found `;
   }
 }
