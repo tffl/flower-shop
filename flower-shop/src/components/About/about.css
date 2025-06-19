@@ -6,22 +6,23 @@
 
 .team-container {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: center;
     flex-direction: column;
     gap: 24px;
-    width: 100%;
-    padding: 40px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 0;
     border-radius: 16px;
     box-sizing: border-box;
-    background: url('img/bgroses_all.png') center/cover;
+    /* background: url('img/bgroses_all.png') center/cover; */
 }
 
 .team-cards-row {
     display: flex;
     justify-content: center;
     gap: 24px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 @media (max-width: 900px) {
@@ -34,7 +35,7 @@
     background: rgba(255, 255, 255, 0.85);
     border-radius: 16px;
     padding: 24px;
-    width: 25%;
+    width: 28%;
     text-align: center;
     flex-shrink: 0;
     box-shadow:
@@ -51,8 +52,8 @@
 }
 
 .avatar {
-    width: 96px;
-    height: 96px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 16px;
@@ -61,18 +62,19 @@
 h3,
 .description {
     color: #555;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .contribution-title {
     color: #555;
     margin-bottom: 10px;
+    font-size: 24px;
 }
 
 .description,
 .contribution-list {
     min-height: 120px;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.3;
 }
 

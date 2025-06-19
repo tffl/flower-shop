@@ -52,14 +52,14 @@ const team: TeamMember[] = [
 
 export const About = () => {
   return (
-    <div className="about-page">
+    <div className="about-page" style={{ backgroundImage: "url('img/bgroses53b.png')"}}>
       <h2>Our team</h2>
       <div className="team-container">
         <div className="team-cards-row">
           {team.map((member) => (
             <div className="team-card" key={member.github}>
               <img src={member.avatar} alt={member.name} className="avatar" />
-              <h3>
+              <h3 className="contribution-title">
                 <a
                   href={member.github}
                   target="_blank"

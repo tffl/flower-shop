@@ -74,6 +74,8 @@ export const Main = () => {
       <div className="container">
         <div className="basket__content">
           <h2> Cart </h2>
+          <p className = 'basket__clear'></p>
+
           <div className="basket__total">
             {goodsQuantityAll < 1 ? (
               <>
@@ -143,8 +145,10 @@ export const Main = () => {
 
 //..............................................
 async function basketClear() {
-  clearCart();
-  document.querySelector(".basket__content")?.remove();
+  await clearCart();
+   document.querySelector(".basket__total")?.remove();
+   const pMess = document.querySelector(".basket__clear");
+   if (pMess) pMess.textContent = 'Your cart is empty yet'
 }
 
 //..............................................

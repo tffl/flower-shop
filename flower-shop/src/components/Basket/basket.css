@@ -13,6 +13,7 @@
   padding: 10px 40px;
   background-position: center;
   color: var(--color-r-txt);
+  font-size: 2rem;
 }
 
 .basket__total {
